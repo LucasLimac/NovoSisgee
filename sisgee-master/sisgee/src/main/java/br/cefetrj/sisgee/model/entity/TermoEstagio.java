@@ -68,6 +68,15 @@ public class TermoEstagio {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false)
 	private Convenio convenio;
+        
+	@Column(length = 80)
+	private String nomeSupervisor;    
+        
+	@Column(length = 80)
+	private String cargoSupervisor;   
+        
+	@Column(length = 80)
+	private String nomeAgenciada;         
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	private ProfessorOrientador professorOrientador;
@@ -83,7 +92,8 @@ public class TermoEstagio {
 			Float valorBolsa, String enderecoTermoEstagio, String numeroEnderecoTermoEstagio,
 			String complementoEnderecoTermoEstagio, String bairroEnderecoTermoEstagio, String cepEnderecoTermoEstagio,
 			String cidadeEnderecoTermoEstagio, String estadoEnderecoTermoEstagio, Boolean eEstagioObrigatorio,
-			Aluno aluno, Convenio convenio, ProfessorOrientador professorOrientador) {
+			Aluno aluno, Convenio convenio, ProfessorOrientador professorOrientador,
+                        String nomeSupervisor, String cargoSupervisor, String nomeAgenciada) {
 		
 		this.dataInicioTermoEstagio = dataInicioTermoEstagio;
 		this.dataFimTermoEstagio = dataFimTermoEstagio;
@@ -100,6 +110,9 @@ public class TermoEstagio {
 		this.aluno = aluno;
 		this.convenio = convenio;
 		this.professorOrientador = professorOrientador;
+                this.nomeSupervisor = nomeSupervisor;
+                this.cargoSupervisor = cargoSupervisor;
+                this.nomeAgenciada = nomeAgenciada;
 	}
 
 
@@ -221,6 +234,22 @@ public class TermoEstagio {
 		return aluno;
 	}
 
+        public String getNomeSupervisor() {
+            return nomeSupervisor;
+        }
+
+        public void setNomeSupervisor(String nomeSupervisor) {
+            this.nomeSupervisor = nomeSupervisor;
+        }
+
+        public String getCargoSupervisor() {
+            return cargoSupervisor;
+        }
+
+        public void setCargoSupervisor(String cargoSupervisor) {
+            this.cargoSupervisor = cargoSupervisor;
+        }        
+        
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
@@ -249,6 +278,14 @@ public class TermoEstagio {
 		this.termosAditivos = termosAditivos;
 	}
 
+        public String getNomeAgenciada() {
+            return nomeAgenciada;
+        }
+
+        public void setNomeAgenciada(String nomeAgenciada) {
+            this.nomeAgenciada = nomeAgenciada;
+        }        
+        
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -273,4 +310,6 @@ public class TermoEstagio {
 			return false;
 		return true;
 	}
+
+
 }

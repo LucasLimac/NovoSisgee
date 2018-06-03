@@ -40,22 +40,16 @@ public class ConvenioServices {
         List<Convenio> x = convenioDao.buscarTodos();
         List<Convenio> aVencer = new ArrayList();
         for (Convenio convenio : x) {
-            System.out.println("Convenio --->" + x);
             String dataAssinou = convenio.getDataAssinatura();
             int anoAntigo = Integer.parseInt(dataAssinou.substring(6, dataAssinou.length()));
-            System.out.println(anoAntigo);
             int mesAntigo = Integer.parseInt(dataAssinou.substring(3, 5));
-            System.out.println(mesAntigo);
 
             int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
-            System.out.println(mesAtual);
             int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-            System.out.println(anoAtual);
 
             int venceu = (anoAtual - anoAntigo) * 12 + (mesAtual - mesAntigo);
             if (venceu >= 58) {
                 aVencer.add(convenio);
-                System.out.println("Entrou aqui" + convenio);
 
             }
 
@@ -93,7 +87,6 @@ public class ConvenioServices {
     public static Convenio buscarConvenioByNumeroConvenio(String numero) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
-            System.out.println("ENTROU NO BUSCARCOONVENIO DO SERVICE ");
             Convenio a = convenioDao.buscarByNumero(numero);
             return a;
         } catch (Exception e) {

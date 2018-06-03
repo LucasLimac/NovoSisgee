@@ -53,6 +53,10 @@ public class Convenio implements Serializable {
     public Convenio() {
     }
 
+    public Convenio(String numeroConvenio) {
+	this.numeroConvenio = numeroConvenio;
+    }     
+    
     public Convenio(String ano, String numero, String dataAssinatura, Empresa empresa) {
         this.ano=ano;
         this.numero=numero;

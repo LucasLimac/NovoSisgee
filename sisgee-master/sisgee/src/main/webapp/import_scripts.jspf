@@ -18,8 +18,7 @@
             
             $('.ehAgenteCheck').change(function(){
 	    	$('.AI').hide();
-                $(this).val() == 'sim' ? $('.isAI').show("slow") : $('.notAI').show("slow");;
-	    	
+	    	$(this).val() == 'sim' ? $('.isAI').show("slow") : $('.notAI').show("slow");;
 	    });
             
            
@@ -124,6 +123,7 @@
                             $("#nome").val(result.nome);
                             $("#nomeCurso").val(result.nomeCurso);
                             $("#nomeCampus").val(result.nomeCampus);
+                            $("#tipoAluno").val(result.tipoAluno);
                         }
                         else{
                             
@@ -148,7 +148,115 @@
 	    $(".addEmpresa, .addAgenteIntegracao").click(function(){
 	    	window.open("form_empresa.jsp", "_blank", "width=800,height=600");
 	    });
-	    
+            
+	    <!-- INICIO BOTÃO PARA BUSCA DE CONVENIO -->
+	    $('#btnBuscarConvenio').click(function(){
+	    	
+                $elementConvenio = $('#numeroConvenio');
+
+	    	if($.trim($elementConvenio.val()) == ""){
+                    $("#numeroConvenio").val("");
+                    $("#myModalLabel").html("<fmt:message key="br.cefetrj.sisgee.import_busca_convenio_script.campo_vazio"/>");
+                    $(".modal-body").html("<fmt:message key="br.cefetrj.sisgee.import_busca_convenio_script.convenio_vazio"/>");      	
+                    $('#myModal').modal('show');
+                    return;             
+	    	}
+	    	
+	    	var result = null;
+                
+	        $.ajax({
+	            type: 'GET',
+	            url: 'BuscaConvenioBotaoServlet', //Servlet
+	            async: true, // habilita a função ajax() repassar os dados para a função pai
+	            data: $elementConvenio.serialize(),
+	            dataType: "json",
+	            success: function(json){
+	                result = json;
+                        if(result.razaoSocial != ""){
+                            $("#numeroConvenio").val(result.numeroConvenio);
+                            $("#razaoSocial").val(result.razaoSocial);
+                            $("#tipoConvenio").val(result.tipoConvenio);
+                            $("#isAgenteIntegracao").val(result.isAgenteIntegracao);
+                            $("#cnpjEcpf").val(result.cnpjEcpf);
+                            $("#nomeEmpresaPessoa").val(result.nomeEmpresaPessoa);  
+                            $("#nomeConvenio").val(result.nomeEmpresaPessoa);
+                        }
+                        else{
+                            $(".numeroConvenio").val("");
+                            $(".razaoSocial").val("");
+                            $("#tipoConvenio").val("");
+                            $("#isAgenteIntegracao").val("");
+                            $("#nomeAgenciada").val("");
+                            $(".cnpjEcpf").val("");
+                            $(".nomeEmpresaPessoa").val("");  
+                            $(".nomeConvenio").val("");
+                            
+                            $("#myModalLabel").html("Convênio não encontrado");
+                            $(".modal-body").html("O Convênio não corresponde a um Convênio cadastrado.");	        	
+                            $('#myModal').modal('show');	        	
+                        }
+	            }
+	        });
+	        
+	        
+	        
+	    });
+            <!-- TÉRMINO BOTÃO PARA BUSCA DE CONVENIO -->
+            
+            <!-- INICIO BOTÃO PARA BUSCA DE CONVENIO POR NOME-->
+	    $('#btnBuscarNomeConvenio').click(function(){
+	    	
+                $elementConvenio = $('#nomeConvenio');
+
+	    	if($.trim($elementConvenio.val()) == ""){
+                    $("#nomeConvenio").val("");
+                    $("#myModalLabel").html("<fmt:message key="br.cefetrj.sisgee.import_busca_convenio_script.campo_vazio"/>");
+                    $(".modal-body").html("<fmt:message key="br.cefetrj.sisgee.import_busca_convenio_script.convenio_vazio"/>");      	
+                    $('#myModal').modal('show');
+                    return;             
+	    	}
+	    	
+	    	var result = null;
+                
+	        $.ajax({
+	            type: 'GET',
+	            url: 'BuscaConvenioBotaoServlet', //Servlet
+	            async: true, // habilita a função ajax() repassar os dados para a função pai
+	            data: $elementConvenio.serialize(),
+	            dataType: "json",
+	            success: function(json){
+	                result = json;
+                        if(result.razaoSocial != ""){
+                            $("#numeroConvenio").val(result.numeroConvenio);
+                            $("#razaoSocial").val(result.razaoSocial);
+                            $("#tipoConvenio").val(result.tipoConvenio);
+                            $("#isAgenteIntegracao").val(result.isAgenteIntegracao);
+                            $("#cnpjEcpf").val(result.cnpjEcpf);
+                            $("#nomeEmpresaPessoa").val(result.nomeEmpresaPessoa);  
+                            $("#nomeConvenio").val(result.nomeEmpresaPessoa);
+                        }
+                        else{
+                            $(".numeroConvenio").val("");
+                            $(".razaoSocial").val("");
+                            $("#tipoConvenio").val("");
+                            $("#isAgenteIntegracao").val("");
+                            $("#nomeAgenciada").val("");
+                            $(".cnpjEcpf").val("");
+                            $(".nomeEmpresaPessoa").val("");  
+                            $(".nomeConvenio").val("");
+                            
+                            $("#myModalLabel").html("Convênio não encontrado");
+                            $(".modal-body").html("O Convênio não corresponde a um Convênio cadastrado.");	        	
+                            $('#myModal').modal('show');	        	
+                        }
+	            }
+	        });
+	        
+	        
+	        
+	    });
+            <!-- TÉRMINO BOTÃO PARA BUSCA DE CONVENIO POR NOME-->
+            
 	    function atualizaAgenteIntegracao(){
 	    	var result = null;
 	        $.ajax({

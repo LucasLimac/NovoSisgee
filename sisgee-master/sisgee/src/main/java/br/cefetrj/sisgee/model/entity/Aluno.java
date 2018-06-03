@@ -30,6 +30,9 @@ public class Aluno {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Pessoa pessoa;
 
+	@Column(length = 50)
+	private String tipoAluno;            
+        
 	@OneToOne(fetch = FetchType.EAGER)
 	private Curso curso;
 
@@ -81,6 +84,14 @@ public class Aluno {
 	public void setTermoEstagios(List<TermoEstagio> termoEstagios) {
 		this.termoEstagios = termoEstagios;
 	}
+
+        public String getTipoAluno() {
+            return tipoAluno;
+        }
+
+        public void setTipoAluno(String tipoAluno) {
+            this.tipoAluno = tipoAluno;
+        }        
 
 	@Override
 	public int hashCode() {

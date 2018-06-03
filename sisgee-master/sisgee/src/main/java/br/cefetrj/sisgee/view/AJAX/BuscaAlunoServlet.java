@@ -42,13 +42,15 @@ public class BuscaAlunoServlet extends HttpServlet {
 		String nomeCurso = "";
 		String nomeCampus = "";
                 String idTermoEstagioAtivo = "";
+                String tipoAluno = "";
 		
 		Aluno aluno = AlunoServices.buscarAlunoByMatricula(matricula.trim());
 		if(aluno != null) {
 			Pessoa pessoa = aluno.getPessoa();
-			Curso curso = aluno.getCurso();
+			Curso curso   = aluno.getCurso();
 			Campus campus = curso.getCampus();
-			
+			tipoAluno     = aluno.getTipoAluno();
+                        
 			idAluno = Integer.toString(aluno.getIdAluno());
 			nome = pessoa.getNome();
 			nomeCurso = curso.getNomeCurso();
@@ -77,6 +79,7 @@ public class BuscaAlunoServlet extends HttpServlet {
 				.add("nomeCurso", nomeCurso)
 				.add("nomeCampus", nomeCampus)
                                 .add("idTermoEstagioAtivo", idTermoEstagioAtivo)
+                                .add("tipoAluno", tipoAluno)
 				.build();
 		
 		StringWriter stWriter = new StringWriter();

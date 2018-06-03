@@ -30,7 +30,6 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("ENTROU NO VALIDABUSCARCONVENIOOOOOOO");
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
 
@@ -68,7 +67,6 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
 
             }
         } else {
-            System.out.println("VAI VALIDAR NOMEEEEEEE");
             /**
              * Validação do nome da pessoa ou empresa usando métodos da Classe
              * ValidaUtils. Campo opcional; Tamanho máximo de 100 caracteres;
@@ -79,10 +77,8 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
                 nomeMsg = ValidaUtils.validaTamanho("Razão Social", 100, nome);
 
                 if (nomeMsg.trim().isEmpty()) {
-                    System.out.println("VALIDOU TAMANHO NOME");
                     nomeMsg = ValidaUtils.validaInteger("Razão Social", nome);
                     if (nomeMsg.trim().isEmpty()) {
-                        System.out.println("VALIDOU O INTEIRO");
                         nomeMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                         request.setAttribute("nomeMsg", nomeMsg);
                         isValid = false;
@@ -111,7 +107,6 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
          * inclusão ou devolver para o formulário com as mensagens.
          */
         if (isValid) {
-            System.out.println("VALIDOU DADOS DO BUSCAAAARRRRRR");
             request.getRequestDispatcher("/BuscarConvenioServlet").forward(request, response);
 
         } else {

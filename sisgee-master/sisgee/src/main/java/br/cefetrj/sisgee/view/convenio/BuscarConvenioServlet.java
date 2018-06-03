@@ -38,9 +38,7 @@ public class BuscarConvenioServlet extends HttpServlet {
         request.setAttribute("filtro", null);
 
         numero = request.getParameter("numeroConvenio");
-        System.out.println("->>>>>>>" + numero);
         nome = request.getParameter("razaoSocial");
-        System.out.println("->>>>>>" + nome);
 
         String idEmpresa = "";
         request.setAttribute("selecao", null);
@@ -111,10 +109,10 @@ public class BuscarConvenioServlet extends HttpServlet {
         }
 
         if (isValid) {
+            
 
             request.getRequestDispatcher("form_renovar_convenio.jsp").forward(request, response);
         } else {
-            System.out.println("ENTROU ELSE DO CONVENIOSSSSSSSS");
             request.setAttribute("erroBuscar", "Não foi encontrado nenhum convênio com os parâmetros passados.");
             request.getRequestDispatcher("index.jsp").forward(request, response);
 
