@@ -8,8 +8,10 @@ import br.cefetrj.sisgee.model.dao.PersistenceManager;
 import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -40,15 +42,22 @@ public class ConvenioServices {
         List<Convenio> x = convenioDao.buscarTodos();
         List<Convenio> aVencer = new ArrayList();
         for (Convenio convenio : x) {
-            String dataAssinou = convenio.getDataAssinatura();
-            int anoAntigo = Integer.parseInt(dataAssinou.substring(6, dataAssinou.length()));
-            int mesAntigo = Integer.parseInt(dataAssinou.substring(3, 5));
-
-            int mesAtual = Calendar.getInstance().get(Calendar.MONTH);
-            int anoAtual = Calendar.getInstance().get(Calendar.YEAR);
-
-            int venceu = (anoAtual - anoAntigo) * 12 + (mesAtual - mesAntigo);
-            if (venceu >= 58) {
+            Date dataAssinou = convenio.getDataAssinatura();
+            Date dataFinal = convenio.getDataFinal();
+            Date dataHoje = new Date();
+            
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(dataHoje);
+            cal.add(Calendar.MONTH, 2);
+            Date dataVenceu =  cal.getTime();
+            
+            
+            System.out.println(convenio+"<<<-----");
+            System.out.println("DATA FINAL "+new SimpleDateFormat("dd/MM/yyyy").format(dataFinal));
+            System.out.println("DATA HOJE "+new SimpleDateFormat("dd/MM/yyyy").format(dataHoje));
+            System.out.println("DATA Venceu "+new SimpleDateFormat("dd/MM/yyyy").format(dataVenceu));
+            if ((dataFinal.getTime()> dataHoje.getTime()) && (dataFinal.getTime()<dataVenceu.getTime())) {
+                
                 aVencer.add(convenio);
 
             }

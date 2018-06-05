@@ -167,7 +167,7 @@
 	        $.ajax({
 	            type: 'GET',
 	            url: 'BuscaConvenioBotaoServlet', //Servlet
-	            async: true, // habilita a função ajax() repassar os dados para a função pai
+	            async: false, // habilita a função ajax() repassar os dados para a função pai
 	            data: $elementConvenio.serialize(),
 	            dataType: "json",
 	            success: function(json){
@@ -221,7 +221,7 @@
 	        $.ajax({
 	            type: 'GET',
 	            url: 'BuscaConvenioBotaoServlet', //Servlet
-	            async: true, // habilita a função ajax() repassar os dados para a função pai
+	            async: false, // habilita a função ajax() repassar os dados para a função pai
 	            data: $elementConvenio.serialize(),
 	            dataType: "json",
 	            success: function(json){

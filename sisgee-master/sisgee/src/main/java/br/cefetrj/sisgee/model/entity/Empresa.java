@@ -77,7 +77,6 @@ public class Empresa implements Serializable {
         this.emailEmpresa = emailEmpresa;
     }
 
-    
     public String getTelefoneEmpresa() {
         return telefoneEmpresa;
     }

@@ -86,7 +86,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="nomeEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_razao_social"/></label>
-                            <input type="text" class="form-control ${ not empty nomeEmpresaMsg ? 'is-invalid': 'is-valid' }" id="nomeEmpresa" name="nomeEmpresa" maxlength="100" value="${ param.nomeEmpresa }">
+                            <input type="text" class="form-control ${ not empty nomeEmpresaMsg ? 'is-invalid': 'is-valid' }" id="nomeEmpresa" name="nomeEmpresa"   maxlength="100" value="${ param.nomeEmpresa }">
                             <c:if test="${ not empty nomeEmpresaMsg }">
                                 <div class="invalid-feedback">${ nomeEmpresaMsg }</div>
                             </c:if>
@@ -185,7 +185,8 @@
             $(document).ready(function () {
                 $('#cnpjEmpresa').mask('99.999.999/9999-99');
                 $('#cpfPessoa').mask('999.999.999-99');
-                $('#dataAssinaturaConvenio').mask('99/99/9999');
+                $('#dataAssinaturaConvenioEmpresa').mask('99/99/9999');
+                $('#dataAssinaturaConvenioPessoa').mask('99/99/9999');
                 
             });
         </script>

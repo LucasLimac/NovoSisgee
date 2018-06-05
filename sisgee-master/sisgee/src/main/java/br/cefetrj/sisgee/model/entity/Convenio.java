@@ -1,6 +1,8 @@
 package br.cefetrj.sisgee.model.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -30,14 +31,14 @@ public class Convenio implements Serializable {
     @Column(length = 10, nullable = false)
     private String numeroConvenio;
     
-    @Column(length = 5, nullable = false)
+    @Column(length = 6, nullable = false)
     private String numero;
     
     @Column(length = 4, nullable = false)
     private String ano;
 
     @Column(nullable = false)
-    private String dataAssinatura;
+    private Date dataAssinatura;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn()
@@ -57,7 +58,7 @@ public class Convenio implements Serializable {
 	this.numeroConvenio = numeroConvenio;
     }     
     
-    public Convenio(String ano, String numero, String dataAssinatura, Empresa empresa) {
+    public Convenio(String ano, String numero, Date dataAssinatura, Empresa empresa) {
         this.ano=ano;
         this.numero=numero;
         this.dataAssinatura = dataAssinatura;
@@ -66,7 +67,7 @@ public class Convenio implements Serializable {
 
     }
 
-    public Convenio(String ano, String numero, String dataAssinatura, Pessoa pessoa) {
+    public Convenio(String ano, String numero, Date dataAssinatura, Pessoa pessoa) {
         this.ano=ano;
         this.numero=numero;
         this.dataAssinatura = dataAssinatura;
@@ -75,12 +76,12 @@ public class Convenio implements Serializable {
 
     }
     
-    public String getDataFinal(){
-        int x = Integer.parseInt(dataAssinatura.substring(6, dataAssinatura.length()));
-        String y = String.valueOf(x + 5);
-        String z = dataAssinatura.substring(0,5) + "/" +  y;
-
-        return z;
+    public Date getDataFinal(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.dataAssinatura);
+        cal.add(Calendar.YEAR, 5);
+        return cal.getTime();
+        
     }
     
 
@@ -96,17 +97,15 @@ public class Convenio implements Serializable {
         return ano;
     }
 
-    public void setAno() {
-        this.ano = this.dataAssinatura.substring(6, this.dataAssinatura.length());
-    }
-
+   
     
-    public String getDataAssinatura() {
+    public Date getDataAssinatura() {
         return dataAssinatura;
     }
 
-    public void setDataAssinatura(String dataAssinatura) {
+    public void setDataAssinatura(Date dataAssinatura) {
         this.dataAssinatura = dataAssinatura;
+        this.ano = new SimpleDateFormat("yyyy").format(dataAssinatura);
     }
 
     public Pessoa getPessoa() {

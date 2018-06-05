@@ -42,8 +42,7 @@ public class IncluirTermoAditivoServlet extends HttpServlet {
 		String enderecoTermoAditivo = (String)request.getAttribute("enderecoTermoAditivo");
 		ProfessorOrientador professorOrientador = new ProfessorOrientador((Integer)request.getAttribute("idProfessor"));
 		
-		TermoAditivo termoAditivo = new TermoAditivo(dataFimTermoAditivo, cargaHorariaTermoAditivo,
-				valorBolsaTermoAditivo, enderecoTermoAditivo, professorOrientador);
+		TermoAditivo termoAditivo = new TermoAditivo(dataFimTermoAditivo, cargaHorariaTermoAditivo,valorBolsaTermoAditivo, enderecoTermoAditivo, professorOrientador);
 		
 		String registroAditivoConcluido = "";
 		String msgOcorreuErro = "";

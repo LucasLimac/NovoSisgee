@@ -45,12 +45,10 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
 				msg = messages.getString(msg);
 			}
 		} else {
-			msg = messages.getString(msg);
+                    msg = messages.getString(msg);
 		}
 		
-
-
-		Aluno aluno = AlunoServices.buscarAluno(new Aluno(id));
+                Aluno aluno = AlunoServices.buscarAluno(new Aluno(id));
 		List<TermoEstagio> termoEstagios =  aluno.getTermoEstagios();
 		
 		//TODO consertar a lógica de mensagem vazia
@@ -70,12 +68,11 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
 				}
 			}
 		}
-
-
+                request.setAttribute("listaTermoEstagio", aluno.getTermoEstagios());
+               // System.out.println(aluno.getTermoEstagios().get(0).);
+                System.out.println(aluno.getTermoEstagios().get(0).getTermosAditivos().isEmpty());
 		request.setAttribute("msg",msg);
 		request.getRequestDispatcher("/form_termo_aditivo.jsp").forward(request, response);
-
-		
 
 	}
 }

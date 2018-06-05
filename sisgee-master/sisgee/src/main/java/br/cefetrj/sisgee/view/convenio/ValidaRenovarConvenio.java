@@ -11,6 +11,7 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -137,7 +138,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
              * Validação da Data de Assinatura do Convenio da Pessoa usando os métodos da
              * Classe ValidaUtils Campo obrigatório
              */
-            Date dataAssinatura = null;
+            Date dataAssinaturaEmpresa = null;
             String dataAssinaturaMsg = "";
             String campo = "Data de Assinatura";
 
@@ -146,9 +147,9 @@ public class ValidaRenovarConvenio extends HttpServlet {
                 dataAssinaturaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioEmpresa);
                 if (dataAssinaturaMsg.trim().isEmpty()) {
                     try {
-                       // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                       // dataAssinatura = format.parse(dataAssinaturaConvenioPessoa);
-                        request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaConvenioEmpresa);
+                       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                       dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioPessoa);
+                        request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
                     } catch (Exception e) {
                         //TODO trocar saída de console por Log
                         System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
@@ -232,7 +233,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
              * Validação da Data de Assinatura do Convenio da Pessoa usando os métodos da
              * Classe ValidaUtils Campo obrigatório
              */
-            Date dataAssinatura = null;
+            Date dataAssinaturaPessoa = null;
             String dataAssinaturaMsg = "";
             String campo = "Data de Assinatura";
 
@@ -241,9 +242,9 @@ public class ValidaRenovarConvenio extends HttpServlet {
                 dataAssinaturaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioPessoa);
                 if (dataAssinaturaMsg.trim().isEmpty()) {
                     try {
-                       // SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                       // dataAssinatura = format.parse(dataAssinaturaConvenioPessoa);
-                        request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaConvenioPessoa);
+                       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                        dataAssinaturaPessoa = format.parse(dataAssinaturaConvenioPessoa);
+                        request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
                     } catch (Exception e) {
                         //TODO trocar saída de console por Log
                         System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");

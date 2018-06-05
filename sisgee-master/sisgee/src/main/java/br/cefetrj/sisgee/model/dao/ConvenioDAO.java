@@ -28,8 +28,6 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
 		    .getSingleResult();
 	}
         
-       
-        
         
         public Convenio buscarByEmpresa(Empresa emp){
 		return (Convenio) manager.createQuery(
@@ -44,6 +42,4 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
 		    .setParameter("pess", pess)
 		    .getSingleResult();
 	}
-        
-        
 }

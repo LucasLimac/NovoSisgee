@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 
 /**
  * 
- * @author padu
+ * @author Vinicius Paradellas
  *
  */
 @Entity
@@ -23,43 +23,54 @@ public class TermoAditivo {
 	private Integer idTermoAditivo;
 
 	private Date dataFimTermoAditivo;
+        
+        private String tipoAditivo;
+        
+        @Column(nullable = false)
+        private Date dataCadastramentoTermoAditivo;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer cargaHorariaTermoAditivo;
 
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Float valorBolsaTermoAditivo;
 
-	@Column(length = 255, nullable = false)
+	@Column(length = 255, nullable = true)
 	private String enderecoTermoAditivo;
 
-	@Column(length = 10, nullable = false)
+	@Column(length = 10, nullable = true)
 	private String numeroEnderecoTermoAditivo;
 
-	@Column(length = 150, nullable = false)
+	@Column(length = 150, nullable = true)
 	private String complementoEnderecoTermoAditivo;
 
-	@Column(length = 150, nullable = false)
+	@Column(length = 150, nullable = true)
 	private String bairroEnderecoTermoAditivo;
 
-	@Column(length = 15, nullable = false)
+	@Column(length = 15, nullable = true)
 	private String cepEnderecoTermoAditivo;
 
-	@Column(length = 150, nullable = false)
+	@Column(length = 150, nullable = true)
 	private String cidadeEnderecoTermoAditivo;
 
-	@Column(length = 2, nullable = false)
+	@Column(length = 2, nullable = true)
 	private String estadoEnderecoTermoAditivo;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = true)
 	private TermoEstagio termoEstagio;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private ProfessorOrientador professorOrientador;
 	
 	public TermoAditivo() {}
-	
+        
+	public TermoAditivo(Date dataCadastramentoTermoAditivo,float valorBolsaTermoAditivo ){
+            tipoAditivo="Valor Bolsa";
+            this.dataCadastramentoTermoAditivo=dataCadastramentoTermoAditivo;
+            this.valorBolsaTermoAditivo=valorBolsaTermoAditivo;
+        }
+        
 	public TermoAditivo(Date dataFimTermoAditivo, Integer cargaHorariaTermoAditivo,
 			Float valorBolsaTermoAditivo, String enderecoTermoAditivo, ProfessorOrientador professorOrientador) {
 		
@@ -68,6 +79,7 @@ public class TermoAditivo {
 		this.valorBolsaTermoAditivo = valorBolsaTermoAditivo;
 		this.enderecoTermoAditivo = enderecoTermoAditivo;
 		this.professorOrientador = professorOrientador;
+                
 	}
 	
 	public ProfessorOrientador getProfessorOrientador() {
@@ -174,6 +186,23 @@ public class TermoAditivo {
 		this.termoEstagio = termoEstagio;
 	}
 
+        public String getTipoAditivo() {
+            return tipoAditivo;
+        }
+
+        public void setTipoAditivo(String tipoAditivo) {
+            this.tipoAditivo = tipoAditivo;
+        }
+
+        public Date getDataCadastramentoTermoAditivo() {
+            return dataCadastramentoTermoAditivo;
+        }
+
+        public void setDataCadastramentoTermoAditivo(Date dataCadastramentoTermoAditivo) {
+            this.dataCadastramentoTermoAditivo = dataCadastramentoTermoAditivo;
+        }
+        
+        
 	@Override
 	public int hashCode() {
 		final int prime = 31;

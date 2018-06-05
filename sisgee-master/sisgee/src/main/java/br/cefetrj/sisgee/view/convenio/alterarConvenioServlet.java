@@ -10,6 +10,7 @@ import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
@@ -37,8 +38,8 @@ public class alterarConvenioServlet extends HttpServlet {
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
         
-        String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
-        String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
+        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaEmpresa");
+        Date dataAssinaturaConvenioPessoa = (Date)request.getAttribute("dataAssinaturaPessoa");
         
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
@@ -50,13 +51,13 @@ public class alterarConvenioServlet extends HttpServlet {
             convenio.getEmpresa().setTelefoneEmpresa(telefoneEmpresa);
             convenio.getEmpresa().setEmailEmpresa(emailEmpresa);
             convenio.setDataAssinatura(dataAssinaturaConvenioEmpresa);
-            convenio.setAno();
+            
             convenio.setNumeroConvenio();
         } else {
             convenio.getPessoa().setTelefone(telefonePessoa);
             convenio.getPessoa().setEmail(emailPessoa);
             convenio.setDataAssinatura(dataAssinaturaConvenioPessoa);
-            convenio.setAno();
+            
             convenio.setNumeroConvenio();
         }
 
