@@ -1,5 +1,6 @@
 package br.cefetrj.sisgee.model.entity;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -72,13 +73,13 @@ public class TermoEstagio {
 	@JoinColumn(nullable = false)
 	private Convenio convenio;
         
-	@Column(length = 100)
+	@Column(length = 80)
 	private String nomeSupervisor;    
         
-	@Column(length = 100)
+	@Column(length = 80)
 	private String cargoSupervisor;   
         
-	@Column(length = 255)
+	@Column()
 	private String nomeAgenciada;         
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -143,14 +144,27 @@ public class TermoEstagio {
 	public void setDataInicioTermoEstagio(Date dataInicioTermoEstagio) {
 		this.dataInicioTermoEstagio = dataInicioTermoEstagio;
 	}
-
-        public String getDataFimTermoEstagio2(){
-                SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+        
+        public String getDataFimTermoEstagio3()throws ParseException  {
+            SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
             String a=format.format(dataFimTermoEstagio);
             return a;
+	}
+        public String getDataFimTermoEstagio2(){
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getDataFimTermoAditivo()!=null){
+                    SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+                    String a=format.format(termosAditivo.getDataFimTermoAditivo());
+                    return a;
+                }
+            }
+            SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+            String a=format.format(dataFimTermoEstagio);
+            return a;
+            
         }
-	public Date getDataFimTermoEstagio() {
-		return dataFimTermoEstagio;
+	public Date getDataFimTermoEstagio(){
+            return dataFimTermoEstagio;
 	}
 
 	public void setDataFimTermoEstagio(Date dataFimTermoEstagio) {
@@ -166,6 +180,15 @@ public class TermoEstagio {
 	}
 
 	public Integer getCargaHorariaTermoEstagio() {
+            Integer a=-1;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(cargaHorariaTermoEstagio!=null){
+                    a=termosAditivo.getCargaHorariaTermoAditivo();
+                }
+            }
+            if(a!=null && a!=-1)
+                return a;
+            else
 		return cargaHorariaTermoEstagio;
 	}
 
@@ -174,7 +197,18 @@ public class TermoEstagio {
 	}
 
 	public Float getValorBolsa() {
-		return valorBolsa;
+            float a=-1;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getValorBolsaTermoAditivo()!=null){
+                    a=termosAditivo.getValorBolsaTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else	
+                return valorBolsa;
 	}
 
 	public void setValorBolsa(Float valorBolsa) {
@@ -182,7 +216,18 @@ public class TermoEstagio {
 	}
 
 	public String getEnderecoTermoEstagio() {
-		return enderecoTermoEstagio;
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return enderecoTermoEstagio;
 	}
 
 	public void setEnderecoTermoEstagio(String enderecoTermoEstagio) {
@@ -190,7 +235,19 @@ public class TermoEstagio {
 	}
 
 	public String getNumeroEnderecoTermoEstagio() {
-		return numeroEnderecoTermoEstagio;
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getNumeroEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getNumeroEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return numeroEnderecoTermoEstagio;
 	}
 
 	public void setNumeroEnderecoTermoEstagio(String numeroEnderecoTermoEstagio) {
@@ -198,7 +255,19 @@ public class TermoEstagio {
 	}
 
 	public String getComplementoEnderecoTermoEstagio() {
-		return complementoEnderecoTermoEstagio;
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getComplementoEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getComplementoEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return complementoEnderecoTermoEstagio;
 	}
 
 	public void setComplementoEnderecoTermoEstagio(String complementoEnderecoTermoEstagio) {
@@ -206,7 +275,19 @@ public class TermoEstagio {
 	}
 
 	public String getBairroEnderecoTermoEstagio() {
-		return bairroEnderecoTermoEstagio;
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getBairroEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getBairroEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return bairroEnderecoTermoEstagio;
 	}
 
 	public void setBairroEnderecoTermoEstagio(String bairroEnderecoTermoEstagio) {
@@ -214,7 +295,19 @@ public class TermoEstagio {
 	}
 
 	public String getCepEnderecoTermoEstagio() {
-		return cepEnderecoTermoEstagio;
+	
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getCepEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getCepEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return cepEnderecoTermoEstagio;
 	}
 
 	public void setCepEnderecoTermoEstagio(String cepEnderecoTermoEstagio) {
@@ -222,7 +315,19 @@ public class TermoEstagio {
 	}
 
 	public String getCidadeEnderecoTermoEstagio() {
-		return cidadeEnderecoTermoEstagio;
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getCidadeEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getCidadeEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return cidadeEnderecoTermoEstagio;
 	}
 
 	public void setCidadeEnderecoTermoEstagio(String cidadeEnderecoTermoEstagio) {
@@ -230,7 +335,19 @@ public class TermoEstagio {
 	}
 
 	public String getEstadoEnderecoTermoEstagio() {
-		return estadoEnderecoTermoEstagio;
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getEstadoEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getEstadoEnderecoTermoAditivo();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return estadoEnderecoTermoEstagio;
 	}
 
 	public void setEstadoEnderecoTermoEstagio(String estadoEnderecoTermoEstagio) {
@@ -238,7 +355,21 @@ public class TermoEstagio {
 	}	
 
 	public Boolean getEEstagioObrigatorio() {
-		return eEstagioObrigatorio;
+		
+            String a="";
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getEobrigatorio()!=null){
+                    a=termosAditivo.getEobrigatorio();
+                    valid=true;
+                }
+            }
+            if(valid)
+                if(a.equals("sim")){
+                return true;
+                }else{
+                return false;}
+            return eEstagioObrigatorio;
 	}
 
 	public void setEEstagioObrigatorio(Boolean eEstagioObrigatorio) {
@@ -250,6 +381,18 @@ public class TermoEstagio {
 	}
 
         public String getNomeSupervisor() {
+            
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getNomeSupervisor()!=null){
+                    a=termosAditivo.getNomeSupervisor();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
             return nomeSupervisor;
         }
 
@@ -258,6 +401,18 @@ public class TermoEstagio {
         }
 
         public String getCargoSupervisor() {
+            
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getCargoSupervisor()!=null){
+                    a=termosAditivo.getCargoSupervisor();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
             return cargoSupervisor;
         }
 
@@ -278,7 +433,19 @@ public class TermoEstagio {
 	}
 
 	public ProfessorOrientador getProfessorOrientador() {
-		return professorOrientador;
+		
+            ProfessorOrientador a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getProfessorOrientador()!=null){
+                    a=termosAditivo.getProfessorOrientador();
+                    valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return professorOrientador;
 	}
 
 	public void setProfessorOrientador(ProfessorOrientador professorOrientador) {

@@ -25,6 +25,7 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.text.DateFormat;
 import java.util.Calendar;
+import jdk.nashorn.internal.runtime.ParserException;
 
 /**
  * Servlet para trazer os dados do banco para a tela de cadastro de Termo
@@ -40,7 +41,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws ServletException, IOException{
 
 		Locale locale = ServletUtils.getLocale(request);
 		ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
@@ -55,8 +56,12 @@ public class FormTermoAditivoServlet extends HttpServlet {
 		String cargaHorariaTermoAditivo = request.getParameter("cargaHorariaTermoEstagio");
                 
                 /** campos de Valor Bolsa */
-		String valorBolsaTermoAditivo = request.getParameter("valorBolsa");
-		
+                
+		String valorBolsaTermoAditivo =request.getParameter("valorBolsa");
+		if(valorBolsaTermoAditivo!=null){
+                    valorBolsaTermoAditivo=valorBolsaTermoAditivo.replace(".", "");
+                    valorBolsaTermoAditivo=valorBolsaTermoAditivo.replace(",", ".");
+                }
 		/** campos de endereço */
 		String enderecoTermoAditivo = request.getParameter("enderecoTermoEstagio");
 		String numeroEnderecoTermoAditivo = request.getParameter("numeroEnderecoTermoEstagio");
@@ -172,9 +177,10 @@ public class FormTermoAditivoServlet extends HttpServlet {
 				valorBolsaMsg = ValidaUtils.validaObrigatorio(campo, valorBolsaTermoAditivo);
 				if (valorBolsaMsg.trim().isEmpty()) {
                                         System.out.println(valorBolsaTermoAditivo);
-					valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsaTermoAditivo.replace(",","."));
+					valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsaTermoAditivo);
 					if (valorBolsaMsg.trim().isEmpty()) {
-						valor = Float.parseFloat(valorBolsaTermoAditivo.replace(",","."));
+                                                
+						valor = Float.parseFloat(valorBolsaTermoAditivo);
 						request.setAttribute("valor", valor);
 					} else {
 						valorBolsaMsg = messages.getString(valorBolsaMsg);
@@ -496,9 +502,13 @@ public class FormTermoAditivoServlet extends HttpServlet {
                     isValid = false;
 		}	
                 
-                if(!(aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime()) ==1)){
+                try{
+                if(!(aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime()) ==1)) {
                     request.setAttribute("msg3","Não existe nenhum Termo Estágio ativo");
                     
+                    isValid=false;
+                }
+                }catch(ParserException e){
                     isValid=false;
                 }
 		if (isValid) {

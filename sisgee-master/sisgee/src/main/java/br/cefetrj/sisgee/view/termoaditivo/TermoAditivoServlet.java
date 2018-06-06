@@ -110,23 +110,56 @@ public class TermoAditivoServlet extends HttpServlet {
 			UF[] uf = UF.asList();
                         
                         request.setAttribute("uf", uf);
-			request.setAttribute("alMatricula", aluno.getMatricula());
+                        
+			/** Dados de aluno*/
+                        request.setAttribute("alMatricula", aluno.getMatricula());
                         request.setAttribute("alNome", aluno.getPessoa().getNome());
                         request.setAttribute("alCampus", aluno.getCurso().getCampus().getNomeCampus());
                         request.setAttribute("alCurso", aluno.getCurso());
-			request.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
-                        
+			
+                        /** Dados de convenio*/
+                        request.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
                         if(termoEstagio.getConvenio().getEmpresa()==null){
                             request.setAttribute("cvNome", termoEstagio.getConvenio().getPessoa().getNome());
                             request.setAttribute("tConvenio","pf");
                             request.setAttribute("cvCpfCnpj",termoEstagio.getConvenio().getPessoa().getCpf());
+                            request.setAttribute("nomeAgenciada",termoEstagio.getNomeAgenciada());
                             
                         }else{
                             request.setAttribute("cvNome", termoEstagio.getConvenio().getEmpresa().getRazaoSocial());
                             request.setAttribute("tConvenio","pj");
-                            request.setAttribute("agIntegracao","sim");
+                            request.setAttribute("agIntegracao",termoEstagio.getConvenio().getEmpresa().isAgenteIntegracao());
                             request.setAttribute("cvCpfCnpj", termoEstagio.getConvenio().getEmpresa().getCnpjEmpresa());
+                            request.setAttribute("nomeAgenciada",termoEstagio.getNomeAgenciada());
                         }
+                        
+                        /** Dados de Vigência */
+                        request.setAttribute("vidataInicioTermoEstagio",termoEstagio.getDataInicioTermoEstagio2());
+                        request.setAttribute("vidataFimTermoEstagio",termoEstagio.getDataFimTermoEstagio2());
+                        
+                        /** Dados de Carga Horária */
+                        request.setAttribute("cacargaHorariaTermoEstagio",termoEstagio.getCargaHorariaTermoEstagio());
+                        
+                        /** Dados de Valor Bolsa */
+                        request.setAttribute("vavalorBolsa",termoEstagio.getValorBolsa());
+                        
+                        /** Dados de Local */
+                        request.setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagio());
+                        request.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagio());
+                        request.setAttribute("encomplementoEnderecoTermoEstagio",termoEstagio.getComplementoEnderecoTermoEstagio());
+                        request.setAttribute("enbairroEnderecoTermoEstagio",termoEstagio.getBairroEnderecoTermoEstagio());
+                        request.setAttribute("encidadeEnderecoTermoEstagio",termoEstagio.getCidadeEnderecoTermoEstagio());
+                        request.setAttribute("enuf",termoEstagio.getEstadoEnderecoTermoEstagio());
+                        request.setAttribute("encepEnderecoTermoEstagio",termoEstagio.getCepEnderecoTermoEstagio());
+                        
+                        /** Dados de Supervisor */
+                        
+                        request.setAttribute("eobrigatorio",termoEstagio.getEEstagioObrigatorio());
+                        request.setAttribute("nomeSupervisor",termoEstagio.getNomeSupervisor());
+                        request.setAttribute("cargoSupervisor",termoEstagio.getCargoSupervisor());
+                        
+                        /** Dados de Professor */
+                        request.setAttribute("pfnomeprofessor",termoEstagio.getProfessorOrientador());
                         
                         request.setAttribute("termoEstagio", termoEstagio);
                          

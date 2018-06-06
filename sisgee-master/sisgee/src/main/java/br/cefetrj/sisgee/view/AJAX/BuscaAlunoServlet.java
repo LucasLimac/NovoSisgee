@@ -59,7 +59,7 @@ public class BuscaAlunoServlet extends HttpServlet {
                         System.out.println("busca termo aluno ");                        
                         if(termos != null){
                             for (TermoEstagio termo : termos) {
-                                if(termo.getDataFimTermoEstagio() == null){
+                                if(termo.getDataFimTermoEstagio()== null){
                                     idTermoEstagioAtivo = 
                                            (termo.getIdTermoEstagio() != null ? 
                                             termo.getIdTermoEstagio().toString() : 
