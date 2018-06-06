@@ -19,11 +19,11 @@ public class ValidaUtils {
 	 */
 	public static String validaTamanho(String nomeCampo, int tamanho, String param) {
 		String msg = "";
-		if(param.length() > tamanho) {
+		if(param!=null && param.length() > tamanho) {
 			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_tamanho_txt";
 		}		
 		return msg;
-	}
+	}   
         
         
         public static String validaEmail(String nomeCampo, String param) {
@@ -185,10 +185,17 @@ public class ValidaUtils {
 	 */
 	public static String validaDatas(Date dataInicio, Date dataFim) {
 		String msg = "";
-		if(dataInicio.compareTo(dataFim) > 0) {
+                System.out.println(dataInicio);
+                if(dataFim==null){
+                    msg = "br.cefetrj.sisgee.valida_utils.msg_valida_datas";
+                    return msg;
+                }
+                else if(dataInicio.compareTo(dataFim) > 0) {
 			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_datas";
+                        return msg;
 		}		
 		return msg;
+                
 	}	
 	
 	

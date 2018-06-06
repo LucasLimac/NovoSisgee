@@ -22,6 +22,7 @@ import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
+import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -593,11 +594,6 @@ public class FormTermoAditivoServlet extends HttpServlet {
                                 }
                                 
                                 
-                                System.out.println(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()+"->"+cal.getTime()+":"+aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio().compareTo(cal.getTime()));
-                                System.out.println(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()+"<-"+cal.getTime()+":"+cal.getTime().compareTo(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()));
-                                System.out.println(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()+"="+cal.getTime()+":"+aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio().compareTo(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()));
-                                
-                                
                                 String registroAditivoConcluido = messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_registroAditivoConcluido");
 				request.setAttribute("msg", registroAditivoConcluido);
 				
@@ -605,6 +601,61 @@ public class FormTermoAditivoServlet extends HttpServlet {
 								
 			}
                         else{
+                        List<ProfessorOrientador> professores = ProfessorOrientadorServices.listarProfessorOrientador();
+			UF[] uf = UF.asList();
+                        request.setAttribute("uf", uf);
+                        
+			/** Dados de aluno*/
+                        request.setAttribute("alMatricula", aluno.getMatricula());
+                        request.setAttribute("alNome", aluno.getPessoa().getNome());
+                        request.setAttribute("alCampus", aluno.getCurso().getCampus().getNomeCampus());
+                        request.setAttribute("alCurso", aluno.getCurso());
+			
+                        /** Dados de convenio*/
+                        request.setAttribute("cvNumero", termoEstagio.getConvenio().getNumeroConvenio());
+                        if(termoEstagio.getConvenio().getEmpresa()==null){
+                            request.setAttribute("cvNome", termoEstagio.getConvenio().getPessoa().getNome());
+                            request.setAttribute("tConvenio","pf");
+                            request.setAttribute("cvCpfCnpj",termoEstagio.getConvenio().getPessoa().getCpf());
+                            request.setAttribute("nomeAgenciada",termoEstagio.getNomeAgenciada());
+                            
+                        }else{
+                            request.setAttribute("cvNome", termoEstagio.getConvenio().getEmpresa().getRazaoSocial());
+                            request.setAttribute("tConvenio","pj");
+                            request.setAttribute("agIntegracao",termoEstagio.getConvenio().getEmpresa().isAgenteIntegracao());
+                            request.setAttribute("cvCpfCnpj", termoEstagio.getConvenio().getEmpresa().getCnpjEmpresa());
+                            request.setAttribute("nomeAgenciada",termoEstagio.getNomeAgenciada());
+                        }
+                        
+                        /** Dados de Vigência */
+                        request.setAttribute("vidataInicioTermoEstagio",termoEstagio.getDataInicioTermoEstagio2());
+                        request.setAttribute("vidataFimTermoEstagio",termoEstagio.getDataFimTermoEstagio2());
+                        
+                        /** Dados de Carga Horária */
+                        request.setAttribute("cacargaHorariaTermoEstagio",termoEstagio.getCargaHorariaTermoEstagio());
+                        
+                        /** Dados de Valor Bolsa */
+                        request.setAttribute("vavalorBolsa",termoEstagio.getValorBolsa());
+                        
+                        /** Dados de Local */
+                        request.setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagio());
+                        request.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagio());
+                        request.setAttribute("encomplementoEnderecoTermoEstagio",termoEstagio.getComplementoEnderecoTermoEstagio());
+                        request.setAttribute("enbairroEnderecoTermoEstagio",termoEstagio.getBairroEnderecoTermoEstagio());
+                        request.setAttribute("encidadeEnderecoTermoEstagio",termoEstagio.getCidadeEnderecoTermoEstagio());
+                        request.setAttribute("enuf",termoEstagio.getEstadoEnderecoTermoEstagio());
+                        request.setAttribute("encepEnderecoTermoEstagio",termoEstagio.getCepEnderecoTermoEstagio());
+                        
+                        /** Dados de Supervisor */
+                        
+                        request.setAttribute("eobrigatorio",termoEstagio.getEEstagioObrigatorio());
+                        request.setAttribute("nomeSupervisor",termoEstagio.getNomeSupervisor());
+                        request.setAttribute("cargoSupervisor",termoEstagio.getCargoSupervisor());
+                        
+                        /** Dados de Professor */
+                        request.setAttribute("pfnomeprofessor",termoEstagio.getProfessorOrientador());
+                        
+                        request.setAttribute("termoEstagio", termoEstagio);
                     
 			request.setAttribute("showVigencia", showVigencia);
 			request.setAttribute("showCargaHoraria", showCargaHoraria);

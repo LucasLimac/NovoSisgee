@@ -200,7 +200,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="cargaHorariaTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.horasDia"/></label>
-                            <input type="text" maxlength="1" class="form-control col-sm-2 ${ not empty cargaHorariaMsg ? 'is-invalid': 'is-valid' }" id="cargaHorariaTermoEstagio" name="cargaHorariaTermoEstagio" value="${ showCargaHoraria eq 'sim' ? '' :cacargaHorariaTermoEstagio }" ${ showCargaHoraria eq 'sim' ? '' :'disabled'}>
+                            <input type="text" required="required" maxlength="1" pattern="[1-6]+$" class="form-control col-sm-2 ${ not empty cargaHorariaMsg ? 'is-invalid': 'is-valid' }" id="cargaHorariaTermoEstagio" name="cargaHorariaTermoEstagio" value="${ showCargaHoraria eq 'sim' ? '' :cacargaHorariaTermoEstagio }" ${ showCargaHoraria eq 'sim' ? '' :'disabled'}>
                             <c:if test="${ not empty cargaHorariaMsg }">
                                 <div class="invalid-feedback">${ cargaHorariaMsg }</div>
                             </c:if>
@@ -231,7 +231,7 @@
                         <div class="form-group col-md-12">
 
                             <label for="enderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.endereco"/></label>
-                            <input type="text" maxlength="255" class="form-control ${ not empty enderecoMsg ? 'is-invalid': not empty enderecoMsg ? 'is-invalid' : 'is-valid' }" id="enderecoTermoEstagio" name="enderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :enenderecoTermoEstagio }">
+                            <input type="text" required="required" pattern="[1-9,a-z\s]+$" maxlength="255" class="form-control ${ not empty enderecoMsg ? 'is-invalid': not empty enderecoMsg ? 'is-invalid' : 'is-valid' }" id="enderecoTermoEstagio" name="enderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :enenderecoTermoEstagio }">
                             <c:if test="${ not empty enderecoMsg }">
                                 <div class="invalid-feedback">${ enderecoMsg }</div>
                             </c:if>
@@ -351,6 +351,9 @@
                 <input type="hidden" name="alMatricula" value="${alMatricula}" />
                 
                     <input type="hidden" name="idTermoEstagio" value="${ termoEstagio.idTermoEstagio }" />
+                    
+                    <input type="hidden" name="dataInicioTermoEstagio" value="${ dataInicioTermoEstagio }" />
+                    
                     <input type="hidden" name="showVigencia" value="${ showVigencia }" />
                     <input type="hidden" name="showCargaHoraria" value="${ showCargaHoraria }" />
                     <input type="hidden" name="showProfessor" value="${ showProfessor }" />

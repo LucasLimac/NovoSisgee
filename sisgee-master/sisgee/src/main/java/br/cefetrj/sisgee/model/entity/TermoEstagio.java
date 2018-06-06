@@ -1,7 +1,9 @@
 package br.cefetrj.sisgee.model.entity;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -120,7 +122,16 @@ public class TermoEstagio {
 	}
 
 
-
+        public String getEstado() throws Exception{
+            final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                final Calendar cal = Calendar.getInstance();
+            if(dataFimTermoEstagio.compareTo(cal.getTime()) ==1){
+                if(dataRescisaoTermoEstagio!=null && dataRescisaoTermoEstagio.compareTo(cal.getTime()) ==1){
+                    return "Ativo";
+                }
+            }
+            return"Encerrado" ;
+        }
 	public Integer getIdTermoEstagio() {
 		return idTermoEstagio;
 	}

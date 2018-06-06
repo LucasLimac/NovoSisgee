@@ -60,7 +60,7 @@
                                 <c:forEach items="${listaTermoEstagio}" var="b">
                                     <tr>
                                         <td><fmt:message key="br.cefetrj.sisgee.4" /></td>
-                                        <td>--</td>
+                                        <td>${b.getEstado()}</td>
                                         <td>${b.getDataInicioTermoEstagio2()}</td>
                                         <td>${b.getDataFimTermoEstagio2()}</td>
                                         <td>${b.getConvenio().pegaCpf()}</td>
