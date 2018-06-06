@@ -74,6 +74,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                     } else {
                         emailEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                         request.setAttribute("emailEmpresaMsg", emailEmpresaMsg);
+                        request.setAttribute("isEmpresa", "sim");
                         isValid = false;
                     }
                 } else {
@@ -105,6 +106,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                         } else {
                             telefoneEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                             request.setAttribute("telefoneEmpresaMsg", telefoneEmpresaMsg);
+                            request.setAttribute("isEmpresa", "sim");
                             isValid = false;
                         }
                     } else {
@@ -205,6 +207,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                     } else {
                         emailPessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                         request.setAttribute("emailPessoaMsg", emailPessoaMsg);
+                        request.setAttribute("isPessoa", "sim");
                         isValid = false;
                     }
                 } else {
@@ -236,6 +239,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                         } else {
                             telefonePessoaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                             request.setAttribute("telefonePessoaMsg", telefonePessoaMsg);
+                            request.setAttribute("isPessoa", "sim");
                             isValid = false;
                         }
                     } else {

@@ -42,7 +42,7 @@
 
                             <div class="form-inline form-group col-md-8 mt-2 offset-2" >
                                 <label for="numeroConvenio" class="mr-1"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_numeroConvenio_renovar" /></label>
-                                <input type="text" class="ml-5 form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' }" id="numeroConvenio" name="numeroConvenio"  maxlength="5" value="">
+                                <input type="text" class="ml-5 form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' }" id="numeroConvenio" name="numeroConvenio"  maxlength="6" value="">
                                 <span class="input-group-btn"> 
                                     <button class="btn btn-primary  " type="submit" id="btnBuscarPeloNumero" ><i class="fas fa-search"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_buscar"/></button>
                                 </span>
