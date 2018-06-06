@@ -1,13 +1,13 @@
 package br.cefetrj.sisgee.model.entity;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -54,8 +54,9 @@ public class Convenio implements Serializable {
     public Convenio() {
     }
 
+    //construtor so com numero
     public Convenio(String numeroConvenio) {
-	this.numeroConvenio = numeroConvenio;
+        this.numeroConvenio = numeroConvenio;
     }     
     
     public Convenio(String ano, String numero, Date dataAssinatura, Empresa empresa) {
@@ -76,13 +77,6 @@ public class Convenio implements Serializable {
 
     }
     
-    public Date getDataFinal(){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(this.dataAssinatura);
-        cal.add(Calendar.YEAR, 5);
-        return cal.getTime();
-        
-    }
     
 
     public String getNumero() {
@@ -97,12 +91,19 @@ public class Convenio implements Serializable {
         return ano;
     }
 
-   
     
     public Date getDataAssinatura() {
         return dataAssinatura;
     }
 
+    public Date getDataFinal(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(this.dataAssinatura);
+        cal.add(Calendar.YEAR, 5);
+        return cal.getTime();
+        
+    }    
+    
     public void setDataAssinatura(Date dataAssinatura) {
         this.dataAssinatura = dataAssinatura;
         this.ano = new SimpleDateFormat("yyyy").format(dataAssinatura);
@@ -156,7 +157,25 @@ public class Convenio implements Serializable {
     public void setTermoEstagio(List<TermoEstagio> termoEstagios) {
         this.termoEstagios = termoEstagios;
     }
-
+    
+    public String pegaNome(){
+        if(pessoa!=null && !pessoa.getNome().isEmpty()){
+            return pessoa.getNome();
+        }
+        else{
+            return empresa.getRazaoSocial();
+        }
+    }
+    public String pegaCpf(){
+        if(pessoa!=null && !pessoa.getCpf().isEmpty()){
+            return pessoa.getCpf();
+        }
+        else{
+            return empresa.getCnpjEmpresa();
+        }    
+        
+         
+    }
     @Override
     public int hashCode() {
         final int prime = 31;

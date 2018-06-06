@@ -18,7 +18,11 @@
 				${ msg }
 			</div>
 		</c:if>
-
+		<c:if test="${ not empty msg2 }">
+			<div class="alert alert-warning" role="alert">
+				${ msg2 }
+			</div>
+		</c:if>
 		<p class="tituloForm">
 		<h5>
 			<fmt:message key = "br.cefetrj.sisgee.resources.form_termo_rescisao.registro_termo"/>
@@ -49,7 +53,7 @@
 			</fieldset>
 		
 			<button type="submit" class="btn btn-primary">Salvar</button>
-			<button type="button" class="btn btn-secondary">Cancelar</button>			
+			<button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'index.jsp'"><i class="far fa-times-circle"></i> Cancelar</button>			
 		</form>
 		
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

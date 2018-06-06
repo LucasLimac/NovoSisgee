@@ -82,6 +82,7 @@ public class TermoEstagioServices {
 			
                         
 			GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
+                        
 			Convenio con = convenioDao.buscar(convenio.getIdConvenio());                        
 			
 			// Convênio já existe para a Empresa selecionada?

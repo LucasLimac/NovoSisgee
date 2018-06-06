@@ -31,15 +31,14 @@ public class alterarConvenioServlet extends HttpServlet {
        
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-        System.out.println("ENTROU NO ALTERAR CONVENIO");
         
         String numero = (String)request.getSession().getAttribute("numero");
         
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
         
-        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaEmpresa");
-        Date dataAssinaturaConvenioPessoa = (Date)request.getAttribute("dataAssinaturaPessoa");
+        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaConvenioEmpresa");
+        Date dataAssinaturaConvenioPessoa = (Date)request.getAttribute("dataAssinaturaConvenioPessoa");
         
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");

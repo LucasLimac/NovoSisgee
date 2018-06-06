@@ -17,6 +17,11 @@ import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
+/*
+ * @author Vinicius Paradellas
+ * @since 1.1
+ *
+ */
 
 /**
  * Busca as informações de cada termo aditivo
@@ -69,9 +74,7 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
 			}
 		}
                 request.setAttribute("listaTermoEstagio", aluno.getTermoEstagios());
-               // System.out.println(aluno.getTermoEstagios().get(0).);
-                System.out.println(aluno.getTermoEstagios().get(0).getTermosAditivos().isEmpty());
-		request.setAttribute("msg",msg);
+                request.setAttribute("msg",msg);
 		request.getRequestDispatcher("/form_termo_aditivo.jsp").forward(request, response);
 
 	}

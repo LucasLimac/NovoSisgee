@@ -86,7 +86,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 			isValid = false;
 		}		
 		
-		
 		String dataTermoRescisaoMsg = "";
 		
 		String campo = "Termo Rescisão";
@@ -99,20 +98,18 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 					dataRescisao = format.parse(dataTermoRescisao);
 					request.setAttribute("dataRescisao", dataRescisao);
 					
-					
-					
 					if(termoEstagio != null) {			
 						/**
 						 * Validação do período (entre o início e fim do estágio) usando o método validaDatas da Classe ValidaUtils
 						 */
 						String periodoMsg = "";	
 						
-							periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataRescisao);
-							if(!periodoMsg.trim().isEmpty()) {
-								periodoMsg = messages.getString(periodoMsg);
-								request.setAttribute("periodoMsg", periodoMsg);
-								isValid = false;					
-							}	
+                                                periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataRescisao);
+                                                if(!periodoMsg.trim().isEmpty()) {
+                                                        periodoMsg = messages.getString(periodoMsg);
+                                                        request.setAttribute("periodoMsg", periodoMsg);
+                                                        isValid = false;					
+                                                }	
 							
 						
 					}else {
@@ -120,9 +117,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 						isValid = false;
 						request.setAttribute("termoEstagioMsg", msg);
 					}
-					
-					
-					
 					
 				} catch (Exception e) {
 					//TODO trocar saída de console por Log

@@ -24,6 +24,26 @@ public class ValidaUtils {
 		}		
 		return msg;
 	}
+        
+        
+        public static String validaEmail(String nomeCampo, String param) {
+		String msg = "";
+		if(!param.contains("@") || !param.contains(".com")) {
+			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
+		}		
+		return msg;
+	}
+        
+        public static String validaTelefone(String nomeCampo, String param) {
+		String msg = "";
+		if(param.length()<8) {
+                    System.out.println("--->>>>"+param.length());
+			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
+		}		
+		return msg;
+	}
+        
+       
 	
 	/**
 	 * Método para validar campo por tamanho, para valores inteiros

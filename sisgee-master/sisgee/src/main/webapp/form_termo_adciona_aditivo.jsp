@@ -30,7 +30,7 @@
 
 
         <div class="container">
-            <c:if test="${ not empty msg }">
+            <c:if test="${ not empty msg and empty msg3 }">
                 <div class="alert alert-warning" role="alert">
                     ${ msg }
                 </div>
@@ -38,6 +38,11 @@
             <c:if test="${ not empty msg2 }">
                 <div class="alert alert-warning" role="alert">
                     ${ msg2 }
+                </div>
+            </c:if>
+            <c:if test="${ not empty msg3 }">
+                <div class="alert alert-warning" role="alert">
+                    ${ msg3 }
                 </div>
             </c:if>
 
@@ -54,7 +59,7 @@
                             <label for="matricula"><fmt:message key = "br.cefetrj.sisgee.resources.form.matricula"/></label>
 
                             <div class="input-group">
-                                <input type="hidden" id="tipoAluno" name="tipoAluno" value="${ param.tipoAluno }">
+                                
                                 <input type="hidden" id="idAluno" name="idAluno" value="${ param.idAluno }">
                                 <input type="text" maxlength="100" class="form-control"  id="matricula" name="matricula" value="${ alMatricula }">
                             </div>
@@ -296,12 +301,12 @@
 
                             <div class="custom-controls-stacked d-block my-3" >
                                 <label class="custom-control custom-radio"> 
-                                    <input id="estagioSim" name="eEstagioObrigatorio" type="radio" class="custom-control-input ${ not empty eEstagioObrigatorioMsg ? 'is-invalid' : '' }" value = "sim"  ${ not empty eEstagioObrigatorioMsg ? '' : eobrigatorio == 'sim' ? 'checked' : '' }> 
+                                    <input id="estagioSim" name="eobrigatorio" type="radio" class="custom-control-input ${ not empty eEstagioObrigatorioMsg ? 'is-invalid' : '' }" value = "sim"  ${ not empty eEstagioObrigatorioMsg ? '' : eobrigatorio == 'sim' ? 'checked' : '' }> 
                                     <span class="custom-control-indicator"></span> 
                                     <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span>
                                 </label> 
                                 <label class="custom-control custom-radio"> 
-                                    <input id="estagioNao" name="eEstagioObrigatorio" type="radio" class="custom-control-input ${ not empty eEstagioObrigatorioMsg ? 'is-invalid' : '' }" value = "nao"  ${ not empty eEstagioObrigatorioMsg ? '' : param.eEstagioObrigatorio == 'nao' ? 'checked' : '' }> 
+                                    <input id="estagioNao" name="eobrigatorio" type="radio" class="custom-control-input ${ not empty eEstagioObrigatorioMsg ? 'is-invalid' : '' }" value = "nao"  ${ not empty eEstagioObrigatorioMsg ? '' : param.eEstagioObrigatorio == 'nao' ? 'checked' : '' }> 
                                     <span class="custom-control-indicator"></span> 
                                     <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span>
                                 </label>
@@ -343,15 +348,15 @@
                             </c:if>				
                         </div>
                 </fieldset>
-
-                <c:if test="${ not empty termoEstagio }">
+                <input type="hidden" name="alMatricula" value="${alMatricula}" />
+                
                     <input type="hidden" name="idTermoEstagio" value="${ termoEstagio.idTermoEstagio }" />
-                    <input type="hidden" name="updVigencia" value="${ updVigencia }" />
-                    <input type="hidden" name="updCargaHoraria" value="${ updCargaHoraria }" />
-                    <input type="hidden" name="updProfessor" value="${ updProfessor }" />
-                    <input type="hidden" name="updValorBolsa" value="${ updValorBolsa }" />
-                    <input type="hidden" name="updEndereco" value="${ updEndereco }" />
-                </c:if>
+                    <input type="hidden" name="showVigencia" value="${ showVigencia }" />
+                    <input type="hidden" name="showCargaHoraria" value="${ showCargaHoraria }" />
+                    <input type="hidden" name="showProfessor" value="${ showProfessor }" />
+                    <input type="hidden" name="showValorBolsa" value="${ showValorBolsa }" />
+                    <input type="hidden" name="showLocal" value="${ showLocal }" />
+                    <input type="hidden" name="showSupervisor" value="${ showSupervisor }" />
 
                 <button type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.salvar"/></button>
                 <c:choose>

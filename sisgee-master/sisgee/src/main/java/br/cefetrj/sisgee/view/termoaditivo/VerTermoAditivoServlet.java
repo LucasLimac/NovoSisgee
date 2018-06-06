@@ -17,7 +17,8 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 /**
  * Servlet criada para visualização dos termos aditivos na tela
- * @author Paulo Cantuária
+ * @author Vinicius Paradellas
+ * @since 1.1
  *
  */
 

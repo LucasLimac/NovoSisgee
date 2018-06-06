@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="cnpjEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cnpj"/></label>
-                            <input type="text" readonly class="form-control ${ not empty cnpjEmpresaMsg ? 'is-invalid': 'is-valid' }" id="cnpjEmpresa" name="cnpjEmpresa" value="${ not empty cnpj ? cnpj :'' }">
+                            <input type="text" readonly class="form-control ${ not empty cnpjEmpresaMsg ? 'is-invalid': '' }" id="cnpjEmpresa" name="cnpjEmpresa" value="${ not empty cnpj ? cnpj :'' }">
                             <c:if test="${ not empty cnpjEmpresaMsg }">
                                 <div class="invalid-feedback">${ cnpjEmpresaMsg }</div>
                             </c:if>
@@ -85,7 +85,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="nomeEmpresa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_razao_social"/></label>
-                            <input type="text" readonly class="form-control ${ not empty nomeEmpresaMsg ? 'is-invalid': 'is-valid' }" id="nomeEmpresa" name="nomeEmpresa" maxlength="100" value="${ not empty razao ? razao :'' }">
+                            <input type="text" readonly class="form-control ${ not empty nomeEmpresaMsg ? 'is-invalid': '' }" id="nomeEmpresa" name="nomeEmpresa" maxlength="100" value="${ not empty razao ? razao :'' }">
                             <c:if test="${ not empty nomeEmpresaMsg }">
                                 <div class="invalid-feedback">${ nomeEmpresaMsg }</div>
                             </c:if>
@@ -130,7 +130,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="cpfPessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cpf"/></label>
-                            <input type="text" readonly class="form-control  ${ not empty cpfPessoaMsg ? 'is-invalid': 'is-valid' }" id="cpfPessoa" name="cpfPessoa"   value="${ not empty cpf ? cpf : '' }">
+                            <input type="text" readonly class="form-control  ${ not empty cpfPessoaMsg ? 'is-invalid': '' }" id="cpfPessoa" name="cpfPessoa"   value="${ not empty cpf ? cpf : '' }">
                             <c:if test="${ not empty cpfPessoaMsg }">
                                 <div class="invalid-feedback">${ cpfPessoaMsg }</div>
                             </c:if>
@@ -138,7 +138,7 @@
 
                         <div class="form-group col-md-6">
                             <label for="nomePessoa"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_nome"/></label>
-                            <input type="text" readonly class="form-control ${ not empty nomePessoaMsg ? 'is-invalid': 'is-valid' }" id="nomePessoa" name="nomePessoa" maxlength="100"  value="${ not empty nome ? nome : '' }">
+                            <input type="text" readonly class="form-control ${ not empty nomePessoaMsg ? 'is-invalid': '' }" id="nomePessoa" name="nomePessoa" maxlength="100"  value="${ not empty nome ? nome : '' }">
                             <c:if test="${ not empty nomePessoaMsg }">
                                 <div class="invalid-feedback">${ nomePessoaMsg }</div>
                             </c:if>

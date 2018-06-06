@@ -88,9 +88,10 @@
                                 <label for="numeroConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numeroConvenio"/></label>
                                 <div class="input-group">
                                     <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ param.numeroConvenio}">
+                                    <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ param.idConvenio}"> 
                                     <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio" maxlength="10" value="${ param.numeroConvenio }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                     <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button" id="btnBuscarConvenio" ><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
+                                        <button class="btn btn-primary" type="button" id="btnBuscarConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
                                     </span>    
                                     <c:if test="${ not empty numeroConvenioMsg }">
                                         <div class="invalid-feedback">${ numeroConvenioMsg }</div>
@@ -122,18 +123,16 @@
                                 <label for="isAgenteIntegracao"><fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_agente_integracao"/></label>
                                 <label class="custom-control">
                                     <input id="isAgenteIntegracao" class="form-control isAgenteIntegracao" type="text" name="isAgenteIntegracao" value="${param.isAgenteIntegracao}" readonly> 
-                                </label>						
-                                <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO--> 
-                                
-                                <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
-                                <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
-                                <label class="custom-control">
-                                    <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ param.nomeAgenciada }" maxlength="20">
                                 </label>
+                                    <!-- AQUI TERMINA SELECIONA AGENTE DE INTEGRACAO-->                            
+                                    <input type="hidden" class="form-control nomeAgenciada nomeAgenciada"  id="nomeAgenciada1" name="nomeAgenciada1" value="${ param.nomeAgenciada}">  
+                                    <label for="nomeAgenciada"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeAgenciada"/></label>
+                                    <label class="custom-control">
+                                        <input type="text" class="form-control ${ not empty agenciadaMsg ? 'is-invalid': 'is-valid' } nomeAgenciada" id="nomeAgenciada"  name="nomeAgenciada" value="${ param.nomeAgenciada }" maxlength="250">
+                                    </label>
                                 <c:if test="${ not empty agenciadaMsg }">
                                     <div class="invalid-feedback">${ agenciadaMsg }</div>
                                 </c:if>  
-                                
                             </div>
                         </div> 
                     </div>                      
@@ -313,8 +312,7 @@
                 <fieldset ${ isVisualizacao eq true ? 'disabled' :'' }>
                     <div class="form-group col-md-8">
                         <label for="idProfessorOrientador"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></label>
-                        <select name="idProfessorOrientador" id="idProfessorOrientador"  class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" ${ empty termoEstagio ? '' : empty updProfessor ? 'disabled' : '' }>
-            
+                        <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" ${ empty termoEstagio ? '' : empty updProfessor ? 'disabled' : '' }>
                             <option value="" selected>---</option>
                             <c:forEach items="${ professores }" var="professor">
                                 <option value="${ professor.idProfessorOrientador }">${ professor.nomeProfessorOrientador }</option>
@@ -370,8 +368,6 @@
 
     <script>
         $(document).ready(function () {
-            var tamanho = $("#cnpjEcpf1").val().length;
-
             $('#cargaHorariaTermoEstagio').mask('9');
             $('#valorBolsa').mask('000.000,00', {reverse: true});
             $('#dataInicioTermoEstagio').mask('99/99/9999');
@@ -379,6 +375,7 @@
             $("#cnpjEcpf1").mask("99.999.999/9999-99");
             $('#cepEnderecoTermoEstagio').mask('99.999-999');
             $('#dataIni').mask('99/99/9999');
+                    
 
         });
 
@@ -406,6 +403,25 @@
 
             }
 
+        }
+        
+        function show2(){
+            alert('show' + $('#isAgenteIntegracao').val());
+           if($('#isAgenteIntegracao').val()!=""){
+                if($('#isAgenteIntegracao').val()!="NÃO"){
+                    document.getElementById("exibeAgenciada1").style.display="block";
+                }else{
+                    document.getElementById("exibeAgenciada1").style.display="none";
+                }
+            }
+        }     
+        
+        function ocultar(){
+            if($('#isAgenteIntegracao').val()==""){
+                document.getElementById("exibeAgenciada1").style.display="none";
+            }else if($('#isAgenteIntegracao').val()=="NÃO"){
+                document.getElementById("exibeAgenciada1").style.display="none";
+            }
         }
     </script>
 </body>

@@ -1,5 +1,6 @@
 package br.cefetrj.sisgee.view.termoaditivo;
 
+import br.cefetrj.sisgee.control.AlunoServices;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,60 +17,47 @@ import javax.servlet.http.HttpServletResponse;
 import br.cefetrj.sisgee.control.ProfessorOrientadorServices;
 import br.cefetrj.sisgee.control.TermoAditivoServices;
 import br.cefetrj.sisgee.control.TermoEstagioServices;
+import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.ProfessorOrientador;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
-import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.util.Calendar;
 
 /**
  * Servlet para trazer os dados do banco para a tela de cadastro de Termo
  * Aditivo.
  * 
- * @author Paulo Cantuária
- * @since 1.0
+ * @author Vinicius Paradellas
+ * @since 1.1
  *
  */
 @WebServlet("/FormTermoAditivoServlet")
 public class FormTermoAditivoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * Método doGet: carrega as listas necessárias para seleção dos atributos de relacionamento e redireciona para a tela de Registro de Termo
-	 */
-        /*
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String aditivo = "sim";
-		//request = carregarListas(request);
-		request.setAttribute("aditivo", aditivo);
-
-		request.getRequestDispatcher("/form_termo_estagio.jsp").forward(request, response);
-
-	}*/
-
-	/**
-	 * Método para validação e inclusão do Termo Aditivo
-	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		Locale locale = ServletUtils.getLocale(request);
-		ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);			
+		ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
+                Aluno aluno=AlunoServices.buscarAlunoByMatricula(request.getParameter("alMatricula"));
+                final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                final Calendar cal = Calendar.getInstance();
 		
-		
-		String dataFimTermoAditivo = request.getParameter("dataFimTermoEstagio");		
+                /** campos de Vigência */
+		String dataFimTermoAditivo = request.getParameter("dataFimTermoEstagio");
+                
+                /** campos de Carga Horária */
 		String cargaHorariaTermoAditivo = request.getParameter("cargaHorariaTermoEstagio");
+                
+                /** campos de Valor Bolsa */
 		String valorBolsaTermoAditivo = request.getParameter("valorBolsa");
 		
-		/**
-		 * campos de endereço
-		 */
+		/** campos de endereço */
 		String enderecoTermoAditivo = request.getParameter("enderecoTermoEstagio");
 		String numeroEnderecoTermoAditivo = request.getParameter("numeroEnderecoTermoEstagio");
 		String complementoEnderecoTermoAditivo = request.getParameter("complementoEnderecoTermoEstagio");
@@ -78,9 +66,16 @@ public class FormTermoAditivoServlet extends HttpServlet {
 		String cidadeEnderecoTermoAditivo = request.getParameter("cidadeEnderecoTermoEstagio");
 		String estadoEnderecoTermoAditivo = request.getParameter("estadoEnderecoTermoEstagio");	
 		
-		/**
-		 * Campos possíveis selecionados para atualização
-		 */
+                /** campos de Professor */
+		String idProfessorOrientador = request.getParameter("idProfessorOrientador");		
+		String idTermoEstagio = request.getParameter("idTermoEstagio");
+                
+                /** campos de Supervisor */
+                String eobrigatorio = request.getParameter("eobrigatorio");
+                String nomeSupervisor = request.getParameter("nomeSupervisor");
+                String cargoSupervisor = request.getParameter("cargoSupervisor");
+                
+                /**Campos possíveis selecionados para atualização*/
                 String showVigencia = request.getParameter("showVigencia");
 		String showValorBolsa = request.getParameter("showValorBolsa");
 		String showCargaHoraria = request.getParameter("showCargaHoraria");
@@ -88,8 +83,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                 String showSupervisor = request.getParameter("showSupervisor");
 		String showProfessor = request.getParameter("showProfessor");	
 		
-		String idProfessorOrientador = request.getParameter("idProfessorOrientador");		
-		String idTermoEstagio = request.getParameter("idTermoEstagio");
+		
 		
 		TermoEstagio termoEstagio = null;
 		Integer idTermo = null;		
@@ -177,9 +171,10 @@ public class FormTermoAditivoServlet extends HttpServlet {
 				campo = "Valor";
 				valorBolsaMsg = ValidaUtils.validaObrigatorio(campo, valorBolsaTermoAditivo);
 				if (valorBolsaMsg.trim().isEmpty()) {
-					valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsaTermoAditivo);
+                                        System.out.println(valorBolsaTermoAditivo);
+					valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsaTermoAditivo.replace(",","."));
 					if (valorBolsaMsg.trim().isEmpty()) {
-						valor = Float.parseFloat(valorBolsaTermoAditivo);
+						valor = Float.parseFloat(valorBolsaTermoAditivo.replace(",","."));
 						request.setAttribute("valor", valor);
 					} else {
 						valorBolsaMsg = messages.getString(valorBolsaMsg);
@@ -235,10 +230,8 @@ public class FormTermoAditivoServlet extends HttpServlet {
 					cargaHorariaMsg = messages.getString(cargaHorariaMsg);
 					request.setAttribute("cargaHorariaMsg", cargaHorariaMsg);
 					isValid = false;
-					
 				}
 			}
-			
 			/**
 			 * Validação de Professor
 			 */
@@ -476,49 +469,89 @@ public class FormTermoAditivoServlet extends HttpServlet {
 					//TODO Fazer log
 					System.out.println(estadoEnderecoMsg);
 				}
+                                
+                                /**
+                                * Validação do nome do supervisor do TermoEstagio usando métodos da Classe ValidaUtils.
+                                * Campo opicional e tamanho máximo de 100 caracteres.
+                                */
+                                String nomeSupervisorMsg = "";
+                                campo = "NomeSupervisor";
+                                tamanho = 80;
+                                nomeSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeSupervisor);
+                                if(nomeSupervisorMsg.trim().isEmpty()) {
+                                        request.setAttribute("nomeSupervisor", nomeSupervisor);
+                                }else {				
+                                        nomeSupervisorMsg = messages.getString(nomeSupervisorMsg);
+                                        nomeSupervisorMsg = ServletUtils.mensagemFormatada(nomeSupervisorMsg, locale, tamanho);
+                                        request.setAttribute("nomeSupervisorMsg", nomeSupervisorMsg);
+                                        isValid = false;
+                                        //TODO Fazer log
+                                        System.out.println(nomeSupervisorMsg);
+                                }
 			}		
 			
 			
 		}else{
-			msg = messages.getString("br.cefetrj.sisgee.form_termo_aditivo_servlet.msg_termo_estagio_invalido");
-			isValid = false;
-			
-		}		
-
+                    msg = messages.getString("br.cefetrj.sisgee.form_termo_aditivo_servlet.msg_termo_estagio_invalido");
+                    isValid = false;
+		}	
+                
+                if(!(aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime()) ==1)){
+                    request.setAttribute("msg3","Não existe nenhum Termo Estágio ativo");
+                    
+                    isValid=false;
+                }
 		if (isValid) {
-			if(showVigencia != null && !showVigencia.trim().isEmpty()) {
+                    
+                    
+                    
+                                if(showVigencia != null && showVigencia.equals("sim")) {
 					TermoAditivo termoAditivo1 = new TermoAditivo();
                                         termoAditivo1.setDataFimTermoAditivo(dataFim);
                                         termoAditivo1.setTipoAditivo("Vigência");
-				}else {
-					//termoAditivo.setDataFimTermoAditivo(termoEstagio.getDataFimTermoEstagio());
-				}
+                                        
+                                        
+                                        termoAditivo1.setDataCadastramentoTermoAditivo((cal.getTime()));
+                                        termoAditivo1.setTermoEstagio(aluno.getTermoEstagios().get(0));
+                                        TermoAditivoServices.incluirTermoAditivo(termoAditivo1);
+                                }
 				
-				if(showCargaHoraria != null && !showCargaHoraria.trim().isEmpty()) {
+                                if(showCargaHoraria!=null && showCargaHoraria.equals("sim")) {
+                                    System.out.println("Entrou no CargaHorária");
                                     TermoAditivo termoAditivo2 = new TermoAditivo();
                                     termoAditivo2.setCargaHorariaTermoAditivo(cargaHoraria);
                                     termoAditivo2.setTipoAditivo("Carga Horária");
-				}else {
-					//termoAditivo.setCargaHorariaTermoAditivo(termoEstagio.getCargaHorariaTermoEstagio());
-				}
-				
-				if(showProfessor != null && !showProfessor.trim().isEmpty()) {
+                                    
+                                    termoAditivo2.setTermoEstagio(aluno.getTermoEstagios().get(0));
+                                    
+                                    termoAditivo2.setDataCadastramentoTermoAditivo((cal.getTime()));
+                                    TermoAditivoServices.incluirTermoAditivo(termoAditivo2);
+                                }
+                                
+				if(showProfessor != null && showProfessor.equals("sim")) {
                                     TermoAditivo termoAditivo3 = new TermoAditivo();
                                     termoAditivo3.setProfessorOrientador(professorOrientador);
                                     termoAditivo3.setTipoAditivo("Professor Orientador");
-				}else {
-					//termoAditivo.setProfessorOrientador(termoEstagio.getProfessorOrientador());
-				}
-				
-				if(showValorBolsa != null && !showValorBolsa.trim().isEmpty()) {
+                                    
+                                    
+                                    
+                                    termoAditivo3.setDataCadastramentoTermoAditivo((cal.getTime()));
+                                    termoAditivo3.setTermoEstagio(aluno.getTermoEstagios().get(0));
+                                    TermoAditivoServices.incluirTermoAditivo(termoAditivo3);
+                                }
+                                
+				if(showValorBolsa != null && showValorBolsa.equals("sim")) {
                                     TermoAditivo termoAditivo4 = new TermoAditivo();
                                     termoAditivo4.setValorBolsaTermoAditivo(valor);
                                     termoAditivo4.setTipoAditivo("Valor da Bolsa");
-				}else {
-					//termoAditivo.setValorBolsaTermoAditivo(termoEstagio.getValorBolsa());
+                                    
+                                    
+                                    termoAditivo4.setDataCadastramentoTermoAditivo((cal.getTime()));
+                                    termoAditivo4.setTermoEstagio(aluno.getTermoEstagios().get(0));
+                                    TermoAditivoServices.incluirTermoAditivo(termoAditivo4);
 				}
 				
-				if(showLocal != null && !showLocal.trim().isEmpty()) {
+				if(showLocal != null && showLocal.equals("sim")) {
                                         TermoAditivo termoAditivo5 = new TermoAditivo();
 					termoAditivo5.setEnderecoTermoAditivo(enderecoTermoAditivo);
 					termoAditivo5.setNumeroEnderecoTermoAditivo(numeroEnderecoTermoAditivo);
@@ -527,28 +560,42 @@ public class FormTermoAditivoServlet extends HttpServlet {
 					termoAditivo5.setCidadeEnderecoTermoAditivo(cidadeEnderecoTermoAditivo);
 					termoAditivo5.setEstadoEnderecoTermoAditivo(estadoEnderecoTermoAditivo);
 					termoAditivo5.setCepEnderecoTermoAditivo(cepEnderecoTermoAditivo);
+                                        termoAditivo5.setTipoAditivo("Local Estágio");
                                         
-				}else {
-					/*
-                                        termoAditivo.setEnderecoTermoAditivo(termoEstagio.getEnderecoTermoEstagio());
-					termoAditivo.setNumeroEnderecoTermoAditivo(termoEstagio.getNumeroEnderecoTermoEstagio());
-					termoAditivo.setComplementoEnderecoTermoAditivo(termoEstagio.getComplementoEnderecoTermoEstagio());
-					termoAditivo.setBairroEnderecoTermoAditivo(termoEstagio.getBairroEnderecoTermoEstagio());
-					termoAditivo.setCidadeEnderecoTermoAditivo(termoEstagio.getCidadeEnderecoTermoEstagio());
-					termoAditivo.setEstadoEnderecoTermoAditivo(termoEstagio.getEstadoEnderecoTermoEstagio());
-					termoAditivo.setCepEnderecoTermoAditivo(termoEstagio.getCepEnderecoTermoEstagio());
-                                        */
-				}
-				
+                                        
+                                        termoAditivo5.setDataCadastramentoTermoAditivo((cal.getTime()));
+                                        termoAditivo5.setTermoEstagio(aluno.getTermoEstagios().get(0));
+                                        TermoAditivoServices.incluirTermoAditivo(termoAditivo5);
+                                        
+                                }
+                                if(showSupervisor != null && showSupervisor.equals("sim")){
+                                    System.out.println("Entrou no Supervisor");
+                                    TermoAditivo termoAditivo6 = new TermoAditivo();
+                                    termoAditivo6.setEobrigatorio(eobrigatorio);
+                                    termoAditivo6.setNomeSupervisor(nomeSupervisor);
+                                    termoAditivo6.setCargoSupervisor(cargoSupervisor);
+                                    termoAditivo6.setTipoAditivo("Supervisor");
+                                    
+                                    
+                                    termoAditivo6.setDataCadastramentoTermoAditivo((cal.getTime()));
+                                    termoAditivo6.setTermoEstagio(aluno.getTermoEstagios().get(0));
+                                    TermoAditivoServices.incluirTermoAditivo(termoAditivo6);
+                                }
                                 
-				
-				
-				String registroAditivoConcluido = messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_registroAditivoConcluido");
+                                
+                                System.out.println(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()+"->"+cal.getTime()+":"+aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio().compareTo(cal.getTime()));
+                                System.out.println(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()+"<-"+cal.getTime()+":"+cal.getTime().compareTo(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()));
+                                System.out.println(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()+"="+cal.getTime()+":"+aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio().compareTo(aluno.getTermoEstagios().get(0).getDataInicioTermoEstagio()));
+                                
+                                
+                                String registroAditivoConcluido = messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_registroAditivoConcluido");
 				request.setAttribute("msg", registroAditivoConcluido);
 				
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 								
-			}else {
+			}
+                        else{
+                    
 			request.setAttribute("showVigencia", showVigencia);
 			request.setAttribute("showCargaHoraria", showCargaHoraria);
 			request.setAttribute("showProfessor", showProfessor);
@@ -566,16 +613,4 @@ public class FormTermoAditivoServlet extends HttpServlet {
 		}
 
             }
-       
-/*	private static HttpServletRequest carregarListas(HttpServletRequest request) {
-
-		List<ProfessorOrientador> professores = ProfessorOrientadorServices.listarProfessorOrientador();
-		UF[] uf = UF.asList();
-
-		request.setAttribute("professores", professores);
-		request.setAttribute("uf", uf);
-
-		return request;
-
-	}*/
 }

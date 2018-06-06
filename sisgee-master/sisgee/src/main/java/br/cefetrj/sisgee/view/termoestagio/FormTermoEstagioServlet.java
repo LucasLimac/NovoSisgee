@@ -90,7 +90,10 @@ public class FormTermoEstagioServlet extends HttpServlet {
                 String nomeSupervisor               = request.getParameter("nomeSupervisor");
                 String cargoSupervisor              = request.getParameter("cargoSupervisor");
                 String nomeAgenciada                = request.getParameter("nomeAgenciada");
-			
+		String idTelaConvenio               = request.getParameter("idConvenio");
+                System.out.println("idTelaConvenio--------->>>>>>>>>>>>>>" + idTelaConvenio);
+                request.setAttribute("idConvenio", idTelaConvenio);
+                
 		boolean isValid = true;
 		String msg = "";
 		String campo = "";

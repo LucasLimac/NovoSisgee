@@ -64,9 +64,9 @@ public class IncluirTermoEstagioServlet extends HttpServlet {
 		Aluno aluno = new Aluno((Integer)request.getAttribute("idAluno")); 	
                 
                 //OBRIGATÓRIO
-                String convenionum = (String)request.getAttribute("numeroConvenio");
-
-                Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(convenionum.substring(0, 5));
+                String convenionum = (String)request.getAttribute("idConvenio");
+                System.out.println("termo estagio ------>>>>>>>>>>" + convenionum);
+                Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(convenionum);
 		//NÃO OBRIGATÓRIO
 		Boolean hasDataFim          = (Boolean)request.getAttribute("hasDataFim");		
 		Boolean hasProfessor        = (Boolean)request.getAttribute("hasProfessor");

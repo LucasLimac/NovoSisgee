@@ -1,5 +1,6 @@
 package br.cefetrj.sisgee.model.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -10,9 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-/**
- * 
+/*
  * @author Vinicius Paradellas
+ * @since 1.1
  *
  */
 @Entity
@@ -55,6 +56,15 @@ public class TermoAditivo {
 
 	@Column(length = 2, nullable = true)
 	private String estadoEnderecoTermoAditivo;
+        
+        @Column(nullable = true)
+        private String eobrigatorio;
+        
+        @Column(nullable = true)
+        private String nomeSupervisor;
+        
+        @Column(nullable = true)
+        private String cargoSupervisor;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(nullable = true)
@@ -97,8 +107,17 @@ public class TermoAditivo {
 	public void setIdTermoAditivo(Integer idTermoAditivo) {
 		this.idTermoAditivo = idTermoAditivo;
 	}
-
+        
+        public String getDataFimTermoAditivo2(){
+                SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+                if(dataFimTermoAditivo!=null){
+                String a=format.format(dataFimTermoAditivo);
+                return a;
+                }
+                return null;
+        }
 	public Date getDataFimTermoAditivo() {
+            
 		return dataFimTermoAditivo;
 	}
 
@@ -193,7 +212,15 @@ public class TermoAditivo {
         public void setTipoAditivo(String tipoAditivo) {
             this.tipoAditivo = tipoAditivo;
         }
-
+        
+        public String getDataCadastramentoTermoAditivo2(){
+                SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+                if(dataCadastramentoTermoAditivo!=null){
+                String a=format.format(dataCadastramentoTermoAditivo);
+                return a;
+                }
+                return null;
+        }
         public Date getDataCadastramentoTermoAditivo() {
             return dataCadastramentoTermoAditivo;
         }
@@ -201,9 +228,32 @@ public class TermoAditivo {
         public void setDataCadastramentoTermoAditivo(Date dataCadastramentoTermoAditivo) {
             this.dataCadastramentoTermoAditivo = dataCadastramentoTermoAditivo;
         }
+
+        public String getEobrigatorio() {
+            return eobrigatorio;
+        }
+
+        public void setEobrigatorio(String eobrigatorio) {
+            this.eobrigatorio = eobrigatorio;
+        }
+
+        public String getNomeSupervisor() {
+            return nomeSupervisor;
+        }
+
+        public void setNomeSupervisor(String nomeSupervisor) {
+            this.nomeSupervisor = nomeSupervisor;
+        }
+
+        public String getCargoSupervisor() {
+            return cargoSupervisor;
+        }
+
+        public void setCargoSupervisor(String cargoSupervisor) {
+            this.cargoSupervisor = cargoSupervisor;
+        }
         
-        
-	@Override
+        @Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

@@ -20,7 +20,6 @@ import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +129,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
         //JSON
         if (empresaNome != null) {
             JsonObject model = Json.createObjectBuilder()
+                    .add("idConvenio", convenio.getNumero())
                     .add("razaoSocial", empresaNome.getRazaoSocial())
                     .add("tipoConvenio", "Pessoa Jurídica")
                     .add("isAgenteIntegracao", agenteIntegracao)
@@ -149,6 +149,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
             response.getWriter().print(jsonData);
         } else if (pessoaNome != null) {
             JsonObject model = Json.createObjectBuilder()
+                    .add("idConvenio", convenio.getNumero())
                     .add("razaoSocial", pessoaNome.getNome())
                     .add("tipoConvenio", "Pessoa Física")
                     .add("isAgenteIntegracao", "NÃO")

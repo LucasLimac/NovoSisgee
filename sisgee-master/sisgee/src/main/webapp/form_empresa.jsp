@@ -188,6 +188,7 @@
                 $('#dataAssinaturaConvenioEmpresa').mask('99/99/9999');
                 $('#dataAssinaturaConvenioPessoa').mask('99/99/9999');
                 
+                
             });
         </script>
 

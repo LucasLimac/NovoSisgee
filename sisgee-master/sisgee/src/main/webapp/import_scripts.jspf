@@ -173,6 +173,7 @@
 	            success: function(json){
 	                result = json;
                         if(result.razaoSocial != ""){
+                            $("#idConvenio").val(result.idConvenio);
                             $("#numeroConvenio").val(result.numeroConvenio);
                             $("#razaoSocial").val(result.razaoSocial);
                             $("#tipoConvenio").val(result.tipoConvenio);
@@ -182,6 +183,7 @@
                             $("#nomeConvenio").val(result.nomeEmpresaPessoa);
                         }
                         else{
+                            $("#idConvenio").val("");
                             $(".numeroConvenio").val("");
                             $(".razaoSocial").val("");
                             $("#tipoConvenio").val("");
@@ -227,6 +229,7 @@
 	            success: function(json){
 	                result = json;
                         if(result.razaoSocial != ""){
+                            $("#idConvenio").val(result.idConvenio);
                             $("#numeroConvenio").val(result.numeroConvenio);
                             $("#razaoSocial").val(result.razaoSocial);
                             $("#tipoConvenio").val(result.tipoConvenio);
@@ -236,6 +239,7 @@
                             $("#nomeConvenio").val(result.nomeEmpresaPessoa);
                         }
                         else{
+                            $("#idConvenio").val("");
                             $(".numeroConvenio").val("");
                             $(".razaoSocial").val("");
                             $("#tipoConvenio").val("");

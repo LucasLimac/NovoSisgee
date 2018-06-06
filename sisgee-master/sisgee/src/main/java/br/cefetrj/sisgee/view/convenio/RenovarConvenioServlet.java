@@ -20,22 +20,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RenovarConvenioServlet", urlPatterns = {"/RenovarConvenioServlet"})
 public class RenovarConvenioServlet extends HttpServlet {
-
-   
-    
-    
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        System.out.println("ENTROU NO RENOVAR CONVENIO SERVLEEEEEEET");
-        String numeroConvenio = req.getParameter("convenio").substring(0,5);
-        System.out.println("AQUI SUBSTRING--->>>>>"+numeroConvenio);
+        
+        int pos = req.getParameter("convenio").indexOf("/");
+        //Substring iniciando em 0 até posição do caracter especial
+        
+        String numeroConvenio = req.getParameter("convenio").substring(0,pos);
         
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio);
-        
-        System.out.println("ACHOUUU-->>>>"+convenio.getNumeroConvenio());
-
         
         if(convenio.getEmpresa()!=null){
             req.setAttribute("isEmpresa", "sim");
@@ -61,7 +56,5 @@ public class RenovarConvenioServlet extends HttpServlet {
         req.getRequestDispatcher("form_renovar_convenio2.jsp").forward(req, resp);
         
     }
-
-   
 
 }

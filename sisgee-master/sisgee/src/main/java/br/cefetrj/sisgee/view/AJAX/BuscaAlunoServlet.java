@@ -56,6 +56,7 @@ public class BuscaAlunoServlet extends HttpServlet {
 			nomeCurso = curso.getNomeCurso();
 			nomeCampus = campus.getNomeCampus();
                         List<TermoEstagio> termos = aluno.getTermoEstagios();
+                        System.out.println("busca termo aluno ");                        
                         if(termos != null){
                             for (TermoEstagio termo : termos) {
                                 if(termo.getDataFimTermoEstagio() == null){

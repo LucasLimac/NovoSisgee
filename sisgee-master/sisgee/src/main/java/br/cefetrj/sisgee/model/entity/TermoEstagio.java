@@ -1,5 +1,6 @@
 package br.cefetrj.sisgee.model.entity;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,8 @@ public class TermoEstagio {
 	@Id
 	@GeneratedValue
 	private Integer idTermoEstagio;
+        
+        private String estado;
 
 	@Column(nullable = false)
 	private Date dataInicioTermoEstagio;
@@ -75,7 +78,7 @@ public class TermoEstagio {
 	@Column(length = 80)
 	private String cargoSupervisor;   
         
-	@Column(length = 80)
+	@Column()
 	private String nomeAgenciada;         
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -94,7 +97,7 @@ public class TermoEstagio {
 			String cidadeEnderecoTermoEstagio, String estadoEnderecoTermoEstagio, Boolean eEstagioObrigatorio,
 			Aluno aluno, Convenio convenio, ProfessorOrientador professorOrientador,
                         String nomeSupervisor, String cargoSupervisor, String nomeAgenciada) {
-		
+		this.estado="ativo";
 		this.dataInicioTermoEstagio = dataInicioTermoEstagio;
 		this.dataFimTermoEstagio = dataFimTermoEstagio;
 		this.cargaHorariaTermoEstagio = cargaHorariaTermoEstagio;
@@ -125,6 +128,14 @@ public class TermoEstagio {
 		this.idTermoEstagio = idTermoEstagio;
 	}
 
+        public String getDataInicioTermoEstagio2(){
+                SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+                if(dataInicioTermoEstagio!=null){
+                String a=format.format(dataInicioTermoEstagio);
+                return a;
+                }
+                return null;}
+        
 	public Date getDataInicioTermoEstagio() {
 		return dataInicioTermoEstagio;
 	}
@@ -133,6 +144,11 @@ public class TermoEstagio {
 		this.dataInicioTermoEstagio = dataInicioTermoEstagio;
 	}
 
+        public String getDataFimTermoEstagio2(){
+                SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+            String a=format.format(dataFimTermoEstagio);
+            return a;
+        }
 	public Date getDataFimTermoEstagio() {
 		return dataFimTermoEstagio;
 	}
@@ -148,7 +164,6 @@ public class TermoEstagio {
 	public void setDataRescisaoTermoEstagio(Date dataRescisaoTermoEstagio) {
 		this.dataRescisaoTermoEstagio = dataRescisaoTermoEstagio;
 	}
-
 
 	public Integer getCargaHorariaTermoEstagio() {
 		return cargaHorariaTermoEstagio;
@@ -310,6 +325,8 @@ public class TermoEstagio {
 			return false;
 		return true;
 	}
-
-
+    @Override
+    public String toString() {
+        return "TermoEstagio{" + "idTermoEstagio=" + idTermoEstagio + ", valorBolsa=" + valorBolsa + ", aluno=" + aluno + '}';
+    }
 }

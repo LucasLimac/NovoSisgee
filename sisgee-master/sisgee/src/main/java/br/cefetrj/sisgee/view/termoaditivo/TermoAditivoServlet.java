@@ -22,6 +22,12 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 
+/*
+ * @author Vinicius Paradellas
+ * @since 1.1
+ *
+ */
+
 @WebServlet("/TermoAditivoServlet")
 public class TermoAditivoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,13 +46,6 @@ public class TermoAditivoServlet extends HttpServlet {
 		String endereco = request.getParameter("alendereco");
 		String supervisor = request.getParameter("alsupervisor");
 		String professor = request.getParameter("alprofessor");
-                
-		System.out.println("Vigencia ->>>>>"+vigencia);
-		System.out.println("carga ->>>>>"+carga);
-                System.out.println("valorBolsa ->>>>>"+valorBolsa);
-                System.out.println("endereco ->>>>>"+endereco);
-                System.out.println("supervisor ->>>>>"+supervisor);
-                System.out.println("professor ->>>>>"+professor);
                 
 		String idAluno = request.getParameter("idAlunoAdt");
 		          System.out.println("Idaluno :"+idAluno);
@@ -110,6 +109,7 @@ public class TermoAditivoServlet extends HttpServlet {
 			List<ProfessorOrientador> professores = ProfessorOrientadorServices.listarProfessorOrientador();
 			UF[] uf = UF.asList();
                         
+                        request.setAttribute("uf", uf);
 			request.setAttribute("alMatricula", aluno.getMatricula());
                         request.setAttribute("alNome", aluno.getPessoa().getNome());
                         request.setAttribute("alCampus", aluno.getCurso().getCampus().getNomeCampus());
@@ -129,8 +129,8 @@ public class TermoAditivoServlet extends HttpServlet {
                         }
                         
                         request.setAttribute("termoEstagio", termoEstagio);
-                        
-			request.setAttribute("showVigencia", vigencia);
+                         
+                        request.setAttribute("showVigencia", vigencia);
                         request.setAttribute("showCargaHoraria", carga);
                         request.setAttribute("showValorBolsa", valorBolsa);
 			request.setAttribute("showLocal", endereco);
