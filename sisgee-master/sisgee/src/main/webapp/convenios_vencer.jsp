@@ -17,19 +17,19 @@
     <body>
         <%@include file="import_navbar.jspf"%>
 
-        
+        <c:if test="${ not empty ConvenioServices.listarConveniosVencer() }">
 
         <table id="myTable" class="table table-info table-bordered container table-hover table-striped " >
             <thead>
                 <tr>
 
-                    <th scope="col">Vigência</th>
-                    <th scope="col">Convênio</th>
-                    <th scope="col">Razão Social/Nome</th>
-                    <th scope="col">CNPJ/CPF</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Pessoa de contato</th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.10" /></th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.11" /></th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.12" /></th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.13" /></th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.14" /></th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.15" /></th>
+                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.16" /></th>
 
                 </tr>
             </thead>
@@ -38,7 +38,7 @@
             <c:forEach items="${ ConvenioServices.listarConveniosVencer()}" var="b" >
                 <tr>
 
-                    <td><fmt:formatDate value="${not empty b.dataAssinatura ? b.dataAssinatura : null }" type = "date" dateStyle = "short"/> a <fmt:formatDate value="${b.getDataFinal()}" type = "date" dateStyle = "short"/></td>
+                    <td><fmt:formatDate value="${not empty b.dataAssinatura ? b.dataAssinatura : null }" type = "date" dateStyle = "short"/> - <fmt:formatDate value="${b.getDataFinal()}" type = "date" dateStyle = "short"/></td>
                     <td>${not empty b.numeroConvenio ? b.numeroConvenio : null }</td>
                     <td>${not empty b.empresa ? b.empresa.razaoSocial: b.pessoa.nome } </td>
                     <td>${not empty b.empresa ? b.empresa.cnpjEmpresa : b.pessoa.cpf }</td>
@@ -52,7 +52,15 @@
 
         </table>
 
-        <button type="button" onclick="javascript:location.href = 'index.jsp'" class="btn btn-primary offset-lg-5 mb-5 mt-5">Voltar</button>
+        </c:if>
+        
+        <c:if test="${ empty ConvenioServices.listarConveniosVencer() }">
+            <div class="alert alert-danger" role="alert">
+                        <h2><fmt:message key = "br.cefetrj.sisgee.28"/></h2>
+                    </div>
+        </c:if>
+        
+        <button type="button" onclick="javascript:location.href = 'index.jsp'" class="btn btn-primary offset-lg-5 mb-5 mt-5"><fmt:message key="br.cefetrj.sisgee.17" /></button>
 
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>

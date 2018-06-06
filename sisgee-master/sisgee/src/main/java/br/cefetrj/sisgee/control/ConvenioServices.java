@@ -51,11 +51,7 @@ public class ConvenioServices {
             cal.add(Calendar.MONTH, 2);
             Date dataVenceu =  cal.getTime();
             
-            
-            System.out.println(convenio+"<<<-----");
-            System.out.println("DATA FINAL "+new SimpleDateFormat("dd/MM/yyyy").format(dataFinal));
-            System.out.println("DATA HOJE "+new SimpleDateFormat("dd/MM/yyyy").format(dataHoje));
-            System.out.println("DATA Venceu "+new SimpleDateFormat("dd/MM/yyyy").format(dataVenceu));
+
             if ((dataFinal.getTime()> dataHoje.getTime()) && (dataFinal.getTime()<dataVenceu.getTime())) {
                 
                 aVencer.add(convenio);

@@ -48,18 +48,18 @@
 		<div class="table-responsive">
                     <table class="table table-info table-bordered container table-hover table-striped">
                                     <tr>
-                                        <th>Tipo</th>
-                                        <th>Status</th>
-                                        <th>Data de Cadastramento</th>
-                                        <th>Vigência</th>
-                                        <th>CPF/CNPJ</th>
-                                        <th>Razão Social/Nome</th>
+                                        <th><fmt:message key="br.cefetrj.sisgee.21" /></th>
+                                        <th><fmt:message key="br.cefetrj.sisgee.22" /></th>
+                                        <th><fmt:message key="br.cefetrj.sisgee.23" /></th>
+                                        <th><fmt:message key="br.cefetrj.sisgee.10" /></th>
+                                        <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
+                                        <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
                                         
                                     </tr>
 						
                                 <c:forEach items="${listaTermoEstagio}" var="b">
                                     <tr>
-                                        <td>Termo Estágio</td>
+                                        <td><fmt:message key="br.cefetrj.sisgee.4" /></td>
                                         <td>--</td>
                                         <td>${b.getDataInicioTermoEstagio2()}</td>
                                         <td>${b.getDataFimTermoEstagio2()}</td>
@@ -131,7 +131,7 @@
                                 <div class="row">
 					<div class="form-check form-check-inline">
 						<label class="form-check-label">
-							<input class="form-check-input" type="checkbox" id="alsupervisor" name="alsupervisor" value="sim">Supervisor
+							<input class="form-check-input" type="checkbox" id="alsupervisor" name="alsupervisor" value="sim"><fmt:message key="br.cefetrj.sisgee.24" />
                                                         <input type="hidden" name="alsupervisor" value=${alsupervisor}>
                                                 </label>
 					</div>

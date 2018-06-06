@@ -72,13 +72,13 @@ public class TermoEstagio {
 	@JoinColumn(nullable = false)
 	private Convenio convenio;
         
-	@Column(length = 80)
+	@Column(length = 100)
 	private String nomeSupervisor;    
         
-	@Column(length = 80)
+	@Column(length = 100)
 	private String cargoSupervisor;   
         
-	@Column()
+	@Column(length = 255)
 	private String nomeAgenciada;         
 
 	@ManyToOne(fetch = FetchType.EAGER)

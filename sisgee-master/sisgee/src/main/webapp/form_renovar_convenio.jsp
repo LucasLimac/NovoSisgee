@@ -87,7 +87,7 @@
 
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.resources.form.numeroConvenio" /></th>
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_razaoSocial_renovar" /></th>
-                                    <th scope="col">CNPJ/CPF</th>
+                                    <th scope="col"><fmt:message key="br.cefetrj.sisgee.19" /></th>
                                     <th scope="col"><fmt:message key="br.cefetrj.sisgee.form_empresa.msg_titulo_renovar" /></th>
 
                                 </tr>

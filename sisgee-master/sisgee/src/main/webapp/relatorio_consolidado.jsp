@@ -81,6 +81,7 @@
 				</fieldset>
 				<button type="submit" class="btn btn-primary"><fmt:message key="br.cefetrj.sisgee.relatorio.relatorio_consolidado.btn_pesquisar" /></button>
                                 <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'index.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>
+                                
 			</form>
 			<c:if test="${ not empty msgRelatorio }">
 						<div class="alert alert-warning" role="alert">
@@ -110,7 +111,11 @@
 	  				</tr>
   			</tbody>
   		</table>
+                                        
   		</c:forEach>
+                <c:if test="${not empty relatorio}">
+                    <a href="imprimirRelatorio.jsp" class="btn btn-warning offset-5" target="_blank"><fmt:message key="br.cefetrj.sisgee.30" /></a>
+                </c:if>
   	</div>
 		
 		<%@include file="import_footer.jspf"%>

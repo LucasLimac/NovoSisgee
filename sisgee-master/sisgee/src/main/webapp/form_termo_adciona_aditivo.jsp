@@ -293,7 +293,7 @@
                 
                 <!-- Aqui começa Supervisor-->
                 <fieldset class="form-group" ${ showSupervisor eq 'sim' ? '' :'disabled'}>
-                    <legend class="col-form-legend col-lg">Supervisor do Estágio</legend>    
+                    <legend class="col-form-legend col-lg"><fmt:message key="br.cefetrj.sisgee.20" /></legend>    
                         <div class="form-row" > 
                             <div class="form-group col-md-3"  >
                                 <label for="eEstagioObrigatorio"><fmt:message key = "br.cefetrj.sisgee.resources.form.estagioObrigatorio"/></label>

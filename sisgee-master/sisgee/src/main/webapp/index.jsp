@@ -87,7 +87,7 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h2 class="section-heading">Serviços</h2>
+            <h2 class="section-heading"><fmt:message key="br.cefetrj.sisgee.1" /></h2>
             <hr class="my-4">
           </div>
         </div>
@@ -98,9 +98,9 @@
             <div class="service-box mt-5 mx-auto">
                 <a href="form_empresa.jsp">
               <i class="fa fa-4x fa-newspaper text-primary mb-3 sr-icons"></i>
-              <h3 class="mb-3">Convênio</h3>
+              <h3 class="mb-3"><fmt:message key="br.cefetrj.sisgee.2" /></h3>
               </a>
-              <p class="text-muted mb-0">Faça um convênio com o CEFET/RJ!</p>
+              <p class="text-muted mb-0"><fmt:message key="br.cefetrj.sisgee.3" /></p>
                 
             </div>
           </div>
@@ -108,9 +108,9 @@
               <a href="form_termo_estagio.jsp">
             <div class="service-box mt-5 mx-auto" >
               <i class="fa fa-4x fa-pencil-alt text-primary mb-3 sr-icons" ></i>
-              <h3 class="mb-3">Termo de Estágio</h3>
+              <h3 class="mb-3"><fmt:message key="br.cefetrj.sisgee.4" /></h3>
               </a>
-              <p class="text-muted mb-0">Preencha um termo para contratar um estagiário do CEFET/RJ!</p>
+              <p class="text-muted mb-0"><fmt:message key="br.cefetrj.sisgee.5" /></p>
             </div>
              
           </div>
@@ -118,9 +118,9 @@
             <div class="service-box mt-5 mx-auto">
                 <a href="form_termo_estagio.jsp">
               <i class="fa fa-4x fa-exchange-alt text-primary mb-3 sr-icons"></i>
-              <h3 class="mb-3">Aditivos</h3>
+              <h3 class="mb-3"><fmt:message key="br.cefetrj.sisgee.6" /></h3>
               </a>
-              <p class="text-muted mb-0">Altere dados do Termo de Estágio quando quiser com os Aditivos!</p>
+              <p class="text-muted mb-0"><fmt:message key="br.cefetrj.sisgee.7" /></p>
                 
             </div>
           </div>
@@ -128,9 +128,9 @@
             <div class="service-box mt-5 mx-auto">
                 <a href="relatorio_consolidado.jsp">
               <i class="fa fa-4x fa-book text-primary mb-3 sr-icons"></i>
-              <h3 class="mb-3">Relatórios</h3>
+              <h3 class="mb-3"><fmt:message key="br.cefetrj.sisgee.8" /></h3>
               </a>
-              <p class="text-muted mb-0">Veja os relatórios e estatísticas de termos!</p>
+              <p class="text-muted mb-0"><fmt:message key="br.cefetrj.sisgee.9" /></p>
                 
             </div>
           </div>

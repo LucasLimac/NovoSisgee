@@ -14,11 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.cefetrj.sisgee.control.AlunoServices;
+import br.cefetrj.sisgee.control.TermoAditivoServices;
 import br.cefetrj.sisgee.control.TermoEstagioServices;
+import br.cefetrj.sisgee.model.dao.TermoAditivoDAO;
 import br.cefetrj.sisgee.model.entity.Aluno;
+import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
+import java.util.ArrayList;
 
 /**
  * Servlet implementation class FormTermoRescisaoServlet
@@ -50,7 +54,8 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 		boolean isValid = true;		
 		Date dataRescisao = null;
 		String msg = "";
-		
+		List<TermoAditivo> termosAditivos = new ArrayList();
+                
 		/**
 		 * Validação do Id do Aluno, usando métodos da Classe ValidaUtils.
 		 * Instanciando o objeto e pegando o TermoEstagio válido (sem data de rescisão)
@@ -105,6 +110,8 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 						String periodoMsg = "";	
 						
                                                 periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataRescisao);
+                                                
+                                                
                                                 if(!periodoMsg.trim().isEmpty()) {
                                                         periodoMsg = messages.getString(periodoMsg);
                                                         request.setAttribute("periodoMsg", periodoMsg);
@@ -133,10 +140,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 			request.setAttribute("dataTermoRescisaoMsg", dataTermoRescisaoMsg);
 			isValid = false;
 		}
-		
-		
-		
-		
 		
 		if (isValid) {
 			termoEstagio.setDataRescisaoTermoEstagio(dataRescisao);

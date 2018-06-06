@@ -91,7 +91,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
                 String cargoSupervisor              = request.getParameter("cargoSupervisor");
                 String nomeAgenciada                = request.getParameter("nomeAgenciada");
 		String idTelaConvenio               = request.getParameter("idConvenio");
-                System.out.println("idTelaConvenio--------->>>>>>>>>>>>>>" + idTelaConvenio);
+
                 request.setAttribute("idConvenio", idTelaConvenio);
                 
 		boolean isValid = true;
@@ -194,9 +194,10 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			if (cargaHorariaMsg.trim().isEmpty()) {
 				Integer cargaHoraria = Integer.parseInt(cargaHorariaTermoEstagio);
 				if (cargaHorariaMsg.trim().isEmpty()) {
-					cargaHorariaMsg = ValidaUtils.validaTamanho(campo, tamanho, cargaHoraria);
+					cargaHorariaMsg = ValidaUtils.validaTamanho(campo, tamanho, cargaHorariaTermoEstagio);
+                                        System.out.println("br.cefetrj.sisgee.view.termoestagio.FormTermoEstagioServlet.doPost() " + cargaHoraria);
 					if (cargaHorariaMsg.trim().isEmpty()) {
-					request.setAttribute("cargaHoraria", cargaHoraria);
+                                            request.setAttribute("cargaHoraria", cargaHoraria);
 					}else {
 						cargaHorariaMsg = messages.getString(cargaHorariaMsg);
 						cargaHorariaMsg = ServletUtils.mensagemFormatada(cargaHorariaMsg, locale, tamanho);
@@ -489,7 +490,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		 */
 		String nomeSupervisorMsg = "";
 		campo = "NomeSupervisor";
-		tamanho = 80;
+		tamanho = 100;
 
                 nomeSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeSupervisor);
                 if(nomeSupervisorMsg.trim().isEmpty()) {
@@ -510,7 +511,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		 */
 		String cargoSupervisorMsg = "";
 		campo = "CargoSupervisor";
-		tamanho = 80;
+		tamanho = 100;
 
                 cargoSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, cargoSupervisor);
                 if(cargoSupervisorMsg.trim().isEmpty()) {
@@ -530,7 +531,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		 */
 		String agenciadaMsg = "";
 		campo = "agenciada";
-		tamanho = 20;
+		tamanho = 255;
 
                 agenciadaMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeAgenciada);
                 if(agenciadaMsg.trim().isEmpty()) {

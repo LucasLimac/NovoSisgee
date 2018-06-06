@@ -113,6 +113,8 @@ public class BuscaRelatorioConsolidadoServlet extends HttpServlet {
     	
     	
     	request.setAttribute("relatorio", listaItemRelatorio);
+        
+        request.getSession().setAttribute("imprimir", listaItemRelatorio);
     	
     	
     	request.getRequestDispatcher("/relatorio_consolidado.jsp").forward(request, response);
