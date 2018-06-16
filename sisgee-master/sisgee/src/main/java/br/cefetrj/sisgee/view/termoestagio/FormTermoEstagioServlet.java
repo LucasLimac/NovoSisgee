@@ -194,7 +194,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			if (cargaHorariaMsg.trim().isEmpty()) {
 				Integer cargaHoraria = Integer.parseInt(cargaHorariaTermoEstagio);
 				if (cargaHorariaMsg.trim().isEmpty()) {
-					cargaHorariaMsg = ValidaUtils.validaTamanho(campo, tamanho, cargaHorariaTermoEstagio);
+					cargaHorariaMsg = ValidaUtils.validaTamanho(campo, tamanho, cargaHoraria);
                                         System.out.println("br.cefetrj.sisgee.view.termoestagio.FormTermoEstagioServlet.doPost() " + cargaHoraria);
 					if (cargaHorariaMsg.trim().isEmpty()) {
                                             request.setAttribute("cargaHoraria", cargaHoraria);
@@ -238,7 +238,16 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsa);
 			if (valorBolsaMsg.trim().isEmpty()) {
 				Float valor = Float.parseFloat(valorBolsa);
-				request.setAttribute("valor", valor);			
+                                valorBolsaMsg = ValidaUtils.validaTamanhoFloat(campo, valor);
+                                if (valorBolsaMsg.trim().isEmpty()) {
+                                    request.setAttribute("valor", valor);		
+                                }else{
+                                    valorBolsaMsg = messages.getString(valorBolsaMsg);
+                                    request.setAttribute("valorBolsaMsg", valorBolsaMsg);
+                                    isValid = false;
+                                    //TODO Fazer log
+                                    System.out.println(valorBolsaMsg);                                    
+                                }
 			} else {
 				valorBolsaMsg = messages.getString(valorBolsaMsg);
 				request.setAttribute("valorBolsaMsg", valorBolsaMsg);
@@ -318,29 +327,20 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		String complementoEnderecoMsg = "";
 		campo = "Complemento";
 		tamanho = 150;
-		complementoEnderecoMsg = ValidaUtils.validaObrigatorio(campo, complementoEnderecoTermoEstagio);
-		if(complementoEnderecoMsg.trim().isEmpty()) {
-			complementoEnderecoMsg = ValidaUtils.validaTamanho(campo, tamanho, complementoEnderecoTermoEstagio);
-			if(complementoEnderecoMsg.trim().isEmpty()) {
-				request.setAttribute("complementoEnderecoTermoEstagio", complementoEnderecoTermoEstagio);
-				System.out.println("Tamanho complemento válido");
-			}else {				
-				complementoEnderecoMsg = messages.getString(complementoEnderecoMsg);
-				complementoEnderecoMsg = ServletUtils.mensagemFormatada(complementoEnderecoMsg, locale, tamanho);
-				request.setAttribute("complementoEnderecoMsg", complementoEnderecoMsg);
-				isValid = false;
-				//TODO Fazer log
-				System.out.println(complementoEnderecoMsg);
-				System.out.println("Tamanho complemento inválido");
-			}
-		}else {
-			complementoEnderecoMsg = messages.getString(complementoEnderecoMsg);
-			request.setAttribute("complementoEnderecoMsg", complementoEnderecoMsg);
-			isValid = false;
-			//TODO Fazer log
-			System.out.println(complementoEnderecoMsg);
-		}		
-		
+                complementoEnderecoMsg = ValidaUtils.validaTamanho(campo, tamanho, complementoEnderecoTermoEstagio);
+                if(complementoEnderecoMsg.trim().isEmpty()) {
+                        request.setAttribute("complementoEnderecoTermoEstagio", complementoEnderecoTermoEstagio);
+                        System.out.println("Tamanho complemento válido");
+                }else {				
+                        complementoEnderecoMsg = messages.getString(complementoEnderecoMsg);
+                        complementoEnderecoMsg = ServletUtils.mensagemFormatada(complementoEnderecoMsg, locale, tamanho);
+                        request.setAttribute("complementoEnderecoMsg", complementoEnderecoMsg);
+                        isValid = false;
+                        //TODO Fazer log
+                        System.out.println(complementoEnderecoMsg);
+                        System.out.println("Tamanho complemento inválido");
+                }
+
 		/**
 		 * Validação do bairro do endereço do TermoEstagio usando métodos da Classe ValidaUtils.
 		 * Campo obrigatório e tamanho máximo de 150 caracteres.
@@ -552,35 +552,44 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		String idProfessorMsg = "";
 		campo = "Professor Orientador";
 		Boolean hasProfessor = false;
-		if (!(idProfessorOrientador.trim().isEmpty() || idProfessorOrientador == null)) {
-			idProfessorMsg = ValidaUtils.validaInteger(campo, idProfessorOrientador);
-			if (idProfessorMsg.trim().isEmpty()) {
-				Integer idProfessor = Integer.parseInt(idProfessorOrientador);
-				List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
-				if (listaProfessores != null) {
-					if (listaProfessores.contains(new ProfessorOrientador(idProfessor))) {
-						request.setAttribute("idProfessor", idProfessor);
-						hasProfessor = true;
-					} else {
-						idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
-						isValid = false;
-						//TODO Fazer log
-						System.out.println(idProfessorMsg);
-					}
-				} else {
-					idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.lista_professores_vazia");
-					isValid = false;
-					//TODO Fazer log
-					System.out.println(idProfessorMsg);
-				}
-			} else {
-				idProfessorMsg = messages.getString(idProfessorMsg);
-				request.setAttribute("idProfessorMsg", idProfessorMsg);
-				isValid = false;
-				//TODO Fazer log
-				System.out.println(idProfessorMsg);
-			}
-		}
+                idProfessorMsg = ValidaUtils.validaObrigatorio(campo, idProfessorOrientador);
+                if(idProfessorMsg.isEmpty()){
+                    if (!(idProfessorOrientador.trim().isEmpty() || idProfessorOrientador == null)) {
+                            idProfessorMsg = ValidaUtils.validaInteger(campo, idProfessorOrientador);
+                            if (idProfessorMsg.trim().isEmpty()) {
+                                    Integer idProfessor = Integer.parseInt(idProfessorOrientador);
+                                    List<ProfessorOrientador> listaProfessores = ProfessorOrientadorServices.listarProfessorOrientador();
+                                    if (listaProfessores != null) {
+                                            if (listaProfessores.contains(new ProfessorOrientador(idProfessor))) {
+                                                    request.setAttribute("idProfessor", idProfessor);
+                                                    hasProfessor = true;
+                                            } else {
+                                                    idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.professor_invalido");
+                                                    isValid = false;
+                                                    //TODO Fazer log
+                                                    System.out.println(idProfessorMsg);
+                                            }
+                                    } else {
+                                            idProfessorMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.lista_professores_vazia");
+                                            isValid = false;
+                                            //TODO Fazer log
+                                            System.out.println(idProfessorMsg);
+                                    }
+                            } else {
+                                    idProfessorMsg = messages.getString(idProfessorMsg);
+                                    request.setAttribute("idProfessorMsg", idProfessorMsg);
+                                    isValid = false;
+                                    //TODO Fazer log
+                                    System.out.println(idProfessorMsg);
+                            }
+                    }
+                }else {
+                    idProfessorMsg = messages.getString(idProfessorMsg);
+                    request.setAttribute("idProfessorMsg", idProfessorMsg);
+                    isValid = false;
+                    //TODO Fazer log
+                    System.out.println(idProfessorMsg);
+                }    
 		request.setAttribute("hasProfessor", hasProfessor);
 		
 		/**

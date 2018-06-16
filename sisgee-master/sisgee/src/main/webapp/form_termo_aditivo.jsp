@@ -38,7 +38,7 @@
                     <div class="container">					
 
                         <button id="btnListarAditivo" type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
-                        <a id="btnListarAditivo" href="form_termo_rescisao.jsp" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.rescisao"/></a>
+                        <a id="btnListarAditivo" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><fmt:message key = "br.cefetrj.sisgee.resources.form.rescisao"/></a>
                     </div>				
 
                 </fieldset>
@@ -156,23 +156,50 @@
                 </form>
 
             </c:if>
-
+<c:if test="${ not empty param.idAluno && empty msg }">
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="myModalLabel"></h5>
+                            <h5 class="modal-title" id="myModalLabel"><fmt:message key = "br.cefetrj.sisgee.resources.form_termo_rescisao.registro_termo"/></h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body"></div>
+                            <div class="modal-body">
+                                <form action="FormTermoRescisaoServlet" method="post">
+                                    <input type="hidden" id="idAluno" name="idAluno" value="${ param.idAluno }">
+                                        <div class="container">
+                                            <div class="col-xs-1" align="center">
+                                                <label for="dataRescisao"><fmt:message key = "br.cefetrj.sisgee.resources.form_termo_rescisao.data_rescisao"/></label>
+                                                <div class="col-md-6">
+                                                    <input type="text" class="form-control ${ not empty dataTermoRescisaoMsg ? 'is-invalid': not empty periodoMsg ? 'is-invalid' : 'is-valid' }" id="dataRescisao"  name="dataTermoRescisao" value="${ param.dataRescisao }" >
+                                                    <c:if test="${ not empty dataTermoRescisaoMsg }">
+                                                        <div class="invalid-feedback">${ dataTermoRescisaoMsg }</div>
+                                                    </c:if>
+                                                </div>
+                                            </div>					
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_salvar"/></button>
+                                        <!--<button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'form_termo_aditivo.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>-->		
+                                </form>                                   
+                            </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.resources.form.fechar"/></button>
                         </div>
                     </div>
                 </div>
             </div>
+</c:if>                        
+                        
+                        
+                        
+                     
+                        
+                        
+                        
+                        
+                        
         </div>
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>

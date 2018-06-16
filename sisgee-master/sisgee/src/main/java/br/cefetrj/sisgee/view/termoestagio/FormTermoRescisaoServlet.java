@@ -55,7 +55,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 		Date dataRescisao = null;
 		String msg = "";
 		List<TermoAditivo> termosAditivos = new ArrayList();
-                
 		/**
 		 * Validação do Id do Aluno, usando métodos da Classe ValidaUtils.
 		 * Instanciando o objeto e pegando o TermoEstagio válido (sem data de rescisão)
@@ -154,7 +153,7 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.setAttribute("Rescisao", rescisao);
 			
-			request.getRequestDispatcher("/form_termo_rescisao.jsp").forward(request, response);
+			request.getRequestDispatcher("/form_termo_aditivo.jsp").forward(request, response);
 		}
 	}
 

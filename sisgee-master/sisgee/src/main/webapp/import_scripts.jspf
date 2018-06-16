@@ -110,20 +110,26 @@
 	            dataType: "json",
 	            success: function(json){
 	                result = json;
-                        if(result.idAluno != ""){
-                            /**
-                             * val é para input
-                             * preencher uma tabela com tamanho de linha aleatorio
-                             * faz um id no template da linha, getelementbyid.clone
-                             * template.childnodes[1].innerhtml=""
-                             * 
-                             */
-                            
-                            $("#idAluno").val(result.idAluno);
-                            $("#nome").val(result.nome);
-                            $("#nomeCurso").val(result.nomeCurso);
-                            $("#nomeCampus").val(result.nomeCampus);
-                            $("#tipoAluno").val(result.tipoAluno);
+                        if(result.alunoMsg4 != ""){
+                            $(".dadosAluno input:not([id=matricula])").val("");
+                            $("#myModalLabel").html(result.alunoMsg5);
+                            $(".modal-body").html(result.alunoMsg4);
+                            $('#myModal').modal('show');
+                        }else if(result.idAluno != ""){
+
+                                /**
+                                 * val é para input
+                                 * preencher uma tabela com tamanho de linha aleatorio
+                                 * faz um id no template da linha, getelementbyid.clone
+                                 * template.childnodes[1].innerhtml=""
+                                 * 
+                                 */
+
+                                $("#idAluno").val(result.idAluno);
+                                $("#nome").val(result.nome);
+                                $("#nomeCurso").val(result.nomeCurso);
+                                $("#nomeCampus").val(result.nomeCampus);
+                                $("#tipoAluno").val(result.tipoAluno);
                         }
                         else{
                             
@@ -131,8 +137,13 @@
                              * html para escrever em html
                              */
                             $(".dadosAluno input:not([id=matricula])").val("");
-                            $("#myModalLabel").html("Aluno não encontrado");
-                            $(".modal-body").html("A matrícula não corresponde a um aluno cadastrado.");	        	
+                            if(result.alunoMsg1 != ""){
+                                $("#myModalLabel").html(result.alunoMsg2);
+                                $(".modal-body").html(result.alunoMsg1);                                
+                            }else{
+                                $("#myModalLabel").html(result.alunoMsg2);
+                                $(".modal-body").html(result.alunoMsg3);
+                            }
                             $('#myModal').modal('show');	        	
                         }
                         if(typeof buscarAlunoCallback != 'undefined'){
@@ -193,8 +204,8 @@
                             $(".nomeEmpresaPessoa").val("");  
                             $(".nomeConvenio").val("");
                             
-                            $("#myModalLabel").html("Convênio não encontrado");
-                            $(".modal-body").html("O Convênio não corresponde a um Convênio cadastrado.");	        	
+                            $("#myModalLabel").html(result.convenioMsg1);
+                            $(".modal-body").html(result.convenioMsg2);	        	
                             $('#myModal').modal('show');	        	
                         }
 	            }
@@ -249,8 +260,8 @@
                             $(".nomeEmpresaPessoa").val("");  
                             $(".nomeConvenio").val("");
                             
-                            $("#myModalLabel").html("Convênio não encontrado");
-                            $(".modal-body").html("O Convênio não corresponde a um Convênio cadastrado.");	        	
+                            $("#myModalLabel").html(result.convenioMsg1);
+                            $(".modal-body").html(result.convenioMsg2);	        	
                             $('#myModal').modal('show');	        	
                         }
 	            }

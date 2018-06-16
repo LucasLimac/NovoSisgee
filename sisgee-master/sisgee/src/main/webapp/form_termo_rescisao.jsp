@@ -41,8 +41,6 @@
 				
 				<div class="form-row">
 					<div class="form-group col-md-4">
-
-
 						<label for="dataRescisao"><fmt:message key = "br.cefetrj.sisgee.resources.form_termo_rescisao.data_rescisao"/></label>
 						<input type="text" class="form-control ${ not empty dataTermoRescisaoMsg ? 'is-invalid': not empty periodoMsg ? 'is-invalid' : 'is-valid' }" id="dataRescisao"  name="dataTermoRescisao" value="${ param.dataRescisao }" >
 					<c:if test="${ not empty dataTermoRescisaoMsg }">

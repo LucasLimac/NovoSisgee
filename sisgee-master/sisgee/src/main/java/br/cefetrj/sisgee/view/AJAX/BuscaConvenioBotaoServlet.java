@@ -20,6 +20,7 @@ import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
         String nome = request.getParameter("nomeConvenio");
         String idConvenio = "";
         Empresa empresa = null;
+        String convenioMsg1 = "", convenioMsg2 = "";
 
         Empresa empresaNome = null;
         Pessoa pessoaNome = null;
@@ -107,9 +109,10 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                         break;
                     }
                 }
-
-                if (convenios != null) {
-                    empresaNome = convenios.get(0).getEmpresa();
+                System.out.println("br.cefetrj.sisgee.view.AJAX.BuscaConvenioBotaoServlet.doGet() " + convenios.toString());
+                if (convenio != null) {
+                    System.out.println("ENTROU NO IF DO BuscaConvenioBotaoServlet.doGet() " + convenios.toString());
+                    empresaNome = convenio.getEmpresa();
                     if (empresaNome != null) {
                         CNPJ = formatString(empresaNome.getCnpjEmpresa(), "##.###.###/####-##");
                         if (empresaNome.isAgenteIntegracao()) {
@@ -117,7 +120,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                         }
                     }
 
-                    pessoaNome = convenios.get(0).getPessoa();
+                    pessoaNome = convenio.getPessoa();
                     if (pessoaNome != null) {
                         pessoaNome.getNome();
                         CPF = formatString(pessoaNome.getCpf(), "###.###.###-##");
@@ -125,6 +128,14 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                 }
             }
         }
+        
+        convenioMsg1 = "br.cefetrj.sisgee.resources.form.convenio_nao_encontrado1";
+        convenioMsg2 = "br.cefetrj.sisgee.resources.form.convenio_nao_encontrado2";
+
+        convenioMsg1 = messages.getString(convenioMsg1);
+        convenioMsg2 = messages.getString(convenioMsg2);
+        request.setAttribute("convenioMsg1", convenioMsg1);
+        request.setAttribute("convenioMsg2", convenioMsg2);        
 
         //JSON
         if (empresaNome != null) {
@@ -173,6 +184,8 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                     .add("tipoConvenio", "")
                     .add("isAgenteIntegracao", "")
                     .add("nomeAgenciada", "")
+                    .add("convenioMsg1", convenioMsg1)
+                    .add("convenioMsg2", convenioMsg2)                  
                     .build();
 
             StringWriter stWriter = new StringWriter();

@@ -89,7 +89,7 @@
                                 <div class="input-group">
                                     <input type="hidden" class="form-control numeroConvenio numeroConvenio"  id="numeroConvenio1" name="numeroConvenio1" value="${ param.numeroConvenio}">
                                     <input type="hidden" class="form-control idConvenio idConvenio"  id="idConvenio" name="idConvenio" value="${ param.idConvenio}"> 
-                                    <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio" maxlength="10" value="${ param.numeroConvenio }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
+                                    <input type="text" class="form-control ${ not empty numeroConvenioMsg ? 'is-invalid': 'is-valid' } numeroConvenio" id="numeroConvenio" name="numeroConvenio"  maxlength="10" value="${ param.numeroConvenio }" placeholder="<fmt:message key = "br.cefetrj.sisgee.resources.form.placeholder_numeroConvenio"/>">
                                     <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button" id="btnBuscarConvenio"><fmt:message key = "br.cefetrj.sisgee.resources.form.buscar"/></button>
                                     </span>    
@@ -192,7 +192,6 @@
                     </div>
                 </fieldset>
 
-
                 <fieldset class="form-group" ${ isVisualizacao eq true ? 'disabled' :'' }>
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.valorBolsaEstagio"/></legend>
                     <div class="form-row">
@@ -205,7 +204,6 @@
                         </div>
                     </div>
                 </fieldset>
-
 
                 <fieldset class="form-group" ${ isVisualizacao eq true ? 'disabled' :'' } ${ empty termoEstagio ? '' : empty updEndereco ? 'disabled' : '' }>
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.localEstagio"/></legend>
@@ -395,34 +393,19 @@
                     dataNova.setMonth(dataNova.getMonth() + 6);
                     tipoDeAluno = "Curso Técnico";
                     document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
+                    document.getElementById("dataFimTermoEstagio").value = dataNova.toLocaleDateString();
                 } else if (tipoDeAluno.toString().toUpperCase() == 'GRADUACAO') {
                     dataNova.setMonth(dataNova.getMonth() + 12);
                     tipoDeAluno = "Graduação";
                     document.getElementById("dataIni").innerHTML = "Esse Estágio terminaria em " + dataNova.toLocaleDateString() + " para este aluno de " + tipoDeAluno;
+                    document.getElementById("dataFimTermoEstagio").value = dataNova.toLocaleDateString();
                 }
 
             }
 
         }
         
-        function show2(){
-            alert('show' + $('#isAgenteIntegracao').val());
-           if($('#isAgenteIntegracao').val()!=""){
-                if($('#isAgenteIntegracao').val()!="NÃO"){
-                    document.getElementById("exibeAgenciada1").style.display="block";
-                }else{
-                    document.getElementById("exibeAgenciada1").style.display="none";
-                }
-            }
-        }     
-        
-        function ocultar(){
-            if($('#isAgenteIntegracao').val()==""){
-                document.getElementById("exibeAgenciada1").style.display="none";
-            }else if($('#isAgenteIntegracao').val()=="NÃO"){
-                document.getElementById("exibeAgenciada1").style.display="none";
-            }
-        }
+
     </script>
 </body>
 </html>
