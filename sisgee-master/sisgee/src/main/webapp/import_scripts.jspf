@@ -106,7 +106,7 @@
                     /**
                      * matricula é o campo de onde vc vai mandar a requisicao para a url
                      */
-	            data: $('#matricula').serialize(),
+	            data: { matricula: $('#matricula').serialize(), termoAditivo: $('#termoAditivo').serialize() },
 	            dataType: "json",
 	            success: function(json){
 	                result = json;

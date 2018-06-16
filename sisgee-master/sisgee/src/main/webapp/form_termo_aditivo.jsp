@@ -15,7 +15,7 @@
             }
         </style>
     </head>
-    <body>
+    <body onLoad="termoAditivo()">
         <%@include file="import_navbar.jspf"%>
 
         <div class="container">
@@ -40,7 +40,7 @@
                         <button id="btnListarAditivo" type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
                         <a id="btnListarAditivo" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><fmt:message key = "br.cefetrj.sisgee.resources.form.rescisao"/></a>
                     </div>				
-
+                <input type="hidden" name="termoAditivo" id="termoAditivo" value="${ param.termoAditivo }">
                 </fieldset>
             </form>
         </div>
@@ -238,7 +238,10 @@
 
                 }
             });
-
+            
+            function termoAditivo(){
+                document.getElementById("termoAditivo").value = "sim";
+            }
         </script>
 
     </body>

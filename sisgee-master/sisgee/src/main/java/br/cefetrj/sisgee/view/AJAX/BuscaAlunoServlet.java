@@ -45,7 +45,9 @@ public class BuscaAlunoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String matricula = request.getParameter("matricula");
+		String matricula = request.getParameter("matricula").substring(10);
+                String termoAditivo = "nao";
+                
 		String idAluno = "";
 		String nome = "";
 		String nomeCurso = "";
@@ -54,7 +56,8 @@ public class BuscaAlunoServlet extends HttpServlet {
                 String tipoAluno = "";
                 String alunoMsg1 = "", alunoMsg2 = "", alunoMsg3 = "", alunoMsg4 = "", alunoMsg5 = "";
                 int tamanho = 10;
-                
+                termoAditivo = request.getParameter("termoAditivo");
+                                
                 Locale locale = ServletUtils.getLocale(request);
                 ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
                 
@@ -62,6 +65,7 @@ public class BuscaAlunoServlet extends HttpServlet {
                 alunoMsg1 = ValidaUtils.validaTamanhoMatricula(tamanho, matricula);
                 
                 if(alunoMsg1.isEmpty() || alunoMsg1 == null ){
+
                     Aluno aluno = AlunoServices.buscarAlunoByMatricula(matricula.trim());
                     if(aluno != null) {
                             Pessoa pessoa = aluno.getPessoa();
@@ -75,13 +79,15 @@ public class BuscaAlunoServlet extends HttpServlet {
                             nomeCampus = campus.getNomeCampus();
                             List<TermoEstagio> termos = aluno.getTermoEstagios();
                             if(termos != null){
-                                alunoMsg4 = "br.cefetrj.sisgee.form_termo_estagio_servlet.msg_aluno_has_termo_aberto";
-                                alunoMsg5 = "br.cefetrj.sisgee.resources.form.msg_aluno_has_termo_aberto2";
-                                
-                                alunoMsg4 = messages.getString(alunoMsg4);
-                                alunoMsg5 = messages.getString(alunoMsg5);  
-				request.setAttribute("alunoMsg4", alunoMsg4);
-                                request.setAttribute("alunoMsg5", alunoMsg5);
+                                if(termoAditivo == null || termoAditivo.isEmpty()){
+                                    alunoMsg4 = "br.cefetrj.sisgee.form_termo_estagio_servlet.msg_aluno_has_termo_aberto";
+                                    alunoMsg5 = "br.cefetrj.sisgee.resources.form.msg_aluno_has_termo_aberto2";
+
+                                    alunoMsg4 = messages.getString(alunoMsg4);
+                                    alunoMsg5 = messages.getString(alunoMsg5);  
+                                    request.setAttribute("alunoMsg4", alunoMsg4);
+                                    request.setAttribute("alunoMsg5", alunoMsg5);                                    
+                                }
                                 
                                 for (TermoEstagio termo : termos) {
                                     if(termo.getDataFimTermoEstagio()== null){
