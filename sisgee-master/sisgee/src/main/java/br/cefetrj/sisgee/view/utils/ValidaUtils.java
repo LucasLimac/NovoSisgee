@@ -122,6 +122,21 @@ public class ValidaUtils {
 		return msg;
 	}
 	
+        /**
+	 * Método para validar campo Matricula por tamanho
+	 * @param tamanho tamanho do campo.
+	 * @param param valor do texto a ser testado.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaTamanhoMatricula(int tamanho, String param) {
+		String msg = "";
+		if(param != null && param.length() < tamanho) {
+			msg = "br.cefetrj.sisgee.resources.form.matricula_aluno_tam";
+		}		
+		return msg;
+	}    
+        
+        
 	/**
 	 * Método para validar campos numéricos de ponto flutuante
 	 * @param nomeCampo texto com o nome do campo.
@@ -257,6 +272,22 @@ public class ValidaUtils {
 			msg = validaTamanho(nomeCampo, tamanho, param);
 		}
 		return msg;
-	}		
+	}
+        
+        /**
+	 * Método que confirmar se valor da Bolsa do Estágio é menor que R$2.000,00
+	 * 
+	 * @param nomeCampo texto com o nome do campo.
+	 * @param param valor do texto a ser testado.
+	 * @return String com mensagem de erro ou vazia.
+	 */
+	public static String validaTamanhoFloat(String nomeCampo, float param) {
+		String msg = "";
+                Float valor = Float.parseFloat("200000");
+		if(Float.compare(param,valor) > 0) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_tamanho_num_valor";
+		}
+		return msg;
+	}  
 }
 
