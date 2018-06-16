@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * Classe criada para métodos de validação, para melhor reuso de código.
- * @author Paulo Cantuária
+ * @author Lucas Lima
  * @since 1.0
  */
 public class ValidaUtils {
@@ -25,19 +25,38 @@ public class ValidaUtils {
 		return msg;
 	}   
         
-        
+        /**
+         * Método para validar email se contém o @ e o .
+         * @param nomeCampo nome do campo a validar
+         * @param param valor que será validado
+         * @return msg de erro 
+         */
         public static String validaEmail(String nomeCampo, String param) {
 		String msg = "";
-		if(!param.contains("@") || !param.contains(".com")) {
+		if(!param.contains("@") || !param.contains(".")) {
 			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
 		}		
 		return msg;
 	}
         
+        /**
+         * Método para validar telefone com no minimo 10 de tamanho
+         * @param nomeCampo nome do campo a validar
+         * @param param valor que será validado
+         * @return msg de erro 
+         */
+        
         public static String validaTelefone(String nomeCampo, String param) {
 		String msg = "";
-		if(param.length()<8) {
-                    System.out.println("--->>>>"+param.length());
+		if(param.length()<10) {
+			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
+		}		
+		return msg;
+	}
+        
+        public static String validaSomenteLetras(String nomeCampo, String param) {
+		String msg = "";
+		if(!(param.matches("^[a-zA-ZÁÂÃÀÇÉÊÍÓÔÕÚÜáâãàçéêíóôõúü ]*$"))) {
 			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
 		}		
 		return msg;
