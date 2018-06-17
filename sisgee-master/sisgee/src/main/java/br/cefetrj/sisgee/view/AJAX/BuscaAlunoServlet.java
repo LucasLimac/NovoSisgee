@@ -21,6 +21,7 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -60,7 +61,7 @@ public class BuscaAlunoServlet extends HttpServlet {
                                 
                 Locale locale = ServletUtils.getLocale(request);
                 ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-                
+                final Calendar cal = Calendar.getInstance();
                 
                 alunoMsg1 = ValidaUtils.validaTamanhoMatricula(tamanho, matricula);
                 
@@ -78,8 +79,9 @@ public class BuscaAlunoServlet extends HttpServlet {
                             nomeCurso = curso.getNomeCurso();
                             nomeCampus = campus.getNomeCampus();
                             List<TermoEstagio> termos = aluno.getTermoEstagios();
-                            if(termos != null){
-                                if(termoAditivo == null || termoAditivo.isEmpty()){
+                            
+                            if(termos != null && !termos.isEmpty()){
+                                if((termoAditivo == null || termoAditivo.isEmpty()) && aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime())>0){
                                     alunoMsg4 = "br.cefetrj.sisgee.form_termo_estagio_servlet.msg_aluno_has_termo_aberto";
                                     alunoMsg5 = "br.cefetrj.sisgee.resources.form.msg_aluno_has_termo_aberto2";
 

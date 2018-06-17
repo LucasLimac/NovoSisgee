@@ -232,6 +232,27 @@ public class ValidaUtils {
                 
 	}	
 	
+	/**
+	 * Método para validar a Data Fim Termo Estágio Rescisao
+	 * 
+	 * @param dataFim data que marca o início do período.
+	 * @param dataFimRegistro data que marca o final do período.
+	 * @return String com mensagem de erro ou vazia.
+	 */
+	public static String validaDatasRescisao(Date dataFim, Date dataFimRegistro) {
+		String msg = "";
+                System.out.println(dataFim);
+                if(dataFimRegistro==null){
+                    msg = "br.cefetrj.sisgee.valida_utils.msg_valida_datas";
+                    return msg;
+                }
+                else if(dataFim.compareTo(dataFimRegistro) < 0) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_datas_rescisao";
+                        return msg;
+		}		
+		return msg;
+                
+	}          
 	
 	/**
 	 * Método para validar a seleção de Estados (UFs)

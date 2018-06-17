@@ -72,7 +72,13 @@ public class TermoAditivo {
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private ProfessorOrientador professorOrientador;
-	
+
+    @Override
+    public String toString() {
+        return "TermoAditivo{" + "idTermoAditivo=" + idTermoAditivo + ", tipoAditivo=" + tipoAditivo + '}';
+    }
+        
+        
 	public TermoAditivo() {}
         
 	public TermoAditivo(Date dataCadastramentoTermoAditivo,float valorBolsaTermoAditivo ){

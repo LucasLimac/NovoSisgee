@@ -110,13 +110,19 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 						
                                                 periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataRescisao);
                                                 
-                                                
                                                 if(!periodoMsg.trim().isEmpty()) {
                                                         periodoMsg = messages.getString(periodoMsg);
                                                         request.setAttribute("periodoMsg", periodoMsg);
                                                         isValid = false;					
-                                                }	
-							
+                                                }else{                                                
+                                                    periodoMsg = ValidaUtils.validaDatasRescisao(termoEstagio.getDataFimTermoEstagio(), dataRescisao);
+
+                                                    if(!periodoMsg.trim().isEmpty()) {
+                                                            periodoMsg = messages.getString(periodoMsg);
+                                                            request.setAttribute("periodoMsg", periodoMsg);
+                                                            isValid = false;					
+                                                    }	
+                                                }
 						
 					}else {
 						msg = messages.getString("br.cefetrj.sisgee.form_termo_rescisao_servlet.msg_termo_estagio_invalido");
@@ -148,7 +154,8 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			
 			
-		} else {			
+		} else {	
+                    System.out.println("FormTermoRescisaoServlet.doPost() " + msg + "  e  "  +  dataTermoRescisaoMsg);
 			String rescisao = "sim";
 			request.setAttribute("msg", msg);
 			request.setAttribute("Rescisao", rescisao);
