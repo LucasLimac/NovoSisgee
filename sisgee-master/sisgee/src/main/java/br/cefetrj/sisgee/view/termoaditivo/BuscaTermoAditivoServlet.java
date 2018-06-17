@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.cefetrj.sisgee.control.AlunoServices;
+import br.cefetrj.sisgee.control.TermoAditivoServices;
 import br.cefetrj.sisgee.model.entity.Aluno;
 import br.cefetrj.sisgee.model.entity.TermoAditivo;
 import br.cefetrj.sisgee.model.entity.TermoEstagio;
@@ -39,6 +40,8 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
 		
 		String msg = null;
 		String idAluno = request.getParameter("idAluno");
+                String mat = request.getParameter("matricula");
+                
 		Integer id = null;
 		
 		msg = ValidaUtils.validaObrigatorio("Aluno", idAluno);		
@@ -62,17 +65,13 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
 			termoEstagios = aluno.getTermoEstagios();			
 		}
 		
-		List<TermoAditivo> termosAditivos = null;
-
-		if (termoEstagios != null) {
-			for (TermoEstagio termoEstagio : termoEstagios) {
-				if (termoEstagio.getDataRescisaoTermoEstagio() == null) {
-					termosAditivos = termoEstagio.getTermosAditivos();
-					request.setAttribute("termosAditivos", termosAditivos);
-					break;
-				}
-			}
-		}
+                if (termoEstagios != null) {
+                  //request.setAttribute("termosAditivos",TermoAditivoServices.listarTermoAditivo());
+                    request.setAttribute("termosAditivos", aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getTermosAditivos());
+                    System.out.println("matricula : "+idAluno);
+                    System.out.println("Rodou aqui :"+ aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getTermosAditivos().size());
+                }
+		
                 request.setAttribute("listaTermoEstagio", aluno.getTermoEstagios());
                 request.setAttribute("msg",msg);
 		request.getRequestDispatcher("/form_termo_aditivo.jsp").forward(request, response);

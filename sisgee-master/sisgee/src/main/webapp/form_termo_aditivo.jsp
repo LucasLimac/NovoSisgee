@@ -24,7 +24,12 @@
                     ${ msg }
                 </div>
             </c:if>
-
+            <c:if test="${ not empty periodoMsg }">
+                <div class="alert alert-warning" role="alert">
+                    ${periodoMsg}
+                </div>
+            </c:if>  
+            
             <p class="tituloForm">
             <h5>		
                 <fmt:message key = "br.cefetrj.sisgee.resources.form.registroTermoAditivo"/>

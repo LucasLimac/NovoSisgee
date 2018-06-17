@@ -123,10 +123,11 @@ public class TermoEstagio {
 
 
         public String getEstado() throws Exception{
-            final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-                final Calendar cal = Calendar.getInstance();
-            if(dataFimTermoEstagio.compareTo(cal.getTime()) ==1){
-                if(dataRescisaoTermoEstagio!=null && dataRescisaoTermoEstagio.compareTo(cal.getTime()) ==1){
+            //final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            final Calendar cal = Calendar.getInstance();
+            Date a= getDataFimTermoEstagio();
+            if(a!=null && a.compareTo(cal.getTime()) >0){
+                if(dataRescisaoTermoEstagio!=null && dataRescisaoTermoEstagio.compareTo(cal.getTime()) >0){
                     return "Ativo";
                 }
             }
@@ -162,20 +163,36 @@ public class TermoEstagio {
             return a;
 	}
         public String getDataFimTermoEstagio2(){
+            boolean pegou=false;
+            String a="";
             for (TermoAditivo termosAditivo : termosAditivos) {
                 if(termosAditivo.getDataFimTermoAditivo()!=null){
                     SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
-                    String a=format.format(termosAditivo.getDataFimTermoAditivo());
-                    return a;
+                    a=format.format(termosAditivo.getDataFimTermoAditivo());
                 }
             }
+            if(pegou){
+                return a;
+            }
             SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
-            String a=format.format(dataFimTermoEstagio);
+            a=format.format(dataFimTermoEstagio);
             return a;
-            
         }
+        
 	public Date getDataFimTermoEstagio(){
-            return dataFimTermoEstagio;
+            Date a=null;
+            boolean pegou=false;
+            if(!termosAditivos.isEmpty())
+                for (TermoAditivo termosAditivo : termosAditivos) {
+                    if(termosAditivo.getDataFimTermoAditivo()!=null){
+                        a=termosAditivo.getDataFimTermoAditivo();
+                        pegou=true;
+                    }
+                }
+            if(pegou)
+                return a;
+            else
+                return dataFimTermoEstagio;
 	}
 
 	public void setDataFimTermoEstagio(Date dataFimTermoEstagio) {

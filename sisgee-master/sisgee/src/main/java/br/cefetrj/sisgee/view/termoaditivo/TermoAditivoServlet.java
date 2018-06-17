@@ -21,6 +21,9 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /*
  * @author Vinicius Paradellas
@@ -38,7 +41,8 @@ public class TermoAditivoServlet extends HttpServlet {
 
 		Locale locale = ServletUtils.getLocale(request);
 		ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-		
+                final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                final Calendar cal = Calendar.getInstance();
 		
 		String vigencia = request.getParameter("alvigencia");
                 String carga = request.getParameter("alcargaHoraria");
@@ -72,18 +76,8 @@ public class TermoAditivoServlet extends HttpServlet {
 				aluno = AlunoServices.buscarAlunoByMatricula(idAluno);
                                 System.out.println(aluno);
 				if (aluno != null) {
-					List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();	
-					for (TermoEstagio termoEstagio2 : termosEstagio) {
-						
-                                            if(termoEstagio2.getDataRescisaoTermoEstagio() == null) {
-							termoEstagio = termoEstagio2;
-							break;
-						}
-					}					
-					
-				} else {
-					//idAlunoMsg = messages.getString("br.cefetrj.sisgee.incluir_termo_aditivo_servlet.msg_AlunoEscolhido");
-					//request.setAttribute("idAlunoMsg", idAlunoMsg);
+					termoEstagio=aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1);
+                                        System.out.println(termoEstagio);
 				}
 
 			
@@ -92,9 +86,8 @@ public class TermoAditivoServlet extends HttpServlet {
 			request.setAttribute("idAlunoMsg", idAlunoMsg);
 			isValid = false;
 		}
-                    
-                    
-		if(termoEstagio != null) {
+                    System.out.println("que isso :"+TermoAditivoServices.listarTermoAditivo());
+		if(termoEstagio != null && (aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime()) >0)) {
 			//TODO implementar lógica de encaminhamento para a tela de registro
 			termosAditivos = termoEstagio.getTermosAditivos();
 			if(termosAditivos != null && !termosAditivos.isEmpty()) {
@@ -144,7 +137,7 @@ public class TermoAditivoServlet extends HttpServlet {
                         request.setAttribute("vavalorBolsa",termoEstagio.getValorBolsa());
                         
                         /** Dados de Local */
-                        request.setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagio());
+                        request.getServletContext().setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagio());
                         request.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagio());
                         request.setAttribute("encomplementoEnderecoTermoEstagio",termoEstagio.getComplementoEnderecoTermoEstagio());
                         request.setAttribute("enbairroEnderecoTermoEstagio",termoEstagio.getBairroEnderecoTermoEstagio());
