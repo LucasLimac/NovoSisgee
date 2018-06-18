@@ -1,4 +1,3 @@
-
 package br.cefetrj.sisgee.control;
 
 import java.util.List;
@@ -50,10 +49,11 @@ public class ConvenioServices {
             Calendar cal = Calendar.getInstance();
             cal.setTime(dataHoje);
             cal.add(Calendar.MONTH, 2);
-            System.out.println(cal+"<<<-----");
+            int ultimodia = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+            cal.set(Calendar.DATE, ultimodia);
+            System.out.println(cal);
             Date dataVenceu =  cal.getTime();
-            System.out.println(convenio.getDataAssinatura()+"<<<----- DATA ASSINATURA CONVENIO");
-            System.out.println(dataVenceu+"<<<--- DATA VENCEUUUUUUU");
+            
 
             if ((dataFinal.getTime()> dataHoje.getTime()) && (dataFinal.getTime()<dataVenceu.getTime())) {
                 
