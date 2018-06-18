@@ -747,6 +747,11 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		}
 	}	
 	
+        /**
+         * Método que carrega lista
+         * @param request
+         * @return 
+         */
 	private static HttpServletRequest carregarListas(HttpServletRequest request) {
 		
 		List<AgenteIntegracao> agentesIntegracao = AgenteIntegracaoServices.listarAgenteIntegracao();

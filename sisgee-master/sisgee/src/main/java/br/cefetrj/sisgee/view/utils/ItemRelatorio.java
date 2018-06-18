@@ -10,21 +10,27 @@ package br.cefetrj.sisgee.view.utils;
 
 public class ItemRelatorio {
 	
-	
 	private String nomeCurso;
 	private int qntTermoEstagio;
 	private int qntTermoAditivo;
 	private int qntRescReg;
 	
 	
-	
+	/**
+         * Método que chama construtor da classe
+         * @param nomeCurso 
+         */
 	public ItemRelatorio(String nomeCurso) {
 		super();
 		this.nomeCurso = nomeCurso;
 	}
 	
-	
-	
+	/**
+         * Método que chama construtor da classe
+         * @param nomeCurso
+         * @param qntTermoEstagio
+         * @param qntRescReg 
+         */
 	public ItemRelatorio(String nomeCurso, int qntTermoEstagio, int qntRescReg) {
 		super();
 		this.nomeCurso = nomeCurso;
@@ -59,6 +65,10 @@ public class ItemRelatorio {
 		this.qntRescReg = qntRescReg;
 	}
 
+        /**
+         * 
+         * @return 
+         */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,6 +77,11 @@ public class ItemRelatorio {
 		return result;
 	}
 
+        /**
+         * Método de comparação
+         * @param obj
+         * @return 
+         */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -86,6 +101,10 @@ public class ItemRelatorio {
 
 
 
+        /**
+         * 
+         * @return 
+         */
 	@Override
 	public String toString() {
 		return "ItemRelatorio [nomeCurso=" + nomeCurso + ", qntTermoEstagio=" + qntTermoEstagio + ", qntTermoAditivo="
