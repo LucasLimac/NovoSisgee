@@ -30,7 +30,9 @@ public class RenovarConvenioServlet extends HttpServlet {
         
         String numeroConvenio = req.getParameter("convenio").substring(0,pos);
         
+        
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numeroConvenio);
+       
         
         if(convenio.getEmpresa()!=null){
             req.setAttribute("isEmpresa", "sim");

@@ -11,11 +11,14 @@ import br.cefetrj.sisgee.control.PessoaServices;
 import br.cefetrj.sisgee.model.entity.Convenio;
 import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
+import br.cefetrj.sisgee.view.utils.ServletUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonWriter;
@@ -23,15 +26,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
  * Servlet para buscar convenio, pelo nome ou numero
+ *
  * @author Lucas Lima
  */
 public class BuscarConvenioServlet extends HttpServlet {
 
+    private static final long serialVersionUID = 1L;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Locale locale = ServletUtils.getLocale(request);
+        ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
 
         String nome = "";
         String numero = "";
@@ -51,19 +61,31 @@ public class BuscarConvenioServlet extends HttpServlet {
 
         boolean isValid = true;
 
+        String msg = "";
+        Logger lg = Logger.getLogger(BuscarConvenioServlet.class);
+
         /**
          * Buscar pelo numero do Convenio
          */
         if (numero != null) {
             if (!numero.equals("")) {
-                convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero.trim());
-            } 
+                try {
+                    convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero.trim());
+                } catch (Exception e) {
+                    msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
+                    request.setAttribute("msg", msg);
+                    lg.error("Exception ao tentar buscar um convenio pelo numero", e);
+                    request.getRequestDispatcher("/form_renovar_convenio.jsp").forward(request, response);
+                    lg.info(msg);
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+                }
+            }
             if (convenio != null) {
                 convenios.add(convenio);
 
             }
-        }else{
-            isValid=false;
+        } else {
+            isValid = false;
         }
 
         /**
@@ -72,14 +94,33 @@ public class BuscarConvenioServlet extends HttpServlet {
         if (nome != null) {
             if (!nome.equals("")) {
 
-                pessoas = PessoaServices.buscarPessoaByNomeList(nome.trim());
+                try {
+                    pessoas = PessoaServices.buscarPessoaByNomeList(nome.trim());
 
-                empresas = EmpresaServices.buscarEmpresaByNomeList(nome.trim());
+                    empresas = EmpresaServices.buscarEmpresaByNomeList(nome.trim());
+                } catch (Exception e) {
+                    msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
+                    request.setAttribute("msg", msg);
+                    lg.error("Exception ao tentar buscar uma pessoa ou empresa pelo nome de Empresa ou Pessoa", e);
+                    request.getRequestDispatcher("/form_renovar_convenio.jsp").forward(request, response);
+                    lg.info(msg);
+                    request.getRequestDispatcher("/index.jsp").forward(request, response);
+
+                }
 
                 if (pessoas != null) {
 
                     for (Pessoa x : pessoas) {
-                        convenio = ConvenioServices.buscarConvenioByPessoa(x);
+                        try {
+                            convenio = ConvenioServices.buscarConvenioByPessoa(x);
+                        } catch (Exception e) {
+                            msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
+                            request.setAttribute("msg", msg);
+                            lg.error("Exception ao tentar buscar um convenio pela pessoa", e);
+                            request.getRequestDispatcher("/form_renovar_convenio.jsp").forward(request, response);
+                            lg.info(msg);
+                            request.getRequestDispatcher("/index.jsp").forward(request, response);
+                        }
                         convenios.add(convenio);
 
                     }
@@ -89,27 +130,34 @@ public class BuscarConvenioServlet extends HttpServlet {
                 if (empresas != null) {
 
                     for (Empresa x : empresas) {
-                        convenio = ConvenioServices.buscarConvenioByEmpresa(x);
+                        try {
+                            convenio = ConvenioServices.buscarConvenioByEmpresa(x);
+                        } catch (Exception e) {
+                            msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
+                            request.setAttribute("msg", msg);
+                            lg.error("Exception ao tentar buscar um convenio pela empresa", e);
+                            request.getRequestDispatcher("/form_renovar_convenio.jsp").forward(request, response);
+                            lg.info(msg);
+                            request.getRequestDispatcher("/index.jsp").forward(request, response);
+                        }
                         convenios.add(convenio);
 
                     }
 
                 }
-            } 
-        }else{
-            isValid=false;
+            }
+        } else {
+            isValid = false;
         }
-        
-        
+
         if (!convenios.isEmpty()) {
-            isValid=true;
+            isValid = true;
 
             request.setAttribute("filtro", convenios);
 
         }
 
         if (isValid) {
-            
 
             request.getRequestDispatcher("form_renovar_convenio.jsp").forward(request, response);
         } else {
