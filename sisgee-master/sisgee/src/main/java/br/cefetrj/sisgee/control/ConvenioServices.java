@@ -32,6 +32,11 @@ public class ConvenioServices {
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
         return convenioDao.buscarTodos();
     }
+    
+    /**
+     * Método para listar convênios a vencer
+     * @return lista de convênios a vencer
+     */
 
     public static List<Convenio> listarConveniosVencer() {
 
@@ -66,11 +71,20 @@ public class ConvenioServices {
 
     }
 
+    /**
+     * Método para buscar um convênio pelo convênio
+     * @param convenio
+     * @return 
+     */
     public static Convenio buscarConvenio(Convenio convenio) {
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
         return convenioDao.buscar(convenio.getIdConvenio());
     }
 
+    /**
+     * Método para incluir um convênio no banco de dados
+     * @param convenio 
+     */
     public static void incluirConvenio(Convenio convenio) {
         GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);
         PersistenceManager.getTransaction().begin();
@@ -81,6 +95,13 @@ public class ConvenioServices {
             PersistenceManager.getTransaction().rollback();
         }
     }
+    
+    /**
+     * Método para buscar um convênio pelo cnpj da empresa
+     * @param numero
+     * @param emp
+     * @return 
+     */
 
     public static Convenio buscarConvenioByNumeroEmpresa(String numero, Empresa emp) {
         ConvenioDAO convenioDao = new ConvenioDAO();
@@ -92,6 +113,11 @@ public class ConvenioServices {
         }
     }
 
+    /**
+     * Método para buscar um convênio pelo número convênio
+     * @param numero
+     * @return 
+     */
     public static Convenio buscarConvenioByNumeroConvenio(String numero) {
         ConvenioDAO convenioDao = new ConvenioDAO();
         try {
@@ -101,6 +127,11 @@ public class ConvenioServices {
             return null;
         }
     }
+    /**
+     * Método para buscar um Convênio pela Empresa
+     * @param empresa
+     * @return 
+     */
 
     public static Convenio buscarConvenioByEmpresa(Empresa empresa) {
         ConvenioDAO convenioDao = new ConvenioDAO();
@@ -111,6 +142,11 @@ public class ConvenioServices {
             return null;
         }
     }
+    /**
+     * Método para buscar um convênio pela pessoa
+     * @param pessoa
+     * @return 
+     */
     
     public static Convenio buscarConvenioByPessoa(Pessoa pessoa) {
         ConvenioDAO convenioDao = new ConvenioDAO();
@@ -122,6 +158,10 @@ public class ConvenioServices {
         }
     }
     
+    /**
+     * Método para fazer um merge de um convenio
+     * @param convenio 
+     */
     public static void alterarConvenio(Convenio convenio) {
 		
 		GenericDAO<Convenio> convenioDao = PersistenceManager.createGenericDAO(Convenio.class);		
