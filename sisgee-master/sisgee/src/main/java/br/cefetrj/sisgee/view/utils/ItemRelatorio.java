@@ -102,7 +102,7 @@ public class ItemRelatorio {
 
 
         /**
-         * 
+         * Método que sobreescreve uma string
          * @return 
          */
 	@Override

@@ -25,7 +25,7 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 
 /**
- * 
+ * Servlet que inlcui um termo de estágio
  * @author Paulo Cantuária
  * @since 1.0
  * 
@@ -37,6 +37,14 @@ import br.cefetrj.sisgee.view.utils.ServletUtils;
 public class IncluirTermoEstagioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+        
+        /**
+        * 
+        * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+        * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+        * @throws ServletException se o pedido do service não puder ser tratado
+        * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+        */
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
