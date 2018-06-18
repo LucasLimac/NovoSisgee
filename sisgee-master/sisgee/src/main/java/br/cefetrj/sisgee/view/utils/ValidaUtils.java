@@ -54,6 +54,12 @@ public class ValidaUtils {
 		return msg;
 	}
         
+        /**
+         * Valida se parametro é somente letras
+         * @param nomeCampo
+         * @param param
+         * @return 
+         */
         public static String validaSomenteLetras(String nomeCampo, String param) {
 		String msg = "";
 		if(!(param.matches("^[a-zA-ZÁÂÃÀÇÉÊÍÓÔÕÚÜáâãàçéêíóôõúü ]*$"))) {

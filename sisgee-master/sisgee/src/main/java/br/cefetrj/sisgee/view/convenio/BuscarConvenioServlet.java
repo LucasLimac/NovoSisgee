@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet para buscar convenio, pelo nome ou numero
  * @author Lucas Lima
  */
 public class BuscarConvenioServlet extends HttpServlet {

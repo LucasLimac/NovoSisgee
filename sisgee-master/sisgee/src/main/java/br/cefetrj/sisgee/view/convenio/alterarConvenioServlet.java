@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Servlet para alterar dados do novo convenio ao renovar
  * @author Lucas Lima
  */
 public class alterarConvenioServlet extends HttpServlet {

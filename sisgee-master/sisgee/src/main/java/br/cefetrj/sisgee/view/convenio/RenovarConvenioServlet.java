@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Servlet para renovar convenio 
  * @author Lucas Lima
  */
 @WebServlet(name = "RenovarConvenioServlet", urlPatterns = {"/RenovarConvenioServlet"})

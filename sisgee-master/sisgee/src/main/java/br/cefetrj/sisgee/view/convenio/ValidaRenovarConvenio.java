@@ -21,13 +21,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Servlet para validar dados do renovar convenio
+ * 
  * @author Lucas Lima
  */
 public class ValidaRenovarConvenio extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+   /**
+    * Post para validar dados do renovar convenio
+    * @param request
+    * @param response
+    * @throws ServletException
+    * @throws IOException 
+    */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
