@@ -129,10 +129,14 @@ public class TermoEstagio {
 
         public String getEstado() throws Exception{
             //final DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
-            final Calendar cal = Calendar.getInstance();
-            Date a= getDataFimTermoEstagio();
+            Calendar cal = Calendar.getInstance();
+            Date a= getDataFimTermoEstagio(), b=getDataRescisaoTermoEstagio();
+            
             if(a!=null && a.compareTo(cal.getTime()) >0){
-                if(dataRescisaoTermoEstagio!=null && dataRescisaoTermoEstagio.compareTo(cal.getTime()) >0){
+                if(b==null){
+                return "Ativo";
+                }  
+                if((b.compareTo(cal.getTime()) >0)){
                     return "Ativo";
                 }
             }

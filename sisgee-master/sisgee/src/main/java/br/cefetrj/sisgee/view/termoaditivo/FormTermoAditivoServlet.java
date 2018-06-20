@@ -498,7 +498,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                                 tamanho = 80;
                                 nomeSupervisorMsg = ValidaUtils.validaTamanho(campo, tamanho, nomeSupervisor);
                                 if(nomeSupervisorMsg.trim().isEmpty()) {
-                                        request.setAttribute("nomeSupervisor", nomeSupervisor);
+                                            request.setAttribute("nomeSupervisor", nomeSupervisor);
                                 }else {				
                                         nomeSupervisorMsg = messages.getString(nomeSupervisorMsg);
                                         nomeSupervisorMsg = ServletUtils.mensagemFormatada(nomeSupervisorMsg, locale, tamanho);
