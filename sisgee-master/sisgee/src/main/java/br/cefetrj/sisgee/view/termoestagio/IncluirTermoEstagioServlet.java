@@ -25,10 +25,12 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 
 /**
- * Servlet que inlcui um termo de estágio
+ * Servlet que inlcui um Termo de Estágio depois de Validado
  * @author Paulo Cantuária
  * @since 1.0
  * 
+ * Adaptado para funcionar com formato mais definido
+ * @author Claudio Freitas
  * @version 2.0
  * 
  */

@@ -70,10 +70,9 @@ public class TermoEstagioServices {
 		 * Lógica de negócio
 		 * 
 		 * 
-		 * Convênio já existe para a Empresa selecionada?
-		 * 		SIM - Encapsular em termo estagio
+		 * Encapsular Convênio em Termo Estágio
 		 * 
-		 * Registrar termo
+		 * Registrar Termo
 		 * 
 		 */
 
@@ -85,10 +84,10 @@ public class TermoEstagioServices {
                         
 			Convenio con = convenioDao.buscar(convenio.getIdConvenio());                        
 			
-			// Convênio já existe para a Empresa selecionada?
+			// Convênio
 			Convenio conv = ConvenioServices.buscarConvenioByNumeroConvenio(termoEstagio.getConvenio().getNumeroConvenio());
 			if(conv != null) {
-				// SIM - Encapsular em termo estagio
+				// Encapsular em termo estagio
 				termoEstagio.setConvenio(conv);
 			}
 

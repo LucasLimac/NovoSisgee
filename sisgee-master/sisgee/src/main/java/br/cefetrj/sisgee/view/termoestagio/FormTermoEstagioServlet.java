@@ -199,7 +199,6 @@ public class FormTermoEstagioServlet extends HttpServlet {
 				Integer cargaHoraria = Integer.parseInt(cargaHorariaTermoEstagio);
 				if (cargaHorariaMsg.trim().isEmpty()) {
 					cargaHorariaMsg = ValidaUtils.validaTamanho(campo, tamanho, cargaHoraria);
-                                        System.out.println("br.cefetrj.sisgee.view.termoestagio.FormTermoEstagioServlet.doPost() " + cargaHoraria);
 					if (cargaHorariaMsg.trim().isEmpty()) {
                                             request.setAttribute("cargaHoraria", cargaHoraria);
 					}else {
