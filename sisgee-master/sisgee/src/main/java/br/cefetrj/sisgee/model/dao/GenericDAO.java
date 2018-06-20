@@ -19,6 +19,7 @@ public class GenericDAO<T> {
 	GenericDAO(Class<T> t, EntityManager manager){
 		this.t = t;
 		this.manager = manager;
+                
 	}
 	
         /**
@@ -38,7 +39,8 @@ public class GenericDAO<T> {
          * @return 
          */
 	public T buscar(Integer id){
-		return manager.find(t, id);
+            T t1 = manager.find(t, id);
+            return t1;
 	}
 	
         /**

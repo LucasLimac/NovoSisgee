@@ -18,10 +18,13 @@ public class AlunoDAO extends GenericDAO<Aluno> {
          * @return 
          */
 	public Aluno buscarByMatricula(String matricula){
-		return (Aluno) manager.createQuery(
+                manager.clear();
+		Aluno a=(Aluno) manager.createQuery(
 		    "SELECT a FROM Aluno a WHERE a.matricula LIKE :matricula")
 		    .setParameter("matricula", matricula)
 		    .getSingleResult();
+                    
+                    return a;
 	}
 
 }

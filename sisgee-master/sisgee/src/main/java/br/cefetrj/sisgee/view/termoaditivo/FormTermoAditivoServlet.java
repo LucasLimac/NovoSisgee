@@ -517,8 +517,7 @@ public class FormTermoAditivoServlet extends HttpServlet {
                 
                 try{
                 if(!(aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime()) ==1)) {
-                    //msg = messages.getString("br.cefetrj.sisgee.form_termo_aditivo_servlet.msg_termo_estagio_invalido");
-                    //request.setAttribute("msg3","Não existe nenhum Termo Estágio ativo");
+                    
                     
                     isValid=false;
                 }
