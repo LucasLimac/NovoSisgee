@@ -12,7 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
- *
+ * Classe Pessoa para Registrar informações relacionadas a Aluno e Convênio 
+ * 
  * @author Lucas Lima
  * @since 1.0
  */

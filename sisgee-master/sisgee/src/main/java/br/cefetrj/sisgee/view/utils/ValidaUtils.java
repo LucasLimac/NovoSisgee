@@ -10,6 +10,156 @@ import java.util.Date;
  * @since 1.0
  */
 public class ValidaUtils {
+<<<<<<< master
+	
+	/**
+	 * Método para validar campo por tamanho, para valores de texto(String)
+	 * @param nomeCampo texto com o nome do campo.
+	 * @param tamanho tamanho do campo.
+	 * @param param valor do texto a ser testado.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaTamanho(String nomeCampo, int tamanho, String param) {
+		String msg = "";
+		if(param!=null && param.length() > tamanho) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_tamanho_txt";
+		}		
+		return msg;
+	}   
+        
+        /**
+         * Método para validar email se contém o @ e o .
+         * @param nomeCampo nome do campo a validar
+         * @param param valor que será validado
+         * @return msg de erro 
+         */
+        public static String validaEmail(String nomeCampo, String param) {
+		String msg = "";
+		if(!param.contains("@") || !param.contains(".")) {
+			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
+		}		
+		return msg;
+	}
+        
+        /**
+         * Método para validar telefone com no minimo 10 de tamanho
+         * @param nomeCampo nome do campo a validar
+         * @param param valor que será validado
+         * @return msg de erro 
+         */
+        
+        public static String validaTelefone(String nomeCampo, String param) {
+		String msg = "";
+		if(param.length()<10) {
+			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
+		}		
+		return msg;
+	}
+        
+        public static String validaSomenteLetras(String nomeCampo, String param) {
+		String msg = "";
+		if(!(param.matches("^[a-zA-ZÁÂÃÀÇÉÊÍÓÔÕÚÜáâãàçéêíóôõúü ]*$"))) {
+			msg = "br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido";
+		}		
+		return msg;
+	}
+        
+       
+	
+	/**
+	 * Método para validar campo por tamanho, para valores inteiros
+	 * @param nomeCampo texto com o nome do campo.
+	 * @param tamanho tamanho do campo.
+	 * @param param valor inteiro a ser testado.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaTamanho(String nomeCampo, int tamanho, Integer param) {
+		String msg = "";
+		if(param > tamanho) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_tamanho_num";
+		}		
+		return msg;
+	}	
+	
+	/**
+	 * Método para validar campo com tamanho restito, para valores de texto(String)
+	  * @param nomeCampo texto com o nome do campo.
+	 * @param tamanho tamanho do campo.
+	 * @param param valor do texto a ser testado.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaTamanhoExato(String nomeCampo, int tamanho, String param) {
+		String msg = "";
+		if(param.length() != tamanho) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_tamanho_exato";
+		}		
+		return msg;
+	}
+	
+	/**
+	 * Método para validar campo obrigatório
+	 * @param nomeCampo texto com o nome do campo.
+	 * @param param valor a ser testado como obrigatório.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaObrigatorio(String nomeCampo, String param) {
+		String msg = "";
+		if(param == null || param.trim().isEmpty()) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_obrigatorio";
+		}		
+		return msg;
+	}
+	
+	/**
+	 * Método para validar campos numéricos inteiros
+	 * @param nomeCampo texto com o nome do campo.
+	 * @param param com o valor a ser convertido para integer.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaInteger(String nomeCampo, String param) {
+		String msg = "";
+		if(!param.matches("\\d*")) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_numerico";
+		}		
+		return msg;
+	}
+	
+        /**
+	 * Método para validar campo Matricula por tamanho
+	 * @param tamanho tamanho do campo.
+	 * @param param valor do texto a ser testado.
+	 * @return String com mensagem de erro ou vazia
+	 */
+	public static String validaTamanhoMatricula(int tamanho, String param) {
+		String msg = "";
+		if(param != null && param.length() < tamanho || param.length() > tamanho) {
+			msg = "br.cefetrj.sisgee.resources.form.matricula_aluno_tam";
+		}		
+		return msg;
+	}    
+        
+        
+	/**
+	 * Método para validar campos numéricos de ponto flutuante
+	 * @param nomeCampo texto com o nome do campo.
+	 * @param param String com o valor a ser convertido para float.
+	 * @return String com mensagem de erro ou vazia.
+	 */
+	public static String validaFloat(String nomeCampo, String param) {
+		String msg = "";		
+		
+		try {
+		@SuppressWarnings("unused")
+		Float valorFloat = Float.parseFloat(param);				
+		
+		}catch(Exception e) {
+			msg = "br.cefetrj.sisgee.valida_utils.msg_valida_numerico";
+		}
+		
+		return msg;	
+		
+		/*NumberFormat nf = NumberFormat.getInstance(new Locale("pt", "BR"));
+=======
 
     /**
      * Método para validar campo por tamanho, para valores de texto(String)
@@ -171,6 +321,7 @@ public class ValidaUtils {
         return msg;
 
         /*NumberFormat nf = NumberFormat.getInstance(new Locale("pt", "BR"));
+>>>>>>> master
 		Number n;
 		try {
 			n = nf.parse(param);

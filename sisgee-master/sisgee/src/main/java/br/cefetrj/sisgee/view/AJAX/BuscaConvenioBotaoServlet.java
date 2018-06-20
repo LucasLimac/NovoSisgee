@@ -199,7 +199,12 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
             response.getWriter().print(jsonData);
         }
     }
-
+    /**
+     * Método para formatar String de Valor ao Retornar para a Tela onde é exibido
+     * 
+     * @author Claudio
+     * @since 1.0
+     */  
     public static String formatString(String value, String pattern) {
         MaskFormatter mf;
         try {

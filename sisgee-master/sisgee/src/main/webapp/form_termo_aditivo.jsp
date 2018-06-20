@@ -174,7 +174,7 @@
                         </div>
                             <div class="modal-body">
                                 <form action="FormTermoRescisaoServlet" method="post">
-                                    <input type="hidden" id="idAluno" name="idAluno" value="${ param.idAluno }">
+                                    <input type="hidden" id="idAluno" name="idAluno" value="${param.idAluno}">
                                         <div class="container">
                                             <div class="col-xs-1" align="center">
                                                 <label for="dataRescisao"><fmt:message key = "br.cefetrj.sisgee.resources.form_termo_rescisao.data_rescisao"/></label>
@@ -187,8 +187,8 @@
                                             </div>					
                                         </div>
                                         <button type="submit" class="btn btn-primary"> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_salvar"/></button>
-                                        <!--<button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'form_termo_aditivo.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>-->		
-                                </form>                                   
+                                        <!--<button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'form_termo_aditivo.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>-->		                                   
+                                </form> 
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.resources.form.fechar"/></button>
@@ -238,6 +238,7 @@
             $(document).ready(function () {
                 $(".form-check-input").change(function () {
                     $('#idAlunoAdt').val($("#idAluno").val());
+                    $('#dataTermoRescisao').mask('99/99/9999');  
                 });
 
                 if ($("#idAluno").val() != "") {

@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
+ * Classe Curso para registrar junto do Cadastro do Aluno e exibir em tela após Buscar Aluno
  * 
  * @author Paulo Cantuária
  * @since 1.0

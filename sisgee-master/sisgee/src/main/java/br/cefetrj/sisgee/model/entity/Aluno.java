@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
+ * Classe Aluno usada em Buscas e Registros de Termo Estágio, Aditivo e Rescisão
  * 
  * @author Paulo Cantuaria
  * @since 1.0
