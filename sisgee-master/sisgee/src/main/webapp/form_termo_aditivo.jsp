@@ -61,6 +61,7 @@
                             <th><fmt:message key="br.cefetrj.sisgee.10" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.13" /></th>
                             <th><fmt:message key="br.cefetrj.sisgee.12" /></th>
+                            <th>Visualizar</th>
 
                         </tr>
 
@@ -72,6 +73,7 @@
                                 <td>${b.getDataFimTermoEstagio2()}</td>
                                 <td>${b.getConvenio().pegaCpf()}</td>
                                 <td>${b.getConvenio().pegaNome()}</td>
+                                <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?id=${b.idTermoEstagio}&tipo=termoestagio&matricula=${param.matricula}" >Visualizar</td>
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c">
                                 <tr>
@@ -81,6 +83,7 @@
                                     <td>${c.getDataFimTermoAditivo2()}</td>
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
+                                    <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?id=${c.idTermoAditivo}&tipo=termoaditivo&aluno=${param.matricula}" >Visualizar</td>
                                 </tr>   
                             </c:forEach>
                         </c:forEach>
@@ -174,7 +177,7 @@
                         </div>
                             <div class="modal-body">
                                 <form action="FormTermoRescisaoServlet" method="post">
-                                    <input type="hidden" id="idAluno" name="idAluno" value="${param.idAluno}">
+                                    <input type="hidden" id="idAluno" name="idAluno" value="${ param.idAluno }">
                                         <div class="container">
                                             <div class="col-xs-1" align="center">
                                                 <label for="dataRescisao"><fmt:message key = "br.cefetrj.sisgee.resources.form_termo_rescisao.data_rescisao"/></label>
@@ -187,8 +190,8 @@
                                             </div>					
                                         </div>
                                         <button type="submit" class="btn btn-primary"> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_salvar"/></button>
-                                        <!--<button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'form_termo_aditivo.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>-->		                                   
-                                </form> 
+                                        <!--<button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'form_termo_aditivo.jsp'"><i class="far fa-times-circle"></i> <fmt:message key = "br.cefetrj.sisgee.form_empresa.msg_cancelar"/></button>-->		
+                                </form>                                   
                             </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><fmt:message key = "br.cefetrj.sisgee.resources.form.fechar"/></button>
@@ -238,7 +241,6 @@
             $(document).ready(function () {
                 $(".form-check-input").change(function () {
                     $('#idAlunoAdt').val($("#idAluno").val());
-                    $('#dataTermoRescisao').mask('99/99/9999');  
                 });
 
                 if ($("#idAluno").val() != "") {

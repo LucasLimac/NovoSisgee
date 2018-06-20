@@ -40,13 +40,6 @@ import jdk.nashorn.internal.runtime.ParserException;
 public class FormTermoAditivoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-        /**
-         * 
-        * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
-        * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
-        * @throws ServletException se o pedido do service não puder ser tratado
-        * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido  
-         */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException{
@@ -121,7 +114,6 @@ public class FormTermoAditivoServlet extends HttpServlet {
 			if (msg.trim().isEmpty()) {
 				idTermo = Integer.parseInt(idTermoEstagio);
 				termoEstagio = TermoEstagioServices.buscarTermoEstagio(idTermo);			
-				
 			}else {
 				msg = messages.getString(msg);
 				isValid = false;
@@ -145,9 +137,10 @@ public class FormTermoAditivoServlet extends HttpServlet {
 			if(showVigencia != null && !showVigencia.trim().isEmpty()) {
 				
 				campo = "Data de Término";
-				Boolean hasDataFim = false;
+				Boolean hasDataFim =false;
 				String dataFimMsg = "";
 				dataFimMsg = ValidaUtils.validaObrigatorio(campo, dataFimTermoAditivo);
+                                System.out.println(""+dataFimMsg);
 				if(dataFimMsg.trim().isEmpty()) {					
 					dataFimMsg = ValidaUtils.validaDate(campo , dataFimTermoAditivo);
 					if(dataFimMsg.trim().isEmpty()) {
@@ -160,20 +153,26 @@ public class FormTermoAditivoServlet extends HttpServlet {
 							isValid = false;
 						}
 					} else {
-						dataFimMsg = messages.getString(dataFimMsg);
+						dataFimMsg = messages.getString("br.cefetrj.sisgee.valida_utils.msg_valida_obrigatorio");
 						request.setAttribute("dataFimMsg", dataFimMsg);
 						isValid = false;						
-					} 
+					}
+                                        String periodoMsg = "";
+                                        periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataFim);
+                                        if(!periodoMsg.trim().isEmpty()) {
+                                            periodoMsg = messages.getString(periodoMsg);
+                                            request.setAttribute("periodoMsg", periodoMsg);
+                                            isValid = false;					
+                                        }
 				}
+                                else{
+                                   dataFimMsg = messages.getString("br.cefetrj.sisgee.valida_utils.msg_valida_obrigatorio");
+                                   request.setAttribute("dataFimMsg", dataFimMsg);
+                                    isValid = false;
+                                }
 				request.setAttribute("hasDataFim", hasDataFim);
 				
-				String periodoMsg = "";
-				periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataFim);
-				if(!periodoMsg.trim().isEmpty()) {
-					periodoMsg = messages.getString(periodoMsg);
-					request.setAttribute("periodoMsg", periodoMsg);
-					isValid = false;					
-				}
+				
 			}
 			
 			/**
@@ -186,10 +185,16 @@ public class FormTermoAditivoServlet extends HttpServlet {
 				if (valorBolsaMsg.trim().isEmpty()) {
                                         System.out.println(valorBolsaTermoAditivo);
 					valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsaTermoAditivo);
-					if (valorBolsaMsg.trim().isEmpty()) {
-                                                
-						valor = Float.parseFloat(valorBolsaTermoAditivo);
-						request.setAttribute("valor", valor);
+					if (valorBolsaMsg.trim().isEmpty()){
+                                                valor = Float.parseFloat(valorBolsaTermoAditivo);
+                                                if(valor<=2000){
+                                                    request.setAttribute("valor", valor);
+                                                }
+                                                else{
+                                                    request.setAttribute("valorBolsaMsg", "Valor deve ser menor que 2mil reais");
+                                                    isValid = false;
+                                                }
+                                                    
 					} else {
 						valorBolsaMsg = messages.getString(valorBolsaMsg);
 						request.setAttribute("valorBolsaMsg", valorBolsaMsg);
