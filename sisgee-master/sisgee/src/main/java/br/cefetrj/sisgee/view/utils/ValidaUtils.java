@@ -218,7 +218,7 @@ public class ValidaUtils {
             int mes = Integer.parseInt(param.substring(3, 5));
             int dia = Integer.parseInt(param.substring(0, 2));
             
-            if (mes <= 12 && dia <= 31) {
+            if (mes <= 12 && dia <= 31 && mes>0 && dia>0) {
                 SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
                 @SuppressWarnings("unused")
                 Date dataFormatada = format.parse(param);
