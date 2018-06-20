@@ -12,29 +12,37 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
+ * Implementacao do padrao DAO para pesquisa especifica de Pessoa
  *
  * @author Lucas Lima
  */
-public class PessoaDAO extends GenericDAO<Pessoa>{
-    
+public class PessoaDAO extends GenericDAO<Pessoa> {
+
     public PessoaDAO() {
         super(Pessoa.class, PersistenceManager.getEntityManager());
     }
 
-   
-public List<Pessoa> buscarByNomeList(String nomeX){
-		return (List<Pessoa>) manager.createQuery(
-		    "SELECT e FROM Pessoa e WHERE LOWER (e.nome) LIKE LOWER (:nomeX)")
-                    
-		    .setParameter("nomeX", nomeX+"%")
-		    .getResultList();
-	}
-    
-    
-    public Pessoa buscarByCpf(String cpf){
-		return (Pessoa) manager.createQuery(
-		   "SELECT e FROM Pessoa e WHERE e.cpf LIKE :cpf")
-		   .setParameter("cpf", cpf)
-		   .getSingleResult();
-	}
+    /**
+     * Método que busca por lista de nome
+     * @param nomeX
+     * @return 
+     */
+    public List<Pessoa> buscarByNomeList(String nomeX) {
+        return (List<Pessoa>) manager.createQuery(
+                "SELECT e FROM Pessoa e WHERE LOWER (e.nome) LIKE LOWER (:nomeX)")
+                .setParameter("nomeX", nomeX + "%")
+                .getResultList();
+    }
+
+    /**
+     * Método que busca por cpf 
+     * @param cpf
+     * @return 
+     */
+    public Pessoa buscarByCpf(String cpf) {
+        return (Pessoa) manager.createQuery(
+                "SELECT e FROM Pessoa e WHERE e.cpf LIKE :cpf")
+                .setParameter("cpf", cpf)
+                .getSingleResult();
+    }
 }

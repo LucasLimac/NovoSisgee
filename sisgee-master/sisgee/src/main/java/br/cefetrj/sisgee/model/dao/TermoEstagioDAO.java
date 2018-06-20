@@ -47,6 +47,12 @@ public class TermoEstagioDAO  {
 		 return  authors;
 	}
 	
+        /**
+         * 
+         * @param inicio
+         * @param termino
+         * @return 
+         */
 	public List<Object[]> buscarFiltrado( Date inicio, Date termino){
 		EntityManagerFactory factory =
 				Persistence.createEntityManagerFactory("sisgeePU");

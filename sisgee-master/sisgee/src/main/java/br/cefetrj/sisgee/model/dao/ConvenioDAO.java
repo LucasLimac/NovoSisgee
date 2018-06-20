@@ -5,12 +5,22 @@ import br.cefetrj.sisgee.model.entity.Empresa;
 import br.cefetrj.sisgee.model.entity.Pessoa;
 import java.util.List;
 
+/**
+ * Implementacao do padrao DAO para pesquisa especifica de Convenio
+ * @author Matheus
+ */
 public class ConvenioDAO extends GenericDAO<Convenio> {
 	
 	public ConvenioDAO() {
 		super(Convenio.class, PersistenceManager.getEntityManager());
 	}
 	
+        /**
+         * Método que busca por numero da empresa
+         * @param numero
+         * @param emp
+         * @return 
+         */
 	public Convenio buscarByNumeroEmpresa(String numero, Empresa emp){
 		return (Convenio) manager.createQuery(
 		    "SELECT c FROM Convenio c WHERE c.numeroConvenio LIKE :numero AND c.empresa = :empresa")
@@ -19,7 +29,11 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
 		    .getSingleResult();
 	}
         
-        
+        /**
+         * Método que busca por numero do convenio
+         * @param numeroConvenio
+         * @return 
+         */
         public Convenio buscarByNumero(String numeroConvenio){
             System.out.println("ENTROU BUSCAR NUMERO CONVENIO DAO");
 		return (Convenio) manager.createQuery(
@@ -28,7 +42,11 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
 		    .getSingleResult();
 	}
         
-        
+        /**
+         * Método que busca por empresa
+         * @param emp
+         * @return 
+         */
         public Convenio buscarByEmpresa(Empresa emp){
 		return (Convenio) manager.createQuery(
 		    "SELECT a FROM Convenio a WHERE a.empresa = :emp")
@@ -36,6 +54,11 @@ public class ConvenioDAO extends GenericDAO<Convenio> {
 		    .getSingleResult();
 	}
         
+        /**
+         * Método que busca por pessoa
+         * @param pess
+         * @return 
+         */
         public Convenio buscarByPessoa(Pessoa pess){
 		return (Convenio) manager.createQuery(
 		    "SELECT a FROM Convenio a WHERE a.pessoa = :pess")

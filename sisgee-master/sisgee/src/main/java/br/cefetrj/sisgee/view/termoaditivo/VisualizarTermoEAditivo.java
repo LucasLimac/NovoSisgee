@@ -15,12 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ * Servlet disponibiliza o termo aditivo e termo estágio ao pedir pra ser visualizado
  * @author Vinicius Paradellas
  */
 @WebServlet("/VisualizarTermoEAditivo")
 public class VisualizarTermoEAditivo extends HttpServlet {
 
+    /**
+     * 
+     * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+     * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+     * @throws ServletException se o pedido do service não puder ser tratado
+     * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
