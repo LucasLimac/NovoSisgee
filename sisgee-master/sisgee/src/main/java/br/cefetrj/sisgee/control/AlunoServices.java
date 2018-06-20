@@ -36,6 +36,10 @@ public class AlunoServices {
 		return alunoDao.buscar(aluno.getIdAluno());
 	}
 	
+        /**
+         * Método que inclui um aluno
+         * @param aluno 
+         */
 	public static void incluirAluno(Aluno aluno){
 		GenericDAO<Aluno> alunoDao = PersistenceManager.createGenericDAO(Aluno.class);		
 		PersistenceManager.getTransaction().begin();
@@ -47,6 +51,11 @@ public class AlunoServices {
 		}
 	}
 	
+        /**
+         * Método que busca aluno pela matrícula
+         * @param matricula
+         * @return 
+         */
 	public static Aluno buscarAlunoByMatricula(String matricula) {
 		AlunoDAO alunoDao = new AlunoDAO();
 		try{

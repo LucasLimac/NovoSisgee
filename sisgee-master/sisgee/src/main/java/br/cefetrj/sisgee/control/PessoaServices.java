@@ -22,6 +22,11 @@ import java.util.List;
  */
 public class PessoaServices {
     
+    /**
+     * Método que busca pesso pelo cpf
+     * @param cpf
+     * @return 
+     */
     public static Pessoa buscarPessoaByCpf(String cpf) {
 		PessoaDAO pessoaDao = new PessoaDAO();
 		try{
@@ -33,6 +38,11 @@ public class PessoaServices {
 		
 	}
     
+    /**
+     * Método que busca pessoa pelo nome
+     * @param nome
+     * @return 
+     */
     public static List<Pessoa> buscarPessoaByNomeList(String nome) {
                 System.out.println("BUSCOU A PESSOA PELO NOME");
 		PessoaDAO pessoaDao = new PessoaDAO();
@@ -45,6 +55,10 @@ public class PessoaServices {
 		
 	}
     
+    /**
+     * Método que inclui uma pessoa
+     * @param pessoa 
+     */
     public static void incluirPessoa(Pessoa pessoa){
                 System.out.println("ENTROU NO INCLUIR PESSOA SERVICE");
 		GenericDAO<Pessoa> pessoaDao = PersistenceManager.createGenericDAO(Pessoa.class);	

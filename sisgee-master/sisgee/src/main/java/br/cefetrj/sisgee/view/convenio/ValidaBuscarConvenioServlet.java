@@ -20,13 +20,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *Valida dados do ao buscar um convenio, numero ou nome
+ * Valida dados do ao buscar um convenio, numero ou nome
  * @author Lucas Lima
  */
 public class ValidaBuscarConvenioServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 
+     * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+     * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+     * @throws ServletException se o pedido do service não puder ser tratado
+     * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

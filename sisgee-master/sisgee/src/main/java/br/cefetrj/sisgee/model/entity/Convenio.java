@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
- *
+ * Classe referente ao convênio
  * @author Lucas Lima
  * @since 2.0
  *
@@ -158,6 +158,10 @@ public class Convenio implements Serializable {
         this.termoEstagios = termoEstagios;
     }
     
+    /**
+     * Método que retorna o nome seja da pessoa fisica ou juridica
+     * @return 
+     */
     public String pegaNome(){
         if(pessoa!=null && !pessoa.getNome().isEmpty()){
             return pessoa.getNome();
@@ -166,6 +170,10 @@ public class Convenio implements Serializable {
             return empresa.getRazaoSocial();
         }
     }
+    /**
+     * Método que reorna o cpf da pessoa fisica ou cnpj da pessoa juridica
+     * @return 
+     */
     public String pegaCpf(){
         if(pessoa!=null && !pessoa.getCpf().isEmpty()){
             return pessoa.getCpf();

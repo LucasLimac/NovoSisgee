@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *Servlet para validar dados do renovar convenio
+ * Servlet para validar dados do renovar convenio
  * 
  * @author Lucas Lima
  */
@@ -29,13 +29,13 @@ public class ValidaRenovarConvenio extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-   /**
-    * Post para validar dados do renovar convenio
-    * @param request
-    * @param response
-    * @throws ServletException
-    * @throws IOException 
-    */
+    /**
+     * Post para validar dados de renovar convenio
+     * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+     * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+     * @throws ServletException se o pedido do service não puder ser tratado
+     * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+     */
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

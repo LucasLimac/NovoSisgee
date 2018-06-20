@@ -65,10 +65,6 @@ public class ItemRelatorio {
 		this.qntRescReg = qntRescReg;
 	}
 
-        /**
-         * 
-         * @return 
-         */
 	@Override
 	public int hashCode() {
 		final int prime = 31;

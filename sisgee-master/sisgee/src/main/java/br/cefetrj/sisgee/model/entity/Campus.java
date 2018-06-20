@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * 
+ * Classe referente ao campus 
  * @author Paulo Cantuária
  * @since 1.0
  *

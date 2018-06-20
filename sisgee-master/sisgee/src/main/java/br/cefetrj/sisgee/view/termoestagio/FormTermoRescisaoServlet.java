@@ -25,21 +25,34 @@ import br.cefetrj.sisgee.view.utils.ValidaUtils;
 import java.util.ArrayList;
 
 /**
- * Servlet implementation class FormTermoRescisaoServlet
+ * Servlet responsável pelo formulário de termo de rescisão
+ * 
  */
 @WebServlet("/FormTermoRescisaoServlet")
 public class FormTermoRescisaoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+        /**
+        * 
+        * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+        * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+        * @throws ServletException se o pedido do service não puder ser tratado
+        * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+        */
+      
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {			
 		
 		request.getRequestDispatcher("/form_termo_rescisao.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+        /**
+        * 
+        * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
+        * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+        * @throws ServletException se o pedido do service não puder ser tratado
+        * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+         */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
