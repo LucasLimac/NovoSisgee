@@ -317,14 +317,14 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="nomeSupervisor"><fmt:message key = "br.cefetrj.sisgee.resources.form.nomeSupervisor"/></label>
-                                <input type="text" class="form-control" id="nomeSupervisor"  name="nomeSupervisor" value="${ showSupervisor eq 'sim' ? '' :nomeSupervisor }" maxlength="80">
+                                <input type="text" required="required" pattern="[a-z\s,A-Z\s]+$" maxlength="100"class="form-control" id="nomeSupervisor"  name="nomeSupervisor" value="${ showSupervisor eq 'sim' ? '' :nomeSupervisor }" maxlength="80">
                                 <c:if test="${ not empty nomeSupervisorMsg }">
                                     <div class="invalid-feedback">${ nomeSupervisorMsg }</div>
                                 </c:if>                        
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="cargoSupervisor"><fmt:message key = "br.cefetrj.sisgee.resources.form.cargoSupervisor"/></label>
-                                <input type="text" class="form-control" id="cargoSupervisor"  name="cargoSupervisor" value="${ showSupervisor eq 'sim' ? '' :cargoSupervisor }" maxlength="80">
+                                <input type="text" required="required" pattern="[a-z\s,A-Z\s]+$" maxlength="50" class="form-control" id="cargoSupervisor"  name="cargoSupervisor" value="${ showSupervisor eq 'sim' ? '' :cargoSupervisor }" maxlength="80">
                                 <c:if test="${ not empty cargoSupervisorMsg }">
                                     <div class="invalid-feedback">${ cargoSupervisorMsg }</div>
                                 </c:if>                      
@@ -399,7 +399,7 @@
             var tamanho = $("#cnpjEcpf1").val().length;
             
             $('#cargaHorariaTermoEstagio').mask('9');
-            $('#valorBolsa').mask('000.000,00', {reverse: true});
+            //$('#valorBolsa').mask('000.000,00', {reverse: true});
             $('#dataInicioTermoEstagio').mask('99/99/9999');
             $('#dataFimTermoEstagio').mask('99/99/9999');
             $("#cnpjEcpf1").mask("99.999.999/9999-99");        
