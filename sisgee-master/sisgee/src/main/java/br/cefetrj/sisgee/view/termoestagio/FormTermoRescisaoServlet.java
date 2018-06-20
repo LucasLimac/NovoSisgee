@@ -59,6 +59,7 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 		 * Validação do Id do Aluno, usando métodos da Classe ValidaUtils.
 		 * Instanciando o objeto e pegando o TermoEstagio válido (sem data de rescisão)
 		 */
+                System.out.println("FormTermoRescisaoServlet.doPost() idAlunoMsg " + idAluno);
 		String idAlunoMsg = "";
 		idAlunoMsg = ValidaUtils.validaObrigatorio("Aluno", idAluno);
 		if (idAlunoMsg.trim().isEmpty()) {
@@ -68,9 +69,10 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 				aluno = AlunoServices.buscarAluno(new Aluno(idAlunoInt));
 				if (aluno != null) {
 					List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();
-					
 					for (TermoEstagio termoEstagio2 : termosEstagio) {
 						if(termoEstagio2.getDataRescisaoTermoEstagio() == null) {
+                                                    					 System.out.println("FormTermoRescisaoServlet.doPost() termosEstagio " + termosEstagio);
+
 							termoEstagio = termoEstagio2;
 							break;
 						}
@@ -96,6 +98,7 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 		dataTermoRescisaoMsg = ValidaUtils.validaObrigatorio(campo, dataTermoRescisao);
 		if (dataTermoRescisaoMsg.trim().isEmpty()) {
 			dataTermoRescisaoMsg = ValidaUtils.validaDate(campo, dataTermoRescisao);
+                        System.out.println("FormTermoRescisaoServlet.doPost() dataTermoRescisaoMsg " + dataTermoRescisao);
 			if (dataTermoRescisaoMsg.trim().isEmpty()) {				
 				try {
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -109,14 +112,14 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 						String periodoMsg = "";	
 						
                                                 periodoMsg = ValidaUtils.validaDatas(termoEstagio.getDataInicioTermoEstagio(), dataRescisao);
-                                                
+                                                System.out.println("FormTermoRescisaoServlet.doPost() validaDatas" );
                                                 if(!periodoMsg.trim().isEmpty()) {
                                                         periodoMsg = messages.getString(periodoMsg);
                                                         request.setAttribute("periodoMsg", periodoMsg);
                                                         isValid = false;					
                                                 }else{                                                
                                                     periodoMsg = ValidaUtils.validaDatasRescisao(termoEstagio.getDataFimTermoEstagio(), dataRescisao);
-
+                                                    System.out.println("FormTermoRescisaoServlet.doPost() validaDatasRescisao" );
                                                     if(!periodoMsg.trim().isEmpty()) {
                                                             periodoMsg = messages.getString(periodoMsg);
                                                             request.setAttribute("periodoMsg", periodoMsg);

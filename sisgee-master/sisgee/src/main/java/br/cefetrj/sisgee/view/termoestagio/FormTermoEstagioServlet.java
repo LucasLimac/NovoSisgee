@@ -35,7 +35,10 @@ import java.util.Calendar;
  * 
  * @author Paulo Cantuária
  * @since 1.0
- *
+ * 
+ * Expandir uso do FormTermoEstagioServlet
+ * @author Claudio Freitas
+ * @version 2.0
  */
 @WebServlet("/FormTermoEstagioServlet")
 public class FormTermoEstagioServlet extends HttpServlet {
@@ -66,7 +69,8 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		
 		Locale locale = ServletUtils.getLocale(request);
 		ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-		
+		final Calendar cal = Calendar.getInstance();
+                
 		String dataInicioTermoEstagio       = request.getParameter("dataInicioTermoEstagio");
 		String dataFimTermoEstagio          = request.getParameter("dataFimTermoEstagio");		
 		String cargaHorariaTermoEstagio     = request.getParameter("cargaHorariaTermoEstagio");
@@ -527,7 +531,7 @@ public class FormTermoEstagioServlet extends HttpServlet {
                 
 		/**
 		 * Validação do agenciada do TermoEstagio usando métodos da Classe ValidaUtils.
-		 * Campo opicional e tamanho máximo de 20 caracteres.
+		 * Campo opicional e tamanho máximo de 255 caracteres.
 		 */
 		String agenciadaMsg = "";
 		campo = "agenciada";
@@ -640,12 +644,12 @@ public class FormTermoEstagioServlet extends HttpServlet {
  
 		/**
 		 * Validação do Nº de Convênio
-		 * Campo obrigatório, tamanho máximo 10
+		 * Campo obrigatório, tamanho máximo 6
 		 * 
 		 */
 		String numeroConvenioMsg = "";
 		campo = "Número do convênio";
-		tamanho = 10;
+		tamanho = 6;
 		numeroConvenioMsg = ValidaUtils.validaObrigatorio(campo, numeroConvenio);
 		if (numeroConvenioMsg.trim().isEmpty()) {
 			numeroConvenioMsg = ValidaUtils.validaTamanho(campo, tamanho, numeroConvenio);
@@ -717,7 +721,9 @@ public class FormTermoEstagioServlet extends HttpServlet {
 			
 			List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();	
 			for (TermoEstagio t : termosEstagio) {				
-				if(t.getDataRescisaoTermoEstagio() == null) {
+				if(((aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataRescisaoTermoEstagio() == null &&   aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataFimTermoEstagio().compareTo(cal.getTime())>0)) || 
+                                   ( aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getDataRescisaoTermoEstagio().compareTo(cal.getTime()) > 0) 
+                                        ) {
 					hasTermoAberto = true;
 					break;
 				}
@@ -747,6 +753,11 @@ public class FormTermoEstagioServlet extends HttpServlet {
 		}
 	}	
 	
+        /**
+         * Método que carrega lista
+         * @param request
+         * @return 
+         */
 	private static HttpServletRequest carregarListas(HttpServletRequest request) {
 		
 		List<AgenteIntegracao> agentesIntegracao = AgenteIntegracaoServices.listarAgenteIntegracao();

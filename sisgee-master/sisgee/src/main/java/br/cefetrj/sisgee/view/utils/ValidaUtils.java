@@ -130,7 +130,7 @@ public class ValidaUtils {
 	 */
 	public static String validaTamanhoMatricula(int tamanho, String param) {
 		String msg = "";
-		if(param != null && param.length() < tamanho) {
+		if(param != null && param.length() < tamanho || param.length() > tamanho) {
 			msg = "br.cefetrj.sisgee.resources.form.matricula_aluno_tam";
 		}		
 		return msg;

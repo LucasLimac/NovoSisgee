@@ -17,9 +17,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
+ * Classe Termo Estágio para registro de informações sobre o Estágio firmado
  * 
  * @author padu
  * @since 1.0
+ * 
+ * Inclusão de métodos e variáveis para modificar o uso do Termo Estágio e oque é incluído nele
+ * @author Claudio
+ * @version 2.0
  */
 @Entity
 public class TermoEstagio {
