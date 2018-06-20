@@ -73,7 +73,7 @@
                                 <td>${b.getDataFimTermoEstagio2()}</td>
                                 <td>${b.getConvenio().pegaCpf()}</td>
                                 <td>${b.getConvenio().pegaNome()}</td>
-                                <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?id=${b.idTermoEstagio}&tipo=termoestagio&matricula=${param.matricula}" >Visualizar</td>
+                                <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
                             </tr>
                             <c:forEach items="${b.getTermosAditivos()}" var="c">
                                 <tr>
@@ -83,7 +83,7 @@
                                     <td>${c.getDataFimTermoAditivo2()}</td>
                                     <td>${b.getConvenio().pegaCpf()}</td>
                                     <td>${b.getConvenio().pegaNome()}</td>
-                                    <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?id=${c.idTermoAditivo}&tipo=termoaditivo&aluno=${param.matricula}" >Visualizar</td>
+                                    <td><a class="btn btn-sm btn-primary btn-block" href="VisualizarTermoEAditivo?ida=${c.idTermoAditivo}&ide=${b.idTermoEstagio}&matricula=${param.matricula}" >Visualizar</td>
                                 </tr>   
                             </c:forEach>
                         </c:forEach>

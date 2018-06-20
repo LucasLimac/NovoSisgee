@@ -183,6 +183,25 @@ public class TermoEstagio {
             a=format.format(dataFimTermoEstagio);
             return a;
         }
+        public String getDataFimTermoEstagioVisu(TermoAditivo ad){
+            boolean pegou=false;
+            String a="";
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getDataFimTermoAditivo()!=null){
+                    SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+                    a=format.format(termosAditivo.getDataFimTermoAditivo());
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(pegou){
+                return a;
+            }
+            SimpleDateFormat format =new SimpleDateFormat("dd/MM/yyyy");
+            a=format.format(dataFimTermoEstagio);
+            return a;
+        }
         
 	public Date getDataFimTermoEstagio(){
             Date a=null;
@@ -224,12 +243,54 @@ public class TermoEstagio {
             else
 		return cargaHorariaTermoEstagio;
 	}
+        
+        public Integer getCargaHorariaTermoEstagioVisu(TermoAditivo ad) {
+            Integer a=-1;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(cargaHorariaTermoEstagio!=null){
+                    a=termosAditivo.getCargaHorariaTermoAditivo();
+                }
+                if(ad==null){
+                    return cargaHorariaTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(a!=null && a!=-1)
+                return a;
+            else
+		return cargaHorariaTermoEstagio;
+	}
 
 	public void setCargaHorariaTermoEstagio(Integer cargaHorariaTermoEstagio) {
 		this.cargaHorariaTermoEstagio = cargaHorariaTermoEstagio;
 	}
 
-	public Float getValorBolsa() {
+	public Float getValorBolsaVisu(TermoAditivo ad) {
+            float a=-1;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                
+                
+                if(termosAditivo.getValorBolsaTermoAditivo()!=null){
+                    a=termosAditivo.getValorBolsaTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return valorBolsa;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(valid)
+                return a;
+            else	
+                return valorBolsa;
+	}
+        
+        public Float getValorBolsa() {
             float a=-1;
             boolean valid=false;
             for (TermoAditivo termosAditivo : termosAditivos) {
@@ -262,6 +323,26 @@ public class TermoEstagio {
             else
             return enderecoTermoEstagio;
 	}
+        public String getEnderecoTermoEstagioVisu(TermoAditivo ad) {
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return enderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return enderecoTermoEstagio;
+	}
 
 	public void setEnderecoTermoEstagio(String enderecoTermoEstagio) {
 		this.enderecoTermoEstagio = enderecoTermoEstagio;
@@ -275,6 +356,29 @@ public class TermoEstagio {
                 if(termosAditivo.getNumeroEnderecoTermoAditivo()!=null){
                     a=termosAditivo.getNumeroEnderecoTermoAditivo();
                     valid=true;
+                }
+                
+            }
+            if(valid)
+                return a;
+            else
+            return numeroEnderecoTermoEstagio;
+	}
+        
+        public String getNumeroEnderecoTermoEstagioVisu(TermoAditivo ad) {
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getNumeroEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getNumeroEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return numeroEnderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
                 }
             }
             if(valid)
@@ -302,6 +406,28 @@ public class TermoEstagio {
             else
             return complementoEnderecoTermoEstagio;
 	}
+        
+        public String getComplementoEnderecoTermoEstagioVisu(TermoAditivo ad) {
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getComplementoEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getComplementoEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return complementoEnderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return complementoEnderecoTermoEstagio;
+	}
 
 	public void setComplementoEnderecoTermoEstagio(String complementoEnderecoTermoEstagio) {
 		this.complementoEnderecoTermoEstagio = complementoEnderecoTermoEstagio;
@@ -315,6 +441,28 @@ public class TermoEstagio {
                 if(termosAditivo.getBairroEnderecoTermoAditivo()!=null){
                     a=termosAditivo.getBairroEnderecoTermoAditivo();
                     valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return bairroEnderecoTermoEstagio;
+	}
+        
+        public String getBairroEnderecoTermoEstagioVisu(TermoAditivo ad) {
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getBairroEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getBairroEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return bairroEnderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
                 }
             }
             if(valid)
@@ -342,6 +490,28 @@ public class TermoEstagio {
             else
             return cepEnderecoTermoEstagio;
 	}
+        
+        public String getCepEnderecoTermoEstagioVisu(TermoAditivo ad) {
+	
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getCepEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getCepEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return cepEnderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return cepEnderecoTermoEstagio;
+	}
 
 	public void setCepEnderecoTermoEstagio(String cepEnderecoTermoEstagio) {
 		this.cepEnderecoTermoEstagio = cepEnderecoTermoEstagio;
@@ -355,6 +525,27 @@ public class TermoEstagio {
                 if(termosAditivo.getCidadeEnderecoTermoAditivo()!=null){
                     a=termosAditivo.getCidadeEnderecoTermoAditivo();
                     valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return cidadeEnderecoTermoEstagio;
+	}
+        public String getCidadeEnderecoTermoEstagioVisu(TermoAditivo ad) {
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getCidadeEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getCidadeEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return cidadeEnderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
                 }
             }
             if(valid)
@@ -382,6 +573,29 @@ public class TermoEstagio {
             else
             return estadoEnderecoTermoEstagio;
 	}
+        
+        public String getEstadoEnderecoTermoEstagioVisu(TermoAditivo ad) {
+		
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getEstadoEnderecoTermoAditivo()!=null){
+                    a=termosAditivo.getEstadoEnderecoTermoAditivo();
+                    valid=true;
+                }
+                if(ad==null){
+                    return estadoEnderecoTermoEstagio;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return estadoEnderecoTermoEstagio;
+	}
+
 
 	public void setEstadoEnderecoTermoEstagio(String estadoEnderecoTermoEstagio) {
 		this.estadoEnderecoTermoEstagio = estadoEnderecoTermoEstagio;
@@ -422,6 +636,29 @@ public class TermoEstagio {
                     a=termosAditivo.getNomeSupervisor();
                     valid=true;
                 }
+                
+            }
+            if(valid)
+                return a;
+            else
+            return nomeSupervisor;
+        }
+        
+        public String getNomeSupervisorVisu(TermoAditivo ad) {
+            
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getNomeSupervisor()!=null){
+                    a=termosAditivo.getNomeSupervisor();
+                    valid=true;
+                }
+                if(ad==null){
+                    return nomeSupervisor;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
+                }
             }
             if(valid)
                 return a;
@@ -441,6 +678,28 @@ public class TermoEstagio {
                 if(termosAditivo.getCargoSupervisor()!=null){
                     a=termosAditivo.getCargoSupervisor();
                     valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return cargoSupervisor;
+        }
+        
+        public String getCargoSupervisorVisu(TermoAditivo ad) {
+            
+            String a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getCargoSupervisor()!=null){
+                    a=termosAditivo.getCargoSupervisor();
+                    valid=true;
+                }
+                if(ad==null){
+                    return cargoSupervisor;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
                 }
             }
             if(valid)
@@ -473,6 +732,27 @@ public class TermoEstagio {
                 if(termosAditivo.getProfessorOrientador()!=null){
                     a=termosAditivo.getProfessorOrientador();
                     valid=true;
+                }
+            }
+            if(valid)
+                return a;
+            else
+            return professorOrientador;
+	}
+        public ProfessorOrientador getProfessorOrientadorVisu(TermoAditivo ad) {
+		
+            ProfessorOrientador a=null;
+            boolean valid=false;
+            for (TermoAditivo termosAditivo : termosAditivos) {
+                if(termosAditivo.getProfessorOrientador()!=null){
+                    a=termosAditivo.getProfessorOrientador();
+                    valid=true;
+                }
+                if(ad==null){
+                    return professorOrientador;
+                }
+                if(ad!=null && ad.equals(termosAditivo)){
+                    break;
                 }
             }
             if(valid)

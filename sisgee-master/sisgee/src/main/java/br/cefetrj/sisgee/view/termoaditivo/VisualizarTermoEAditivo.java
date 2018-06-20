@@ -24,14 +24,18 @@ public class VisualizarTermoEAditivo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         
-        String id = req.getParameter("id");
-        String tipo = req.getParameter("tipo");
+        String ide = req.getParameter("ide");
+        String ida = req.getParameter("ida");
         String matricula = req.getParameter("matricula");
         UF[] uf = UF.asList();
+        TermoEstagio termoEstagio=null;
+        TermoAditivo termoAditivo=null;
         
         Aluno aluno=AlunoServices.buscarAlunoByMatricula(matricula);
-        TermoEstagio termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt(id));
-        TermoAditivo termoAditivo=TermoAditivoServices.buscarTermoAditivo(Integer.parseInt(id));
+        if(ide!=null)
+        termoEstagio=TermoEstagioServices.buscarTermoEstagio(Integer.parseInt(ide));
+        if(ida!=null)
+        termoAditivo=TermoAditivoServices.buscarTermoAditivo(Integer.parseInt(ida));
         
         req.setAttribute("uf", uf);
                         
@@ -62,28 +66,28 @@ public class VisualizarTermoEAditivo extends HttpServlet {
                         req.setAttribute("vidataFimTermoEstagio",termoEstagio.getDataFimTermoEstagio2());
                         
                         /** Dados de Carga Horária */
-                        req.setAttribute("cacargaHorariaTermoEstagio",termoEstagio.getCargaHorariaTermoEstagio());
+                        req.setAttribute("cacargaHorariaTermoEstagio",termoEstagio.getCargaHorariaTermoEstagioVisu(termoAditivo));
                         
                         /** Dados de Valor Bolsa */
-                        req.setAttribute("vavalorBolsa",termoEstagio.getValorBolsa());
+                        req.setAttribute("vavalorBolsa",termoEstagio.getValorBolsaVisu(termoAditivo));
                         
                         /** Dados de Local */
-                        req.getServletContext().setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagio());
-                        req.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagio());
-                        req.setAttribute("encomplementoEnderecoTermoEstagio",termoEstagio.getComplementoEnderecoTermoEstagio());
-                        req.setAttribute("enbairroEnderecoTermoEstagio",termoEstagio.getBairroEnderecoTermoEstagio());
-                        req.setAttribute("encidadeEnderecoTermoEstagio",termoEstagio.getCidadeEnderecoTermoEstagio());
-                        req.setAttribute("enuf",termoEstagio.getEstadoEnderecoTermoEstagio());
-                        req.setAttribute("encepEnderecoTermoEstagio",termoEstagio.getCepEnderecoTermoEstagio());
+                        req.getServletContext().setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagioVisu(termoAditivo));
+                        req.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagioVisu(termoAditivo));
+                        req.setAttribute("encomplementoEnderecoTermoEstagio",termoEstagio.getComplementoEnderecoTermoEstagioVisu(termoAditivo));
+                        req.setAttribute("enbairroEnderecoTermoEstagio",termoEstagio.getBairroEnderecoTermoEstagioVisu(termoAditivo));
+                        req.setAttribute("encidadeEnderecoTermoEstagio",termoEstagio.getCidadeEnderecoTermoEstagioVisu(termoAditivo));
+                        req.setAttribute("enuf",termoEstagio.getEstadoEnderecoTermoEstagioVisu(termoAditivo));
+                        req.setAttribute("encepEnderecoTermoEstagio",termoEstagio.getCepEnderecoTermoEstagioVisu(termoAditivo));
                         
                         /** Dados de Supervisor */
                         
                         req.setAttribute("eobrigatorio",termoEstagio.getEEstagioObrigatorio());
-                        req.setAttribute("nomeSupervisor",termoEstagio.getNomeSupervisor());
-                        req.setAttribute("cargoSupervisor",termoEstagio.getCargoSupervisor());
+                        req.setAttribute("nomeSupervisor",termoEstagio.getNomeSupervisorVisu(termoAditivo));
+                        req.setAttribute("cargoSupervisor",termoEstagio.getCargoSupervisorVisu(termoAditivo));
                         
                         /** Dados de Professor */
-                        req.setAttribute("pfnomeprofessor",termoEstagio.getProfessorOrientador());
+                        req.setAttribute("pfnomeprofessor",termoEstagio.getProfessorOrientadorVisu(termoAditivo));
                         
         req.getRequestDispatcher("/form_termo_Visualiza.jsp").forward(req, resp);
     }
