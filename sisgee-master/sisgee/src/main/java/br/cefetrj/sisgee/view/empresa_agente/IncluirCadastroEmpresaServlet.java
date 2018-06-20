@@ -96,6 +96,7 @@ public class IncluirCadastroEmpresaServlet extends HttpServlet {
                 request.setAttribute("msg", msg);
                 request.setAttribute("numeroConvenioGerado", convenio.getNumeroConvenio());
                 request.getRequestDispatcher("/form_empresa_sucesso.jsp").forward(request, response);
+                lg.info(msg);
 
             } catch (Exception e) {
                 msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");

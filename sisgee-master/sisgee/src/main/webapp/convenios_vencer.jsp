@@ -62,6 +62,10 @@
         
         <button type="button" onclick="javascript:location.href = 'index.jsp'" class="btn btn-primary offset-lg-5 mb-5 mt-5"><fmt:message key="br.cefetrj.sisgee.17" /></button>
 
+        <c:if test="${not empty ConvenioServices.listarConveniosVencer()}">
+                <a href="imprimirConveniosVencer.jsp" class="btn btn-warning " target="_blank"><fmt:message key="br.cefetrj.sisgee.30" /></a>
+            </c:if>
+                
         <%@include file="import_footer.jspf"%>
         <%@include file="import_finalbodyscripts.jspf"%>
 

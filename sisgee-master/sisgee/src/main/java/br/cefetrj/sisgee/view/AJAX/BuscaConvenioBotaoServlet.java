@@ -30,8 +30,9 @@ import javax.servlet.http.HttpSession;
 import javax.swing.text.MaskFormatter;
 
 /**
- *
- * @author Usuario
+ *Servlet para trazer o convenio por meio de requisição AJAX.
+ * 
+ * @author Claudio
  */
 @WebServlet("/BuscaConvenioBotaoServlet")
 public class BuscaConvenioBotaoServlet extends HttpServlet {

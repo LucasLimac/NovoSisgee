@@ -17,29 +17,31 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 /**
+ * Servlet para alterar dados do novo convenio ao renovar
  *
  * @author Lucas Lima
  */
 public class alterarConvenioServlet extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-        
-        String numero = (String)request.getSession().getAttribute("numero");
-        
+
+        String numero = (String) request.getSession().getAttribute("numero");
+
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
-        
-        Date dataAssinaturaConvenioEmpresa = (Date)request.getAttribute("dataAssinaturaConvenioEmpresa");
-        Date dataAssinaturaConvenioPessoa = (Date)request.getAttribute("dataAssinaturaConvenioPessoa");
-        
+
+        Date dataAssinaturaConvenioEmpresa = (Date) request.getAttribute("dataAssinaturaConvenioEmpresa");
+        Date dataAssinaturaConvenioPessoa = (Date) request.getAttribute("dataAssinaturaConvenioPessoa");
+
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
@@ -50,21 +52,33 @@ public class alterarConvenioServlet extends HttpServlet {
             convenio.getEmpresa().setTelefoneEmpresa(telefoneEmpresa);
             convenio.getEmpresa().setEmailEmpresa(emailEmpresa);
             convenio.setDataAssinatura(dataAssinaturaConvenioEmpresa);
-            
+
             convenio.setNumeroConvenio();
         } else {
             convenio.getPessoa().setTelefone(telefonePessoa);
             convenio.getPessoa().setEmail(emailPessoa);
             convenio.setDataAssinatura(dataAssinaturaConvenioPessoa);
-            
+
             convenio.setNumeroConvenio();
         }
 
-        ConvenioServices.alterarConvenio(convenio);
-        String msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
-                request.setAttribute("msg", msg);
-                request.setAttribute("numeroConvenioGerado", convenio.getNumeroConvenio());
-                request.getRequestDispatcher("/form_empresa_sucesso.jsp").forward(request, response);
+        String msg = "";
+        Logger lg = Logger.getLogger(alterarConvenioServlet.class);
+        try {
+            ConvenioServices.alterarConvenio(convenio);
+            msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_convenio_cadastrado");
+            request.setAttribute("msg", msg);
+            request.setAttribute("numeroConvenioGerado", convenio.getNumeroConvenio());
+            request.getRequestDispatcher("/form_empresa_sucesso.jsp").forward(request, response);
+            
+        } catch (Exception e) {
+            msg = messages.getString("br.cefetrj.sisgee.incluir_cadastro_empresa_servlet.msg_ocorreu_erro");
+            request.setAttribute("msg", msg);
+            lg.error("Exception ao tentar alterar um convenio", e);
+            request.getRequestDispatcher("/form_renovar_convenio.jsp").forward(request, response);
+            lg.info(msg);
+            request.getRequestDispatcher("/index.jsp").forward(request, response);
+        }
     }
 
 }

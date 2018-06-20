@@ -21,45 +21,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
+ *Servlet para validar dados do renovar convenio
+ * 
  * @author Lucas Lima
  */
 public class ValidaRenovarConvenio extends HttpServlet {
-    
+
     private static final long serialVersionUID = 1L;
 
+   /**
+    * Post para validar dados do renovar convenio
+    * @param request
+    * @param response
+    * @throws ServletException
+    * @throws IOException 
+    */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         Locale locale = ServletUtils.getLocale(request);
         ResourceBundle messages = ResourceBundle.getBundle("Messages", locale);
-        
+
         String emailPessoa = request.getParameter("emailPessoa");
         String telefonePessoa = request.getParameter("telefonePessoa");
-        
+
         String dataAssinaturaConvenioEmpresa = request.getParameter("dataAssinaturaConvenioEmpresa");
         String dataAssinaturaConvenioPessoa = request.getParameter("dataAssinaturaConvenioPessoa");
-        
+
         String emailEmpresa = request.getParameter("emailEmpresa");
         String telefoneEmpresa = request.getParameter("telefoneEmpresa");
         String contatoEmpresa = request.getParameter("contatoEmpresa");
-        
-        String numero = (String)request.getSession().getAttribute("numero");
-        
-        
+
+        String numero = (String) request.getSession().getAttribute("numero");
+
         Convenio convenio = ConvenioServices.buscarConvenioByNumeroConvenio(numero);
-        
-        boolean isValid = true; 
-        
-        if(convenio.getEmpresa()!=null){
-            if(convenio.getEmpresa().isAgenteIntegracao()){
+
+        boolean isValid = true;
+
+        if (convenio.getEmpresa() != null) {
+            if (convenio.getEmpresa().isAgenteIntegracao()) {
                 request.setAttribute("simAgenteIntegracao", "sim");
-            }else{
+            } else {
                 request.setAttribute("naoAgenteIntegracao", "sim");
             }
             request.setAttribute("cnpj", convenio.getEmpresa().getCnpjEmpresa());
             request.setAttribute("razao", convenio.getEmpresa().getRazaoSocial());
-             /**
+            /**
              * Validação do Email do Cadastro Empresa usando métodos da Classe
              * ValidaUtils. Campo obrigatório; Tamanho máximo de 50 caracteres;
              */
@@ -114,7 +122,6 @@ public class ValidaRenovarConvenio extends HttpServlet {
                         request.setAttribute("telefoneEmpresaMsg", telefoneEmpresaMsg);
                         request.setAttribute("isEmpresa", "sim");
                         isValid = false;
-                        
 
                     }
 
@@ -137,7 +144,17 @@ public class ValidaRenovarConvenio extends HttpServlet {
             if (contatoEmpresaMsg.trim().isEmpty()) {
                 contatoEmpresaMsg = ValidaUtils.validaTamanho("contatoEmpresa", 50, contatoEmpresa);
                 if (contatoEmpresaMsg.trim().isEmpty()) {
-                    request.setAttribute("contatoEmpresa", contatoEmpresa);
+                    contatoEmpresaMsg = ValidaUtils.validaSomenteLetras("contatoEmpresa", contatoEmpresa);
+                    if (contatoEmpresaMsg.trim().isEmpty()) {
+                        request.setAttribute("contatoEmpresa", contatoEmpresa);
+
+                    } else {
+                        contatoEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("contatoEmpresaMsg", contatoEmpresaMsg);
+                        request.setAttribute("isEmpresa", "sim");
+                        isValid = false;
+
+                    }
                 } else {
                     contatoEmpresaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                     request.setAttribute("contatoEmpresaMsg", contatoEmpresaMsg);
@@ -146,10 +163,10 @@ public class ValidaRenovarConvenio extends HttpServlet {
                 }
 
             }
-            
+
             /**
-             * Validação da Data de Assinatura do Convenio da Pessoa usando os métodos da
-             * Classe ValidaUtils Campo obrigatório
+             * Validação da Data de Assinatura do Convenio da Pessoa usando os
+             * métodos da Classe ValidaUtils Campo obrigatório
              */
             Date dataAssinaturaEmpresa = null;
             String dataAssinaturaMsg = "";
@@ -159,18 +176,30 @@ public class ValidaRenovarConvenio extends HttpServlet {
             if (dataAssinaturaMsg.trim().isEmpty()) {
                 dataAssinaturaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioEmpresa);
                 if (dataAssinaturaMsg.trim().isEmpty()) {
-                    try {
-                       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                       dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioEmpresa);
-                        request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
-                    } catch (Exception e) {
-                        //TODO trocar saída de console por Log
-                        System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
+                    dataAssinaturaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataAssinaturaConvenioEmpresa);
+                    if (dataAssinaturaMsg.trim().isEmpty()) {
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                            dataAssinaturaEmpresa = format.parse(dataAssinaturaConvenioEmpresa);
+                            request.setAttribute("dataAssinaturaConvenioEmpresa", dataAssinaturaEmpresa);
+                        } catch (Exception e) {
+                            //TODO trocar saída de console por Log
+                            System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
+                            request.setAttribute("isEmpresa", "sim");
+                            isValid = false;
+                        }
+                    } else {
+                        dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
                         request.setAttribute("isEmpresa", "sim");
                         isValid = false;
+                        //TODO Fazer log
+                        System.out.println(dataAssinaturaMsg);
+
                     }
+
                 } else {
-                    dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
+                    dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                     request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
                     request.setAttribute("isEmpresa", "sim");
                     isValid = false;
@@ -178,19 +207,19 @@ public class ValidaRenovarConvenio extends HttpServlet {
                     System.out.println(dataAssinaturaMsg);
                 }
             } else {
-                dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
+                dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                 request.setAttribute("dataAssinaturaEmpresaMsg", dataAssinaturaMsg);
                 request.setAttribute("isEmpresa", "sim");
                 isValid = false;
                 //TODO Fazer log
                 System.out.println(dataAssinaturaMsg);
             }
-            
-        }else{
-            
+
+        } else {
+
             request.setAttribute("cpf", convenio.getPessoa().getCpf());
             request.setAttribute("nome", convenio.getPessoa().getNome());
-            
+
             /**
              * Validação do email da Pessoa Cadastro Pessoa Fisica usando
              * métodos da Classe ValidaUtils. Campo opcional; Tamanho máximo de
@@ -259,8 +288,8 @@ public class ValidaRenovarConvenio extends HttpServlet {
             }
 
             /**
-             * Validação da Data de Assinatura do Convenio da Pessoa usando os métodos da
-             * Classe ValidaUtils Campo obrigatório
+             * Validação da Data de Assinatura do Convenio da Pessoa usando os
+             * métodos da Classe ValidaUtils Campo obrigatório
              */
             Date dataAssinaturaPessoa = null;
             String dataAssinaturaMsg = "";
@@ -270,18 +299,29 @@ public class ValidaRenovarConvenio extends HttpServlet {
             if (dataAssinaturaMsg.trim().isEmpty()) {
                 dataAssinaturaMsg = ValidaUtils.validaDate(campo, dataAssinaturaConvenioPessoa);
                 if (dataAssinaturaMsg.trim().isEmpty()) {
-                    try {
-                       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                        dataAssinaturaPessoa   = format.parse(dataAssinaturaConvenioPessoa);
-                        request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
-                    } catch (Exception e) {
-                        //TODO trocar saída de console por Log
-                        System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
+                    dataAssinaturaMsg = ValidaUtils.validaTamanhoExato(campo, 10, dataAssinaturaConvenioPessoa);
+                    if (dataAssinaturaMsg.trim().isEmpty()) {
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                            dataAssinaturaPessoa = format.parse(dataAssinaturaConvenioPessoa);
+                            request.setAttribute("dataAssinaturaConvenioPessoa", dataAssinaturaPessoa);
+                        } catch (Exception e) {
+                            //TODO trocar saída de console por Log
+                            System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
+                            request.setAttribute("isPessoa", "sim");
+                            isValid = false;
+                        }
+                    } else {
+                        dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                        request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
                         request.setAttribute("isPessoa", "sim");
                         isValid = false;
+                        //TODO Fazer log
+                        System.out.println(dataAssinaturaMsg);
                     }
+
                 } else {
-                    dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
+                    dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                     request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
                     request.setAttribute("isPessoa", "sim");
                     isValid = false;
@@ -289,7 +329,7 @@ public class ValidaRenovarConvenio extends HttpServlet {
                     System.out.println(dataAssinaturaMsg);
                 }
             } else {
-                dataAssinaturaMsg = messages.getString(dataAssinaturaMsg);
+                dataAssinaturaMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                 request.setAttribute("dataAssinaturaPessoaMsg", dataAssinaturaMsg);
                 request.setAttribute("isPessoa", "sim");
                 isValid = false;
@@ -297,27 +337,21 @@ public class ValidaRenovarConvenio extends HttpServlet {
                 System.out.println(dataAssinaturaMsg);
             }
         }
-        
-         /**
+
+        /**
          * Teste das variáveis booleanas após validação. Redirecionamento para a
          * inclusão ou devolver para o formulário com as mensagens.
          */
         if (isValid) {
-                request.getRequestDispatcher("/alterarConvenioServlet").forward(request, response);
-           
+            request.getRequestDispatcher("/alterarConvenioServlet").forward(request, response);
+
         } else {
             String msg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_atencao");
             request.setAttribute("msg", msg);
             request.getRequestDispatcher("/form_renovar_convenio2.jsp").forward(request, response);
 
         }
-        
-        
-        
-        
-        
-    }
 
-    
+    }
 
 }
