@@ -70,7 +70,7 @@ public class VisualizarTermoEAditivo extends HttpServlet {
                         
                         /** Dados de Vigência */
                         req.setAttribute("vidataInicioTermoEstagio",termoEstagio.getDataInicioTermoEstagio2());
-                        req.setAttribute("vidataFimTermoEstagio",termoEstagio.getDataFimTermoEstagio2());
+                        req.setAttribute("vidataFimTermoEstagio",termoEstagio.getDataFimTermoEstagioVisu(termoAditivo));
                         
                         /** Dados de Carga Horária */
                         req.setAttribute("cacargaHorariaTermoEstagio",termoEstagio.getCargaHorariaTermoEstagioVisu(termoAditivo));
