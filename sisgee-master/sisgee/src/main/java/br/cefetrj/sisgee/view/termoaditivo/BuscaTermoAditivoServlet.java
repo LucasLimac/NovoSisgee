@@ -45,7 +45,8 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
                 String mat = request.getParameter("matricula");
                 
 		Integer id = null;
-		
+                System.out.println("Aqui >>> "+idAluno);
+		if(Integer.parseInt(idAluno)!=-1){
 		msg = ValidaUtils.validaObrigatorio("Aluno", idAluno);		
 		if(msg.trim().isEmpty()) {
 			msg = ValidaUtils.validaInteger("Aluno", idAluno);
@@ -70,12 +71,11 @@ public class BuscaTermoAditivoServlet extends HttpServlet {
                 if (termoEstagios != null) {
                   //request.setAttribute("termosAditivos",TermoAditivoServices.listarTermoAditivo());
                     request.setAttribute("termosAditivos", aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getTermosAditivos());
-                    System.out.println("matricula : "+idAluno);
-                    System.out.println("Rodou aqui :"+ aluno.getTermoEstagios().get(aluno.getTermoEstagios().size()-1).getTermosAditivos().size());
                 }
 		
                 request.setAttribute("listaTermoEstagio", aluno.getTermoEstagios());
                 request.setAttribute("msg",msg);
+                }
 		request.getRequestDispatcher("/form_termo_aditivo.jsp").forward(request, response);
 
 	}

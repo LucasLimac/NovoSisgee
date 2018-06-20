@@ -43,7 +43,7 @@
                     
                     <div class="container">					
 
-                        <button id="btnListarAditivo" type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
+                        <button id="btnListarAditivo" type="submit" class="btn btn-primary" ><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
                         <a id="btnListarAditivo" class="btn btn-primary" data-toggle="modal" data-target="#myModal"><fmt:message key = "br.cefetrj.sisgee.resources.form.rescisao"/></a>
                         <button type="button" class="btn btn-secondary" onclick="javascript:location.href = 'index.jsp'" ><fmt:message key = "br.cefetrj.sisgee.resources.form.cancelar"/></button>
                     </div>				
