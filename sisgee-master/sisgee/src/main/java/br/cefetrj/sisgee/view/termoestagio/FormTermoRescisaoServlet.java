@@ -71,8 +71,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 					List<TermoEstagio> termosEstagio = aluno.getTermoEstagios();
 					for (TermoEstagio termoEstagio2 : termosEstagio) {
 						if(termoEstagio2.getDataRescisaoTermoEstagio() == null) {
-                                                    					 System.out.println("FormTermoRescisaoServlet.doPost() termosEstagio " + termosEstagio);
-
 							termoEstagio = termoEstagio2;
 							break;
 						}
@@ -98,7 +96,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 		dataTermoRescisaoMsg = ValidaUtils.validaObrigatorio(campo, dataTermoRescisao);
 		if (dataTermoRescisaoMsg.trim().isEmpty()) {
 			dataTermoRescisaoMsg = ValidaUtils.validaDate(campo, dataTermoRescisao);
-                        System.out.println("FormTermoRescisaoServlet.doPost() dataTermoRescisaoMsg " + dataTermoRescisao);
 			if (dataTermoRescisaoMsg.trim().isEmpty()) {				
 				try {
 					SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -119,7 +116,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
                                                         isValid = false;					
                                                 }else{                                                
                                                     periodoMsg = ValidaUtils.validaDatasRescisao(termoEstagio.getDataFimTermoEstagio(), dataRescisao);
-                                                    System.out.println("FormTermoRescisaoServlet.doPost() validaDatasRescisao" );
                                                     if(!periodoMsg.trim().isEmpty()) {
                                                             periodoMsg = messages.getString(periodoMsg);
                                                             request.setAttribute("periodoMsg", periodoMsg);
@@ -134,7 +130,7 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 					}
 					
 				} catch (Exception e) {
-					//TODO trocar saída de console por Log
+					//TODO saída de console
 					System.out.println("Data em formato incorreto, mesmo após validação na classe ValidaUtils");
 					isValid = false;
 				}
@@ -158,7 +154,6 @@ public class FormTermoRescisaoServlet extends HttpServlet {
 			
 			
 		} else {	
-                    System.out.println("FormTermoRescisaoServlet.doPost() " + msg + "  e  "  +  dataTermoRescisaoMsg);
 			String rescisao = "sim";
 			request.setAttribute("msg", msg);
 			request.setAttribute("Rescisao", rescisao);
