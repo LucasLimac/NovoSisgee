@@ -152,7 +152,9 @@ public class BuscarConvenioServlet extends HttpServlet {
                     }
 
                 }
-            }
+            }else {
+            isValid = false;
+        }
         } else {
             isValid = false;
         }
@@ -164,6 +166,9 @@ public class BuscarConvenioServlet extends HttpServlet {
 
         }
 
+        /**
+         * Se for valido dispacha para o mesmo form com a tabela de convenios encontrado setada
+         */
         if (isValid) {
 
             request.getRequestDispatcher("form_renovar_convenio.jsp").forward(request, response);

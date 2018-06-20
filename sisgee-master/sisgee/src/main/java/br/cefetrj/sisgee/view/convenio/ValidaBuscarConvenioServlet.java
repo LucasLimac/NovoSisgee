@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * Valida dados do ao buscar um convenio, numero ou nome
+ *
  * @author Lucas Lima
  */
 public class ValidaBuscarConvenioServlet extends HttpServlet {
@@ -28,11 +29,14 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 
-     * @param request um objeto HttpServletRequest que contém a solicitação feita pelo cliente do servlet.
-     * @param response um objeto HttpServletResponse que contém a resposta que o servlet envia para o cliente
+     *
+     * @param request um objeto HttpServletRequest que contém a solicitação
+     * feita pelo cliente do servlet.
+     * @param response um objeto HttpServletResponse que contém a resposta que o
+     * servlet envia para o cliente
      * @throws ServletException se o pedido do service não puder ser tratado
-     * @throws IOException se um erro de entrada ou saída for detectado quando o servlet manipula o pedido 
+     * @throws IOException se um erro de entrada ou saída for detectado quando o
+     * servlet manipula o pedido
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,6 +51,13 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
         Integer tamanho = 0;
 
         if (numero != null) {
+
+            if (numero.isEmpty()) {
+                String numeroConvenioMsg = "";
+                numeroConvenioMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
+                request.setAttribute("numeroConvenioMsg", numeroConvenioMsg);
+                isValid = false;
+            }
             /**
              * Validação do numero do Convenio usando métodos da Classe
              * ValidaUtils. Campo opcional; Tamanho máximo de 5 caracteres;
@@ -89,7 +100,7 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
                         nomeMsg = messages.getString("br.cefetrj.sisgee.form_termo_estagio_servlet.valor_invalido");
                         request.setAttribute("nomeMsg", nomeMsg);
                         isValid = false;
-                        
+
                     } else {
                         request.setAttribute("razaoSocial", nome);
 
@@ -119,6 +130,7 @@ public class ValidaBuscarConvenioServlet extends HttpServlet {
         } else {
             String msg = messages.getString("br.cefetrj.sisgee.valida_cadastro_empresa_servlet.msg_atencao");
             request.setAttribute("msg", msg);
+
             request.getRequestDispatcher("/form_renovar_convenio.jsp").forward(request, response);
 
         }

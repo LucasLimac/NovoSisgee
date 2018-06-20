@@ -155,7 +155,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                     .add("cnpjEcpf", CNPJ)
                     .add("nomeEmpresaPessoa", empresaNome.getRazaoSocial())
                     .add("nomeConvenio", empresaNome.getRazaoSocial())
-                    .add("numeroConvenio", convenio.getNumeroConvenio())
+                    .add("numeroConvenio", convenio.getNumero())
                     .build();
 
             StringWriter stWriter = new StringWriter();
@@ -175,7 +175,7 @@ public class BuscaConvenioBotaoServlet extends HttpServlet {
                     .add("cnpjEcpf", CPF)
                     .add("nomeEmpresaPessoa", pessoaNome.getNome())
                     .add("nomeConvenio", pessoaNome.getNome())
-                    .add("numeroConvenio", convenio.getNumeroConvenio())
+                    .add("numeroConvenio", convenio.getNumero())
                     .build();
 
             StringWriter stWriter = new StringWriter();

@@ -34,12 +34,13 @@
             <h5>		
                 <fmt:message key = "br.cefetrj.sisgee.resources.form.registroTermoAditivo"/>
             </h5>		
-
+            
+            
             <form action=BuscaTermoAditivoServlet method="post">
 
                 <fieldset class="form-group dadosAluno" >
-
                     <%@include file="import_busca_aluno.jspf"%>
+                    
                     <div class="container">					
 
                         <button id="btnListarAditivo" type="submit" class="btn btn-primary"><fmt:message key = "br.cefetrj.sisgee.resources.form.listarAditivos"/></button>
@@ -165,7 +166,8 @@
                 </form>
                     
             </c:if>
-<c:if test="${ not empty param.idAluno && empty msg }">
+                
+
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -199,7 +201,7 @@
                     </div>
                 </div>
             </div>
-</c:if>                        
+                      
                         
                         
                         
