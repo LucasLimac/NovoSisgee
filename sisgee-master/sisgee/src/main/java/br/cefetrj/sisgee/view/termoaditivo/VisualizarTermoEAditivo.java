@@ -70,7 +70,7 @@ public class VisualizarTermoEAditivo extends HttpServlet {
                         
                         /** Dados de Valor Bolsa */
                         req.setAttribute("vavalorBolsa",termoEstagio.getValorBolsaVisu(termoAditivo));
-                        
+                        System.out.println("aqui"+termoEstagio.getValorBolsaVisu(termoAditivo));
                         /** Dados de Local */
                         req.getServletContext().setAttribute("enenderecoTermoEstagio",termoEstagio.getEnderecoTermoEstagioVisu(termoAditivo));
                         req.setAttribute("ennumeroEnderecoTermoEstagio",termoEstagio.getNumeroEnderecoTermoEstagioVisu(termoAditivo));

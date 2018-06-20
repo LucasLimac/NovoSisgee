@@ -177,7 +177,7 @@
                         <div class="form-group col-md-6">
 
                             <label for="dataInicioTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataInicio"/></label>
-                            <input type="text" class="form-control col-sm-4 ${ not empty dataInicioMsg ? 'is-invalid': not empty periodoMsg ? 'is-invalid' : 'is-valid' }" id="dataInicioTermoEstagio"  name="dataInicioTermoEstagio" value="${ vidataInicioTermoEstagio }" disabled onchange="sugereData();">
+                            <input type="text" class="form-control col-sm-4 " id="dataInicioTermoEstagio"  name="dataInicioTermoEstagio" value="${ vidataInicioTermoEstagio }" disabled onchange="sugereData();">
                             <p class="valid-feedback" id="dataIni" name="dataIni"></p>
                             <c:if test="${ not empty dataInicioMsg }">
                                 <div class="invalid-feedback">${ dataInicioMsg }</div>
@@ -185,7 +185,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="dataFimTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.dataTermino"/></label>
-                            <input type="text" class="form-control col-sm-4 ${ not empty dataFimMsg ? 'is-invalid': not empty periodoMsg ? 'is-invalid' : 'is-valid' }" id="dataFimTermoEstagio"   name="dataFimTermoEstagio" value="${showVigencia eq 'sim' ? '' : vidataFimTermoEstagio }" ${ showVigencia eq 'sim' ? '' :'disabled'} >
+                            <input type="text" class="form-control col-sm-4 " id="dataFimTermoEstagio"   name="dataFimTermoEstagio" value="${showVigencia eq 'sim' ? '' : vidataFimTermoEstagio }" ${ showVigencia eq 'sim' ? '' :'disabled'} >
                             <c:if test="${ not empty dataFimMsg }">
                                 <div class="invalid-feedback">${ dataFimMsg }</div>
                             </c:if>
@@ -200,7 +200,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="cargaHorariaTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.horasDia"/></label>
-                            <input type="text" required="required" maxlength="1" pattern="[1-6]+$" class="form-control col-sm-2 ${ not empty cargaHorariaMsg ? 'is-invalid': 'is-valid' }" id="cargaHorariaTermoEstagio" name="cargaHorariaTermoEstagio" value="${ showCargaHoraria eq 'sim' ? '' :cacargaHorariaTermoEstagio }" ${ showCargaHoraria eq 'sim' ? '' :'disabled'}>
+                            <input type="text" required="required" maxlength="1" pattern="[1-6]+$" class="form-control col-sm-2 " id="cargaHorariaTermoEstagio" name="cargaHorariaTermoEstagio" value="${ showCargaHoraria eq 'sim' ? '' :cacargaHorariaTermoEstagio }" ${ showCargaHoraria eq 'sim' ? '' :'disabled'}>
                             <c:if test="${ not empty cargaHorariaMsg }">
                                 <div class="invalid-feedback">${ cargaHorariaMsg }</div>
                             </c:if>
@@ -240,21 +240,21 @@
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <label for="numeroEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.numero"/></label>
-                            <input type="text" maxlength="10" class="form-control ${ not empty numeroEnderecoMsg ? 'is-invalid': not empty numeroEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="numeroEnderecoTermoEstagio" name="numeroEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :ennumeroEnderecoTermoEstagio }">
+                            <input type="text" maxlength="10" class="form-control" id="numeroEnderecoTermoEstagio" name="numeroEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :ennumeroEnderecoTermoEstagio }">
                             <c:if test="${ not empty numeroEnderecoMsg }">
                                 <div class="invalid-feedback">${ numeroEnderecoMsg }</div>
                             </c:if>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="complementoEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.complemento"/></label>
-                            <input maxlength="150" type="text" class="form-control ${ not empty complementoEnderecoMsg ? 'is-invalid': not empty complementoEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="complementoEnderecoTermoEstagio" name="complementoEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :encomplementoEnderecoTermoEstagio }">
+                            <input maxlength="150" type="text" class="form-control" id="complementoEnderecoTermoEstagio" name="complementoEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :encomplementoEnderecoTermoEstagio }">
                             <c:if test="${ not empty complementoEnderecoMsg }">
                                 <div class="invalid-feedback">${ complementoEnderecoMsg }</div>
                             </c:if>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="bairroEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.bairro"/></label>
-                            <input type="text" maxlength="150" class="form-control ${ not empty bairroEnderecoMsg ? 'is-invalid': not empty bairroEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="bairroEnderecoTermoEstagio" name="bairroEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :enbairroEnderecoTermoEstagio }">
+                            <input type="text" maxlength="150" class="form-control" id="bairroEnderecoTermoEstagio" name="bairroEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :enbairroEnderecoTermoEstagio }">
                             <c:if test="${ not empty bairroEnderecoMsg }">
                                 <div class="invalid-feedback">${ bairroEnderecoMsg }</div>
                             </c:if>
@@ -263,14 +263,14 @@
                     <div class="form-row">					
                         <div class="form-group col-md-6">
                             <label for="cidadeEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.cidade"/></label>
-                            <input type="text" maxlength="150" class="form-control ${ not empty cidadeEnderecoMsg ? 'is-invalid': not empty cidadeEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="cidadeEnderecoTermoEstagio" name="cidadeEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :encidadeEnderecoTermoEstagio }">
+                            <input type="text" maxlength="150" class="form-control" id="cidadeEnderecoTermoEstagio" name="cidadeEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :encidadeEnderecoTermoEstagio }">
                             <c:if test="${ not empty cidadeEnderecoMsg }">
                                 <div class="invalid-feedback">${ cidadeEnderecoMsg }</div>
                             </c:if>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="estadoEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.estado"/></label>
-                            <select name = "estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control ${ not empty estadoEnderecoMsg ? 'is-invalid': not empty estadoEnderecoMsg ? 'is-invalid' : 'is-valid' }">
+                            <select name = "estadoEnderecoTermoEstagio" id="estadoEnderecoTermoEstagio" class="form-control">
                                 <option value="" selected>${showLocal eq 'sim' ? '' :enuf}</option>
                                 <c:forEach items="${ uf }" var="uf">
                                     <option value="${ uf }">${ uf }</option>
@@ -282,7 +282,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label for="cepEnderecoTermoEstagio"><fmt:message key = "br.cefetrj.sisgee.resources.form.cep"/></label>
-                            <input type="text" class="form-control ${ not empty cepEnderecoMsg ? 'is-invalid': not empty cepEnderecoMsg ? 'is-invalid' : 'is-valid' }" id="cepEnderecoTermoEstagio" name="cepEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :encepEnderecoTermoEstagio }">
+                            <input type="text" class="form-control" id="cepEnderecoTermoEstagio" name="cepEnderecoTermoEstagio" value="${ showLocal eq 'sim' ? '' :encepEnderecoTermoEstagio }">
                             <c:if test="${ not empty cepEnderecoMsg }">
                                 <div class="invalid-feedback">${ cepEnderecoMsg }</div>
                             </c:if>
@@ -301,12 +301,12 @@
 
                             <div class="custom-controls-stacked d-block my-3" >
                                 <label class="custom-control custom-radio"> 
-                                    <input id="estagioSim" name="eobrigatorio" type="radio" class="custom-control-input ${ not empty eEstagioObrigatorioMsg ? 'is-invalid' : '' }" value = "sim"  ${ eobrigatorio eq 'true'? 'checked' : '' }> 
+                                    <input id="estagioSim" name="eobrigatorio" type="radio" class="custom-control-input" value = "sim"  ${ eobrigatorio eq 'true'? 'checked' : '' }> 
                                     <span class="custom-control-indicator"></span> 
                                     <span class="custom-control-description" ><fmt:message key = "br.cefetrj.sisgee.resources.form.sim"/></span>
                                 </label> 
                                 <label class="custom-control custom-radio"> 
-                                    <input id="estagioNao" name="eobrigatorio" type="radio" class="custom-control-input ${ not empty eEstagioObrigatorioMsg ? 'is-invalid' : '' }" value = "nao"  ${ eobrigatorio eq 'false'? 'checked' : ''  }> 
+                                    <input id="estagioNao" name="eobrigatorio" type="radio" class="custom-control-input" value = "nao"  ${ eobrigatorio eq 'false'? 'checked' : ''  }> 
                                     <span class="custom-control-indicator"></span> 
                                     <span class="custom-control-description"><fmt:message key = "br.cefetrj.sisgee.resources.form.nao"/></span>
                                 </label>
@@ -337,7 +337,7 @@
                     <legend class="col-form-legend col-lg"><fmt:message key = "br.cefetrj.sisgee.resources.form.professorOrientador"/></legend>
                         <div class="form-group col-md-8">
                                 <label for="idProfessorOrientador"></label>
-                            <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control ${ not empty idProfessorMsg ? 'is-invalid': not empty idProfessorMsg ? 'is-invalid' : 'is-valid' }" >
+                            <select name="idProfessorOrientador" id="idProfessorOrientador" class="form-control" >
                                 <option value="" selected>${ showLocal eq 'sim' ? '' : pfnomeprofessor }</option>
                                 <c:forEach items="${ professores }" var="professor">
                                     <option value="${ professor.idProfessorOrientador }">${ professornomeProfessorOrientador }</option>
@@ -379,7 +379,7 @@
             var tamanho = $("#cnpjEcpf1").val().length;
             
             $('#cargaHorariaTermoEstagio').mask('9');
-            $('#valorBolsa').mask('000.000,00', {reverse: true});
+            
             $('#dataInicioTermoEstagio').mask('99/99/9999');
             $('#dataFimTermoEstagio').mask('99/99/9999');
             $("#cnpjEcpf1").mask("99.999.999/9999-99");        
