@@ -27,7 +27,11 @@ import br.cefetrj.sisgee.model.entity.TermoEstagio;
 import br.cefetrj.sisgee.view.utils.ServletUtils;
 import br.cefetrj.sisgee.view.utils.UF;
 import br.cefetrj.sisgee.view.utils.ValidaUtils;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Servlet para tratar os dados da tela de cadastro de Termo de Estágio.
@@ -248,13 +252,21 @@ public class FormTermoEstagioServlet extends HttpServlet {
         campo = "Valor";
         valorBolsaMsg = ValidaUtils.validaObrigatorio(campo, valorBolsa);
         if (valorBolsaMsg.trim().isEmpty()) {
+            String v=valorBolsa;
             valorBolsa = valorBolsa.replaceAll("[.|,]", "");
+            
             valorBolsaMsg = ValidaUtils.validaFloat(campo, valorBolsa);
             if (valorBolsaMsg.trim().isEmpty()) {
                 Float valor = Float.parseFloat(valorBolsa);
                 valorBolsaMsg = ValidaUtils.validaTamanhoFloat(campo, valor);
                 if (valorBolsaMsg.trim().isEmpty()) {
-                    request.setAttribute("valor", valor);
+                    NumberFormat nf =NumberFormat.getNumberInstance(locale);
+                    try {
+                        request.setAttribute("valor", new Float(nf.parse(v).floatValue()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        isValid = false;
+                    }
                 } else {
                     valorBolsaMsg = messages.getString(valorBolsaMsg);
                     request.setAttribute("valorBolsaMsg", valorBolsaMsg);

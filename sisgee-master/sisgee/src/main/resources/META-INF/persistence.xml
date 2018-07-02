@@ -4,9 +4,9 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/sisgeeDB"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/sisgeeDB_matheus"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
-      <property name="javax.persistence.jdbc.password" value="vinzbcc001"/>
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
